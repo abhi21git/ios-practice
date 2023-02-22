@@ -63,8 +63,8 @@
 				F3CB5A952997725A00F6E3D2 /* ViewController.swift */,
 				F3CB5AA529978E1000F6E3D2 /* NotificationsCenter.swift */,
 				F3CB5A972997725A00F6E3D2 /* Main.storyboard */,
-				F3CB5A9A2997725A00F6E3D2 /* Assets.xcassets */,
 				F3CB5A9C2997725A00F6E3D2 /* LaunchScreen.storyboard */,
+				F3CB5A9A2997725A00F6E3D2 /* Assets.xcassets */,
 				F3CB5A9F2997725A00F6E3D2 /* Info.plist */,
 			);
 			path = NotificationCenter;
