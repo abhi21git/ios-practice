@@ -16,9 +16,15 @@ class ViewController3: UIViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        removeBadge()
+    }
+    
     @objc func didNotificationDataRecieve(_ data: Any?) {
         guard let data = data as? String else {  return }
         observerOutputLabel.text?.append(" \(data)")
+        incrementBadgeCount()
     }
     
     @IBAction func addObserver1(_ sender: UIButton) {
