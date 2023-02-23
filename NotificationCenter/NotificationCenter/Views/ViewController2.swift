@@ -22,15 +22,36 @@ class ViewController2: UIViewController {
     }
     
     @IBAction func addObserver1(_ sender: UIButton) {
-        Notifications.manager.addObserver(for: self, identifier: NotificationName.observer1, selector: #selector(didNotificationDataRecieve(_:)))
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.setTitle("Remove observer 1", for: .normal)
+            Notifications.manager.addObserver(for: self, identifier: NotificationName.observer1, selector: #selector(didNotificationDataRecieve(_:)))
+        } else {
+            sender.setTitle("Add observer 1", for: .normal)
+            Notifications.manager.removeObserver(for: self, identifier: NotificationName.observer1)
+        }
     }
     
     @IBAction func addObserver3(_ sender: UIButton) {
-        Notifications.manager.addObserver(for: self, identifier: NotificationName.observer3, selector: #selector(didNotificationDataRecieve(_:)))
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.setTitle("Remove observer 3", for: .normal)
+            Notifications.manager.addObserver(for: self, identifier: NotificationName.observer3, selector: #selector(didNotificationDataRecieve(_:)))
+        } else {
+            sender.setTitle("Add observer 3", for: .normal)
+            Notifications.manager.removeObserver(for: self, identifier: NotificationName.observer3)
+        }
     }
     
     @IBAction func addObserver4(_ sender: UIButton) {
-        Notifications.manager.addObserver(for: self, identifier: NotificationName.observer4, selector: #selector(didNotificationDataRecieve(_:)))
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.setTitle("Remove observer 4", for: .normal)
+            Notifications.manager.addObserver(for: self, identifier: NotificationName.observer4, selector: #selector(didNotificationDataRecieve(_:)))
+        } else {
+            sender.setTitle("Add observer 4", for: .normal)
+            Notifications.manager.removeObserver(for: self, identifier: NotificationName.observer4)
+        }
     }
     
     @IBAction func postAction(_ sender: UIButton) {
