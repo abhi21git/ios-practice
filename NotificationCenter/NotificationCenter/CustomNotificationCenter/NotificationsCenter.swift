@@ -24,36 +24,48 @@ class NotificationsCenter: NotificationsCenterProtocol {
     private var observers: Array<NotificationCenterData> = []
 
     func addObserver(for classObject: AnyObject, identifier: String, handler: Selector) {
-        let notificationData: NotificationCenterData = .init(identifier: identifier, class: (name: classObject, handler: handler))
-        observers.add(for: notificationData)
+        let data: NotificationCenterData = .init(identifier: identifier, class: (object: classObject, handler: handler))
+        observers.add(notification: data)
     }
 
     func post(identifier: String, data: Any?) {
-        observers[id: identifier].forEach({ _ = $0.class.name.perform($0.class.handler, with: data) })
+        observers.post(data, for: identifier)
     }
 
     func removeObserver(for classObject: AnyObject, identifier: String) {
-        observers.removeAll(where: {$0.identifier == identifier && $0.class.name === classObject})
+        observers.remove(for: classObject, and: identifier)
     }
 }
 
 struct NotificationCenterData: Equatable {
     let identifier: String
-    let `class`: (name: AnyObject, handler: Selector)
+    let `class`: (object: AnyObject, handler: Selector)
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.identifier == rhs.identifier && lhs.class.name === rhs.class.name && lhs.class.handler == rhs.class.handler
+        return lhs.identifier == rhs.identifier && lhs.class.object === rhs.class.object && lhs.class.handler == rhs.class.handler
+    }
+
+    func post(_ data: Any?) {
+        _ = `class`.object.perform(`class`.handler, with: data)
     }
 }
 
 extension Array where Element == NotificationCenterData {
     subscript(id identifier: String) -> [Element] {
-        return self.filter({$0.identifier == identifier})
+        return self.filter({ $0.identifier == identifier })
     }
 
-    mutating func add(for data: Element) {
+    mutating func add(notification data: Element) {
         guard checkIfDoesntExist(item: data) else { return }
         self.append(data)
+    }
+
+    mutating func remove(for classObject: AnyObject, and identifier: String) {
+        self.removeAll(where: { $0.identifier == identifier && $0.class.object === classObject })
+    }
+
+    fileprivate func post(_ data: Any?, for identifier: String) {
+        self[id: identifier].forEach({ $0.post(data) })
     }
     
     private func checkIfDoesntExist(item: Element) -> Bool {
