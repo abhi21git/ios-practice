@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: Notification Name
 struct NotificationName {
     static let observer1 = "observer1"
     static let observer2 = "observer2"

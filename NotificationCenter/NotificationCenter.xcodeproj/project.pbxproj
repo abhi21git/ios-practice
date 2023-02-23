@@ -17,7 +17,7 @@
 		F3CB5A992997725A00F6E3D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3CB5A972997725A00F6E3D2 /* Main.storyboard */; };
 		F3CB5A9B2997725A00F6E3D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3CB5A9A2997725A00F6E3D2 /* Assets.xcassets */; };
 		F3CB5A9E2997725A00F6E3D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3CB5A9C2997725A00F6E3D2 /* LaunchScreen.storyboard */; };
-		F3CB5AA629978E1000F6E3D2 /* NotificationsCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB5AA529978E1000F6E3D2 /* NotificationsCenter.swift */; };
+		F3CB5AA629978E1000F6E3D2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB5AA529978E1000F6E3D2 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		F3CB5A9A2997725A00F6E3D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3CB5A9D2997725A00F6E3D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3CB5A9F2997725A00F6E3D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3CB5AA529978E1000F6E3D2 /* NotificationsCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCenter.swift; sourceTree = "<group>"; };
+		F3CB5AA529978E1000F6E3D2 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		1320B2FC29A6B45B002FB100 /* CustomNotificationCenter */ = {
 			isa = PBXGroup;
 			children = (
-				F3CB5AA529978E1000F6E3D2 /* NotificationsCenter.swift */,
+				F3CB5AA529978E1000F6E3D2 /* Notifications.swift */,
 				1320B2FD29A6B473002FB100 /* NotificationEntity.swift */,
 			);
 			path = CustomNotificationCenter;
@@ -174,7 +174,7 @@
 				F3CB5A942997725A00F6E3D2 /* SceneDelegate.swift in Sources */,
 				1320B30429A6B5F5002FB100 /* ViewController4.swift in Sources */,
 				1320B2FE29A6B473002FB100 /* NotificationEntity.swift in Sources */,
-				F3CB5AA629978E1000F6E3D2 /* NotificationsCenter.swift in Sources */,
+				F3CB5AA629978E1000F6E3D2 /* Notifications.swift in Sources */,
 				1320B30229A6B5D5002FB100 /* ViewController3.swift in Sources */,
 				1320B30029A6B59B002FB100 /* ViewController2.swift in Sources */,
 			);

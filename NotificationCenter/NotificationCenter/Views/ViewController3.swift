@@ -22,19 +22,19 @@ class ViewController3: UIViewController {
     }
     
     @IBAction func addObserver1(_ sender: UIButton) {
-        NotificationsCenter.default.addObserver(for: self, identifier: NotificationName.observer1, handler: #selector(didNotificationDataRecieve(_:)))
+        Notifications.manager.addObserver(for: self, identifier: NotificationName.observer1, selector: #selector(didNotificationDataRecieve(_:)))
     }
     
     @IBAction func addObserver2(_ sender: UIButton) {
-        NotificationsCenter.default.addObserver(for: self, identifier: NotificationName.observer2, handler: #selector(didNotificationDataRecieve(_:)))
+        Notifications.manager.addObserver(for: self, identifier: NotificationName.observer2, selector: #selector(didNotificationDataRecieve(_:)))
     }
     
     @IBAction func addObserver4(_ sender: UIButton) {
-        NotificationsCenter.default.addObserver(for: self, identifier: NotificationName.observer4, handler: #selector(didNotificationDataRecieve(_:)))
+        Notifications.manager.addObserver(for: self, identifier: NotificationName.observer4, selector: #selector(didNotificationDataRecieve(_:)))
     }
     
     @IBAction func postAction(_ sender: UIButton) {
-        NotificationsCenter.default.post(identifier: NotificationName.observer3, data: observerDataTextField.text)
+        Notifications.manager.post(identifier: NotificationName.observer3, data: observerDataTextField.text)
     }
 
 }
