@@ -17,7 +17,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y6N-UR-07g">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.36862745098039218" green="0.36078431372549019" blue="0.90196078431372551" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" systemColor="systemPurpleColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="PlM-i2-KN0"/>
@@ -38,70 +39,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CU0-7O-f6S">
-                                <rect key="frame" x="40" y="260" width="313" height="332"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="CU0-7O-f6S">
+                                <rect key="frame" x="40" y="277.33333333333337" width="313" height="297.33333333333337"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Us9-rE-fhn">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TmY-5b-hVJ">
-                                        <rect key="frame" x="0.0" y="40.333333333333314" width="313" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPI-5y-wZW">
-                                        <rect key="frame" x="0.0" y="94.333333333333314" width="313" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzv-qH-1b9">
-                                        <rect key="frame" x="0.0" y="134.66666666666669" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 2"/>
-                                        <connections>
-                                            <action selector="addObserver2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zqa-so-K4t"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fct-aM-wK8">
-                                        <rect key="frame" x="0.0" y="189" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 3"/>
-                                        <connections>
-                                            <action selector="addObserver3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cla-6f-mgV"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oB-gY-mVl">
-                                        <rect key="frame" x="0.0" y="243.33333333333334" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 4"/>
-                                        <connections>
-                                            <action selector="addObserver4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yS6-QO-1At"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXB-Ub-Yem">
-                                        <rect key="frame" x="0.0" y="297.66666666666663" width="313" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post    "/>
-                                        <connections>
-                                            <action selector="postAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="okI-Fl-aSr"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gcr-6X-gxG">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="74.333333333333329"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to post" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TmY-5b-hVJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPI-5y-wZW">
+                                                <rect key="frame" x="0.0" y="54.000000000000007" width="313" height="20.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1kt-jk-7tU">
+                                        <rect key="frame" x="0.0" y="154.33333333333337" width="313" height="143"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzv-qH-1b9">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 2"/>
+                                                <connections>
+                                                    <action selector="addObserver2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zqa-so-K4t"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fct-aM-wK8">
+                                                <rect key="frame" x="0.0" y="54.333333333333314" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 3"/>
+                                                <connections>
+                                                    <action selector="addObserver3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cla-6f-mgV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oB-gY-mVl">
+                                                <rect key="frame" x="0.0" y="108.66666666666669" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 4"/>
+                                                <connections>
+                                                    <action selector="addObserver4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yS6-QO-1At"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Us9-rE-fhn">
+                                <rect key="frame" x="125.66666666666669" y="99" width="142" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXB-Ub-Yem">
+                                <rect key="frame" x="136.66666666666666" y="645" width="119.99999999999997" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="O5T-v5-kk7"/>
+                                    <constraint firstAttribute="width" constant="120" id="wB1-PZ-beO"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post " cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="postAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="okI-Fl-aSr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Us9-rE-fhn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="7G8-ey-kSs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SXB-Ub-Yem" secondAttribute="bottom" constant="80" id="MQX-E4-nwS"/>
                             <constraint firstItem="CU0-7O-f6S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Phb-32-ype"/>
+                            <constraint firstItem="SXB-Ub-Yem" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SKU-bC-9gg"/>
+                            <constraint firstItem="Us9-rE-fhn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YH1-hu-8oz"/>
                             <constraint firstItem="CU0-7O-f6S" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fdz-Nw-j58"/>
                             <constraint firstItem="CU0-7O-f6S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rZy-8a-JVF"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="View 1" image="1.circle" catalog="system" id="3qE-AT-PHM"/>
+                    <tabBarItem key="tabBarItem" title="View 1" image="1.circle" catalog="system" id="3qE-AT-PHM">
+                        <color key="badgeColor" systemColor="systemIndigoColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="observerDataTextField" destination="TmY-5b-hVJ" id="Ing-sE-gMZ"/>
                         <outlet property="observerOutputLabel" destination="PPI-5y-wZW" id="hvW-FA-Cns"/>
@@ -109,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="-385"/>
+            <point key="canvasLocation" x="-2392" y="996"/>
         </scene>
         <!--View 2-->
         <scene sceneID="MEd-Yh-tGb">
@@ -119,70 +146,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ew7-0E-XcS">
-                                <rect key="frame" x="40" y="260" width="313" height="332"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="ew7-0E-XcS">
+                                <rect key="frame" x="40" y="277.33333333333337" width="313" height="297.33333333333337"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bc9-8d-HF4">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zs9-eX-0jZ">
-                                        <rect key="frame" x="0.0" y="40.333333333333314" width="313" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCy-dQ-G5y">
-                                        <rect key="frame" x="0.0" y="94.333333333333314" width="313" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs3-O1-dlx">
-                                        <rect key="frame" x="0.0" y="134.66666666666669" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 1"/>
-                                        <connections>
-                                            <action selector="addObserver1:" destination="XYk-tK-W0L" eventType="touchUpInside" id="sXw-Fn-TIQ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HvB-cw-bi4">
-                                        <rect key="frame" x="0.0" y="189" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 3"/>
-                                        <connections>
-                                            <action selector="addObserver3:" destination="XYk-tK-W0L" eventType="touchUpInside" id="s5y-0Y-E3s"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XX0-o0-tnL">
-                                        <rect key="frame" x="0.0" y="243.33333333333334" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 4"/>
-                                        <connections>
-                                            <action selector="addObserver4:" destination="XYk-tK-W0L" eventType="touchUpInside" id="cKQ-gf-Wjl"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ev6-t0-Zs4">
-                                        <rect key="frame" x="0.0" y="297.66666666666663" width="313" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post    "/>
-                                        <connections>
-                                            <action selector="postAction:" destination="XYk-tK-W0L" eventType="touchUpInside" id="cKw-Wg-wxU"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9IG-RN-4JW">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="74.333333333333329"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to post" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zs9-eX-0jZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCy-dQ-G5y">
+                                                <rect key="frame" x="0.0" y="54.000000000000007" width="313" height="20.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5hV-Uf-g69">
+                                        <rect key="frame" x="0.0" y="154.33333333333337" width="313" height="143"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs3-O1-dlx">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 1"/>
+                                                <connections>
+                                                    <action selector="addObserver1:" destination="XYk-tK-W0L" eventType="touchUpInside" id="sXw-Fn-TIQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HvB-cw-bi4">
+                                                <rect key="frame" x="0.0" y="54.333333333333314" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 3"/>
+                                                <connections>
+                                                    <action selector="addObserver3:" destination="XYk-tK-W0L" eventType="touchUpInside" id="s5y-0Y-E3s"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XX0-o0-tnL">
+                                                <rect key="frame" x="0.0" y="108.66666666666669" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 4"/>
+                                                <connections>
+                                                    <action selector="addObserver4:" destination="XYk-tK-W0L" eventType="touchUpInside" id="cKQ-gf-Wjl"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bc9-8d-HF4">
+                                <rect key="frame" x="124.33333333333333" y="99" width="144.33333333333337" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ev6-t0-Zs4">
+                                <rect key="frame" x="136.66666666666666" y="645" width="119.99999999999997" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Zxv-JO-2Lj"/>
+                                    <constraint firstAttribute="width" constant="120" id="hae-lM-3HZ"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post " cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="postAction:" destination="XYk-tK-W0L" eventType="touchUpInside" id="cKw-Wg-wxU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hty-vM-lDA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ew7-0E-XcS" firstAttribute="leading" secondItem="Hty-vM-lDA" secondAttribute="leading" constant="40" id="2xN-n5-xST"/>
+                            <constraint firstItem="bc9-8d-HF4" firstAttribute="centerX" secondItem="GgQ-7N-beR" secondAttribute="centerX" id="9EY-QA-HEO"/>
                             <constraint firstItem="ew7-0E-XcS" firstAttribute="centerX" secondItem="GgQ-7N-beR" secondAttribute="centerX" id="G95-x4-CIT"/>
+                            <constraint firstItem="Hty-vM-lDA" firstAttribute="bottom" secondItem="Ev6-t0-Zs4" secondAttribute="bottom" constant="80" id="Nd0-tY-PMv"/>
+                            <constraint firstItem="bc9-8d-HF4" firstAttribute="top" secondItem="Hty-vM-lDA" secondAttribute="top" constant="40" id="aFY-vK-Pr7"/>
                             <constraint firstItem="ew7-0E-XcS" firstAttribute="centerY" secondItem="GgQ-7N-beR" secondAttribute="centerY" id="qQb-ZE-fZk"/>
+                            <constraint firstItem="Ev6-t0-Zs4" firstAttribute="centerX" secondItem="GgQ-7N-beR" secondAttribute="centerX" id="vBs-zz-w2S"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="View 2" image="2.circle" catalog="system" id="T7Y-YS-4Qu"/>
+                    <tabBarItem key="tabBarItem" title="View 2" image="2.circle" catalog="system" id="T7Y-YS-4Qu">
+                        <color key="badgeColor" systemColor="systemPurpleColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="observerDataTextField" destination="zs9-eX-0jZ" id="vrS-VP-qht"/>
                         <outlet property="observerOutputLabel" destination="QCy-dQ-G5y" id="Kak-vC-85E"/>
@@ -190,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mEY-49-SRT" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1085" y="-279"/>
+            <point key="canvasLocation" x="-1616" y="996"/>
         </scene>
         <!--View 3-->
         <scene sceneID="ZCF-st-uF2">
@@ -200,70 +253,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pcA-oX-mKq">
-                                <rect key="frame" x="40" y="260" width="313" height="332"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="pcA-oX-mKq">
+                                <rect key="frame" x="40" y="277.33333333333337" width="313" height="297.33333333333337"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PG-sP-Qrj">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hOD-Vz-zXg">
-                                        <rect key="frame" x="0.0" y="40.333333333333314" width="313" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mR-Fz-5Sv">
-                                        <rect key="frame" x="0.0" y="94.333333333333314" width="313" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncs-2T-CzE">
-                                        <rect key="frame" x="0.0" y="134.66666666666669" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 1"/>
-                                        <connections>
-                                            <action selector="addObserver1:" destination="jxE-ub-n6C" eventType="touchUpInside" id="GBx-Zg-7X4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Hp-c9J">
-                                        <rect key="frame" x="0.0" y="189" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 2"/>
-                                        <connections>
-                                            <action selector="addObserver2:" destination="jxE-ub-n6C" eventType="touchUpInside" id="oph-9k-TnL"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dz-zx-ops">
-                                        <rect key="frame" x="0.0" y="243.33333333333334" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 4"/>
-                                        <connections>
-                                            <action selector="addObserver4:" destination="jxE-ub-n6C" eventType="touchUpInside" id="dCX-yf-T0L"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgb-X4-Qnb">
-                                        <rect key="frame" x="0.0" y="297.66666666666663" width="313" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post    "/>
-                                        <connections>
-                                            <action selector="postAction:" destination="jxE-ub-n6C" eventType="touchUpInside" id="NG1-k5-WQd"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aw2-Qc-sIp">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="74.333333333333329"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to post" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hOD-Vz-zXg">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mR-Fz-5Sv">
+                                                <rect key="frame" x="0.0" y="54.000000000000007" width="313" height="20.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yXU-vJ-NUZ">
+                                        <rect key="frame" x="0.0" y="154.33333333333337" width="313" height="143"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncs-2T-CzE">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 1"/>
+                                                <connections>
+                                                    <action selector="addObserver1:" destination="jxE-ub-n6C" eventType="touchUpInside" id="GBx-Zg-7X4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Hp-c9J">
+                                                <rect key="frame" x="0.0" y="54.333333333333314" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 2"/>
+                                                <connections>
+                                                    <action selector="addObserver2:" destination="jxE-ub-n6C" eventType="touchUpInside" id="oph-9k-TnL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dz-zx-ops">
+                                                <rect key="frame" x="0.0" y="108.66666666666669" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 4"/>
+                                                <connections>
+                                                    <action selector="addObserver4:" destination="jxE-ub-n6C" eventType="touchUpInside" id="dCX-yf-T0L"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PG-sP-Qrj">
+                                <rect key="frame" x="124.33333333333333" y="99" width="144.66666666666669" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgb-X4-Qnb">
+                                <rect key="frame" x="136.66666666666666" y="645" width="119.99999999999997" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Bed-v8-QVK"/>
+                                    <constraint firstAttribute="width" constant="120" id="Xzx-fj-pNU"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post " cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="postAction:" destination="jxE-ub-n6C" eventType="touchUpInside" id="NG1-k5-WQd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xlq-0o-np9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7PG-sP-Qrj" firstAttribute="centerX" secondItem="L19-S4-xVO" secondAttribute="centerX" id="2cU-dg-2qP"/>
                             <constraint firstItem="pcA-oX-mKq" firstAttribute="centerX" secondItem="L19-S4-xVO" secondAttribute="centerX" id="ECr-c5-sGl"/>
+                            <constraint firstItem="Hgb-X4-Qnb" firstAttribute="centerX" secondItem="L19-S4-xVO" secondAttribute="centerX" id="LYd-cm-wfv"/>
+                            <constraint firstItem="xlq-0o-np9" firstAttribute="bottom" secondItem="Hgb-X4-Qnb" secondAttribute="bottom" constant="80" id="aVw-j8-Obg"/>
                             <constraint firstItem="pcA-oX-mKq" firstAttribute="leading" secondItem="xlq-0o-np9" secondAttribute="leading" constant="40" id="d0k-m8-V9K"/>
+                            <constraint firstItem="7PG-sP-Qrj" firstAttribute="top" secondItem="xlq-0o-np9" secondAttribute="top" constant="40" id="dh3-Wn-4eq"/>
                             <constraint firstItem="pcA-oX-mKq" firstAttribute="centerY" secondItem="L19-S4-xVO" secondAttribute="centerY" id="zAB-OY-Jae"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="View 3" image="3.circle" catalog="system" id="98X-Rz-NDu"/>
+                    <tabBarItem key="tabBarItem" title="View 3" image="3.circle" catalog="system" id="98X-Rz-NDu">
+                        <color key="badgeColor" systemColor="systemIndigoColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="observerDataTextField" destination="hOD-Vz-zXg" id="UIl-7P-F0L"/>
                         <outlet property="observerOutputLabel" destination="4mR-Fz-5Sv" id="1JA-ed-RfG"/>
@@ -271,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKi-Ny-lkh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1085" y="442"/>
+            <point key="canvasLocation" x="-834" y="996"/>
         </scene>
         <!--View 4-->
         <scene sceneID="URA-Pp-dk1">
@@ -281,70 +360,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bAT-wQ-KOR">
-                                <rect key="frame" x="40" y="260" width="313" height="332"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="bAT-wQ-KOR">
+                                <rect key="frame" x="40" y="277.33333333333337" width="313" height="297.33333333333337"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6D-qa-i98">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZy-28-iYA">
-                                        <rect key="frame" x="0.0" y="40.333333333333314" width="313" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gen-Y3-zPg">
-                                        <rect key="frame" x="0.0" y="94.333333333333314" width="313" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wel-gQ-foG">
-                                        <rect key="frame" x="0.0" y="134.66666666666669" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 1"/>
-                                        <connections>
-                                            <action selector="addObserver1:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="5aZ-li-wnF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86K-wj-YVh">
-                                        <rect key="frame" x="0.0" y="189" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 2"/>
-                                        <connections>
-                                            <action selector="addObserver2:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="p4U-WL-qyc"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVh-RS-Ilg">
-                                        <rect key="frame" x="0.0" y="243.33333333333334" width="313" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add observer 3"/>
-                                        <connections>
-                                            <action selector="addObserver3:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="4fa-Py-8vV"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXK-OF-tE4">
-                                        <rect key="frame" x="0.0" y="297.66666666666663" width="313" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post    "/>
-                                        <connections>
-                                            <action selector="postAction:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="U1b-sr-n7f"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hKo-cf-VXm">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="74.333333333333329"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to post" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZy-28-iYA">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gen-Y3-zPg">
+                                                <rect key="frame" x="0.0" y="54.000000000000007" width="313" height="20.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WeP-Xa-I6b">
+                                        <rect key="frame" x="0.0" y="154.33333333333337" width="313" height="143"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wel-gQ-foG">
+                                                <rect key="frame" x="0.0" y="0.0" width="313" height="34.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 1"/>
+                                                <connections>
+                                                    <action selector="addObserver1:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="5aZ-li-wnF"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86K-wj-YVh">
+                                                <rect key="frame" x="0.0" y="54.333333333333314" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 2"/>
+                                                <connections>
+                                                    <action selector="addObserver2:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="p4U-WL-qyc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVh-RS-Ilg">
+                                                <rect key="frame" x="0.0" y="108.66666666666669" width="313" height="34.333333333333343"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add observer 3"/>
+                                                <connections>
+                                                    <action selector="addObserver3:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="4fa-Py-8vV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6D-qa-i98">
+                                <rect key="frame" x="124" y="99" width="145" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXK-OF-tE4">
+                                <rect key="frame" x="136.66666666666666" y="645" width="119.99999999999997" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="0iA-OD-05Z"/>
+                                    <constraint firstAttribute="height" constant="44" id="V6u-SE-lxK"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="paperplane" catalog="system" title="Post " cornerStyle="capsule">
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="postAction:" destination="Y1O-qk-5CQ" eventType="touchUpInside" id="U1b-sr-n7f"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yRk-gs-d7N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bAT-wQ-KOR" firstAttribute="centerY" secondItem="Bag-ed-X0R" secondAttribute="centerY" id="8Zu-pt-3kX"/>
                             <constraint firstItem="bAT-wQ-KOR" firstAttribute="centerX" secondItem="Bag-ed-X0R" secondAttribute="centerX" id="D1s-XC-27L"/>
+                            <constraint firstItem="s6D-qa-i98" firstAttribute="centerX" secondItem="Bag-ed-X0R" secondAttribute="centerX" id="TYH-nZ-23D"/>
+                            <constraint firstItem="yRk-gs-d7N" firstAttribute="bottom" secondItem="FXK-OF-tE4" secondAttribute="bottom" constant="80" id="WlR-qy-tEM"/>
                             <constraint firstItem="bAT-wQ-KOR" firstAttribute="leading" secondItem="yRk-gs-d7N" secondAttribute="leading" constant="40" id="XL9-D5-uro"/>
+                            <constraint firstItem="FXK-OF-tE4" firstAttribute="centerX" secondItem="Bag-ed-X0R" secondAttribute="centerX" id="n1e-TE-DOy"/>
+                            <constraint firstItem="s6D-qa-i98" firstAttribute="top" secondItem="yRk-gs-d7N" secondAttribute="top" constant="40" id="z6c-90-bSz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="View 4" image="4.circle" catalog="system" id="Hny-t5-6sk"/>
+                    <tabBarItem key="tabBarItem" title="View 4" image="4.circle" catalog="system" id="Hny-t5-6sk">
+                        <color key="badgeColor" systemColor="systemIndigoColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="observerDataTextField" destination="QZy-28-iYA" id="XFn-m7-frd"/>
                         <outlet property="observerOutputLabel" destination="gen-Y3-zPg" id="ywx-Kl-zQs"/>
@@ -352,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DY4-kk-i74" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="575"/>
+            <point key="canvasLocation" x="-66" y="996"/>
         </scene>
     </scenes>
     <resources>
@@ -363,6 +468,12 @@
         <image name="paperplane" catalog="system" width="128" height="119"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
