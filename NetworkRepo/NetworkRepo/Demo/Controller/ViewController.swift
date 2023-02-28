@@ -8,10 +8,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let viewModel = HomeViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        viewModel.getMovieList()
     }
 }
 
