@@ -13,6 +13,7 @@
 		F3FCE7F02A094EFC00DAAD05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3FCE7EF2A094EFC00DAAD05 /* Assets.xcassets */; };
 		F3FCE7F32A094EFC00DAAD05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3FCE7F12A094EFC00DAAD05 /* LaunchScreen.storyboard */; };
 		F3FCE7FB2A0951E500DAAD05 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FCE7FA2A0951E500DAAD05 /* CollectionViewCell.swift */; };
+		F3FFD5CC2A0BCCDF006B98B5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FFD5CB2A0BCCDF006B98B5 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F3FCE7F22A094EFC00DAAD05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3FCE7F42A094EFC00DAAD05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3FCE7FA2A0951E500DAAD05 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		F3FFD5CB2A0BCCDF006B98B5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				F3FCE7E62A094EFB00DAAD05 /* AppDelegate.swift */,
 				F3FCE7E82A094EFB00DAAD05 /* SceneDelegate.swift */,
 				F3FCE7EA2A094EFB00DAAD05 /* ViewController.swift */,
+				F3FFD5CB2A0BCCDF006B98B5 /* HeaderView.swift */,
 				F3FCE7EF2A094EFC00DAAD05 /* Assets.xcassets */,
 				F3FCE7F12A094EFC00DAAD05 /* LaunchScreen.storyboard */,
 				F3FCE7F42A094EFC00DAAD05 /* Info.plist */,
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3FFD5CC2A0BCCDF006B98B5 /* HeaderView.swift in Sources */,
 				F3FCE7EB2A094EFB00DAAD05 /* ViewController.swift in Sources */,
 				F3FCE7E72A094EFB00DAAD05 /* AppDelegate.swift in Sources */,
 				F3FCE7FB2A0951E500DAAD05 /* CollectionViewCell.swift in Sources */,
