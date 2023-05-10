@@ -9,15 +9,10 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    let customView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.circle")
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -27,6 +22,8 @@ class CollectionViewCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .italicSystemFont(ofSize: 15)
         titleLabel.textAlignment = .center
+        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
+        titleLabel.textColor = .white
         return titleLabel
     }()
     
@@ -35,6 +32,8 @@ class CollectionViewCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .boldSystemFont(ofSize: 12)
         titleLabel.textAlignment = .center
+        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
+        titleLabel.textColor = .white
         return titleLabel
     }()
   
@@ -47,27 +46,22 @@ class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        titleLabel.text = ""
-    }
-    
     private func setUpViews() {
-        addSubview(customView)
-        customView.addSubview(imageView)
+        contentView.addSubview(imageView)
         imageView.addSubview(titleLabel)
         imageView.addSubview(indexLabel)
+        imageView.layer.cornerRadius = 10.0
+        imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
+        
+        indexLabel.layer.cornerRadius = 5
+        indexLabel.layer.masksToBounds = true
         
         NSLayoutConstraint.activate([
-            customView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            customView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            customView.topAnchor.constraint(equalTo: topAnchor),
-            customView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            imageView.leadingAnchor.constraint(equalTo: customView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: customView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: customView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: customView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 20.0),
             titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
@@ -77,31 +71,23 @@ class CollectionViewCell: UICollectionViewCell {
             indexLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 5),
             indexLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5)
         ])
-        imageView.layer.cornerRadius = 10.0
-        imageView.layer.masksToBounds = true
-        titleLabel.backgroundColor = .white.withAlphaComponent(0.5)
-        titleLabel.layer.cornerRadius = 10
-        titleLabel.clipsToBounds = true
-        
-        indexLabel.backgroundColor = .white.withAlphaComponent(0.5)
-        indexLabel.layer.cornerRadius = 10
-        indexLabel.clipsToBounds = true
-        imageView.clipsToBounds = true
     }
     
-    func configureCell(placeName: String, imageName: String, index: Int) {
-        titleLabel.text = placeName
-        imageView.image = UIImage(named: imageName)
+    func configureCell(city: Cities, index: Int) {
+        titleLabel.text = city.name
+        imageView.image = UIImage(named: city.name)
         indexLabel.text = "\(index)"
     }
     
     func prepareForAnimation() {
         titleLabel.transform = CGAffineTransform(translationX: 0, y: 20)
+        indexLabel.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     }
     
     func animateItems(with duration: TimeInterval = 0.3) {
         UIView.animate(withDuration: duration, delay: 0.3) { [weak self] in
             self?.titleLabel.transform = .identity
+            self?.indexLabel.transform  = .identity
         }
     }
 }
