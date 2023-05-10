@@ -58,13 +58,17 @@ class CollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: customView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: customView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: customView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: customView.bottomAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 20.0),
-            titleLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
         ])
         imageView.layer.cornerRadius = 10.0
         imageView.layer.masksToBounds = true
+        titleLabel.backgroundColor = .white.withAlphaComponent(0.5)
+        titleLabel.layer.cornerRadius = 10
+        titleLabel.clipsToBounds = true
     }
     
     func configureCell(placeName: String, imageName: String) {
