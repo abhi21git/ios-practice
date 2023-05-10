@@ -39,7 +39,6 @@ class ViewController: UIViewController {
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     override func viewDidLoad() {
@@ -51,7 +50,10 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        self.title = "Collection View"
+        collectionView.register(HeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "HeaderView")
+//        self.title = "Collection View"
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -73,23 +75,25 @@ extension ViewController: UICollectionViewDataSource {
         cell.configureCell(placeName: cities[indexPath.item].name, imageName: cities[indexPath.item].image )
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 4
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 4
-//    }
 }
 
 // MARK: - Custom FlowLayout
 extension ViewController:  UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let collectionWidth = collectionView.bounds.width
-//        return CGSize(width: collectionWidth, height: 200)
-//    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                         withReuseIdentifier: "HeaderView",
+                                                                         for: indexPath)
+        return headerView
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        .init(width: collectionView.bounds.width / 2, height: 200.0)
+    }
+    
 }
+
+
 
 struct City {
     var image: String = ""
