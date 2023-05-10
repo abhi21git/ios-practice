@@ -55,8 +55,8 @@ class CollectionViewCell: UICollectionViewCell {
     private func setUpViews() {
         addSubview(customView)
         customView.addSubview(imageView)
-        customView.addSubview(titleLabel)
-        customView.addSubview(indexLabel)
+        imageView.addSubview(titleLabel)
+        imageView.addSubview(indexLabel)
         
         NSLayoutConstraint.activate([
             customView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -86,12 +86,22 @@ class CollectionViewCell: UICollectionViewCell {
         indexLabel.backgroundColor = .white.withAlphaComponent(0.5)
         indexLabel.layer.cornerRadius = 10
         indexLabel.clipsToBounds = true
-
+        imageView.clipsToBounds = true
     }
     
     func configureCell(placeName: String, imageName: String, index: Int) {
         titleLabel.text = placeName
         imageView.image = UIImage(named: imageName)
         indexLabel.text = "\(index)"
+    }
+    
+    func prepareForAnimation() {
+        titleLabel.transform = CGAffineTransform(translationX: 0, y: 20)
+    }
+    
+    func animateItems(with duration: TimeInterval = 0.3) {
+        UIView.animate(withDuration: duration, delay: 0.3) { [weak self] in
+            self?.titleLabel.transform = .identity
+        }
     }
 }
