@@ -58,7 +58,7 @@ class CollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: customView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: customView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: customView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -10.0),
+            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor),
             imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0),
             
             titleLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
