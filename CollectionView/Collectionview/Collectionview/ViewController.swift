@@ -32,11 +32,7 @@ class ViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        let layout: UICollectionViewCompositionalLayout = createLayout()
-//        layout.minimumInteritemSpacing = 0 /// spacing between same row
-//        layout.minimumLineSpacing = 5 /// spacing between lines of item grid
-//        layout.itemSize = CGSizeMake(view.bounds.width, 200.0)
-//        layout.scrollDirection = .vertical
+        let layout: UICollectionViewCompositionalLayout = createFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -53,7 +49,6 @@ class ViewController: UIViewController {
         collectionView.register(HeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: "HeaderView")
-//        self.title = "Collection View"
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -95,7 +90,7 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
 
 // MARK: - Custom FlowLayout
 extension ViewController {
-    func createLayout() -> UICollectionViewCompositionalLayout {
+    func createFlowLayout() -> UICollectionViewCompositionalLayout {
         /// item
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -105,18 +100,18 @@ extension ViewController {
         /// vertical Group
         let vGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                                                                          heightDimension: .fractionalHeight(1)),
-                                                      subitem: item2, count: 2)
+                                                      subitem: item2, count: 2) /// same config apply everywhere
         /// group
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+        let mainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                                                           heightDimension: .fractionalHeight(0.6)),
-                                                       subitems: [vGroup, item])
+                                                       subitems: [vGroup, item]) /// use subitems for cell config
         
 //        NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
 //                                                                              heightDimension: .fractionalHeight(0.3)),
 //                                           repeatingSubitem: item,
 //                                           count: 3)
         ///section
-        let section = NSCollectionLayoutSection(group: group)
+        let section = NSCollectionLayoutSection(group: mainGroup)
         
         
         return UICollectionViewCompositionalLayout(section: section)
