@@ -20,6 +20,17 @@ class ViewController: UIViewController {
         setUpViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.layoutIfNeeded()
+        prepareAnimation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        performAnimation()
+    }
+    
     private func setUpViews() {
         let titleLabelConstraints: [NSLayoutConstraint] = setupTitleLabel()
         let collectionConstraints: [NSLayoutConstraint] = setupCollectionView()
@@ -59,6 +70,20 @@ class ViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ]
         return constraints
+    }
+    
+    private func prepareAnimation() {
+        let yTransformation = view.center.y - titleLabel.center.y
+        titleLabel.transform = CGAffineTransform(translationX: 0, y: yTransformation)
+        collectionView.transform = CGAffineTransform(translationX: 0, y: yTransformation)
+    }
+    
+    private func performAnimation() {
+        UIView.animate(withDuration: 0.3, delay: 0.2) { [weak self] in
+            self?.titleLabel.transform = .identity
+            self?.collectionView.transform = .identity
+
+        }
     }
 }
 
