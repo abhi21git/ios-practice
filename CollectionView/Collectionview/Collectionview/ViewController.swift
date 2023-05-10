@@ -28,16 +28,19 @@ class ViewController: UIViewController {
                                     City(image: "Salda", name: "Salda"),
                                     City(image: "Sumela", name: "Sumela")]
     
-    var collectionView: UICollectionView = {
+    var collectionView: UICollectionView!
+    
+    override func loadView() {
+        super.loadView()
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        layout.itemSize = CGSizeMake(150.0, 150)
+        layout.minimumInteritemSpacing = 0 /// spacing between same row
+        layout.minimumLineSpacing = 5 /// spacing between lines of item grid
+        layout.itemSize = CGSizeMake(view.bounds.width, 200.0)
         layout.scrollDirection = .vertical
-        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +62,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource {
   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cities.count
@@ -71,19 +74,21 @@ extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionWidth = collectionView.bounds.width
-        return CGSize(width: collectionWidth / 2 - 8, height: collectionWidth / 2 - 8)
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 4
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 4
+//    }
+}
 
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
-    }
+// MARK: - Custom FlowLayout
+extension ViewController:  UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let collectionWidth = collectionView.bounds.width
+//        return CGSize(width: collectionWidth, height: 200)
+//    }
 }
 
 struct City {
