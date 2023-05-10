@@ -97,13 +97,21 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
 extension ViewController {
     func createLayout() -> UICollectionViewCompositionalLayout {
         /// item
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.5)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        
+        let item2 = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1)))
+        
+        let item3 = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalHeight(1)))
         /// group
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                                                          heightDimension: .fractionalHeight(0.3)),
-                                                       repeatingSubitem: item,
-                                                       count: 3)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                                              heightDimension: .fractionalHeight(0.3)),
+                                                       subitems: [item2, item, item3])
+        
+//        NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+//                                                                              heightDimension: .fractionalHeight(0.3)),
+//                                           repeatingSubitem: item,
+//                                           count: 3)
         ///section
         let section = NSCollectionLayoutSection(group: group)
         
