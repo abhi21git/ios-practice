@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133735A92A0C039A00ED531D /* CollectionCompositionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133735A82A0C039A00ED531D /* CollectionCompositionLayout.swift */; };
 		F3FCE7E72A094EFB00DAAD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FCE7E62A094EFB00DAAD05 /* AppDelegate.swift */; };
 		F3FCE7E92A094EFB00DAAD05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FCE7E82A094EFB00DAAD05 /* SceneDelegate.swift */; };
 		F3FCE7EB2A094EFB00DAAD05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FCE7EA2A094EFB00DAAD05 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		133735A82A0C039A00ED531D /* CollectionCompositionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCompositionLayout.swift; sourceTree = "<group>"; };
 		F3FCE7E32A094EFB00DAAD05 /* Collectionview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collectionview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3FCE7E62A094EFB00DAAD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3FCE7E82A094EFB00DAAD05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				F3FCE7E82A094EFB00DAAD05 /* SceneDelegate.swift */,
 				F3FCE7EA2A094EFB00DAAD05 /* ViewController.swift */,
 				F3FFD5CB2A0BCCDF006B98B5 /* HeaderView.swift */,
+				133735A82A0C039A00ED531D /* CollectionCompositionLayout.swift */,
 				F3FCE7EF2A094EFC00DAAD05 /* Assets.xcassets */,
 				F3FCE7F12A094EFC00DAAD05 /* LaunchScreen.storyboard */,
 				F3FCE7F42A094EFC00DAAD05 /* Info.plist */,
@@ -144,6 +147,7 @@
 				F3FCE7EB2A094EFB00DAAD05 /* ViewController.swift in Sources */,
 				F3FCE7E72A094EFB00DAAD05 /* AppDelegate.swift in Sources */,
 				F3FCE7FB2A0951E500DAAD05 /* CollectionViewCell.swift in Sources */,
+				133735A92A0C039A00ED531D /* CollectionCompositionLayout.swift in Sources */,
 				F3FCE7E92A094EFB00DAAD05 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -92,24 +92,27 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
 extension ViewController {
     func createFlowLayout() -> UICollectionViewCompositionalLayout {
         /// item
-        let short = createLayoutItem(size: .fraction(height: 1.0, width: 1.0))
-        short.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
+        let short: LayoutItem = .fractionalSize(width: 1.0, height: 0.25)
+                                .insets(top: 0, leading: 0, bottom: 10, trailing: 0)
 
-        let tall = createLayoutItem(size: .fraction(height: 0.25, width: 1.0))
-        tall.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
+        let tall: LayoutItem = .fractionalSize(width: 1.0, height: 0.5)
+                               .insets(top: 0, leading: 0, bottom: 10, trailing: 0)
 
         let leftGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
                                                                            heightDimension: .fractionalHeight(1)),
                                                          subitems:  [short, short, tall])
-        
+        leftGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+
         let rightGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
                                                                            heightDimension: .fractionalHeight(1)),
                                                          subitems:  [tall, short, short])
+        rightGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
 
         /// group
         let mainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                              heightDimension: .fractionalHeight(1)),
-                                                       subitems: [leftGroup, rightGroup])
+                                                           subitems: [leftGroup, rightGroup])
+        mainGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
         
         ///section
         let section = NSCollectionLayoutSection(group: mainGroup)
@@ -123,19 +126,5 @@ struct City {
     init(image: String, name: String) {
         self.image = image
         self.name = name
-    }
-}
-
-public enum ItemSize {
-    case fraction(height: CGFloat, width: CGFloat)
-}
-
-extension NSObject {
-    func createLayoutItem(size: ItemSize) -> NSCollectionLayoutItem {
-        switch size{
-        case .fraction(height: let height, width: let width):
-            return NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(height),
-                                                            heightDimension: .fractionalHeight(width)))
-        }
     }
 }
