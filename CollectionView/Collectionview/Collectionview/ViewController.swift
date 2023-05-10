@@ -92,12 +92,10 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
 extension ViewController {
     func createFlowLayout() -> UICollectionViewCompositionalLayout {
         /// item
-        let short = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                             heightDimension: .fractionalHeight(0.25)))
+        let short = createLayoutItem(size: .fraction(height: 1.0, width: 1.0))
         short.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
 
-        let tall = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(0.5)))
+        let tall = createLayoutItem(size: .fraction(height: 0.25, width: 1.0))
         tall.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
 
         let leftGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
@@ -125,5 +123,19 @@ struct City {
     init(image: String, name: String) {
         self.image = image
         self.name = name
+    }
+}
+
+public enum ItemSize {
+    case fraction(height: CGFloat, width: CGFloat)
+}
+
+extension NSObject {
+    func createLayoutItem(size: ItemSize) -> NSCollectionLayoutItem {
+        switch size{
+        case .fraction(height: let height, width: let width):
+            return NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(height),
+                                                            heightDimension: .fractionalHeight(width)))
+        }
     }
 }
