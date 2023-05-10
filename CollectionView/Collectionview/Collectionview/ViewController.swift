@@ -92,28 +92,27 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
 extension ViewController {
     func createFlowLayout() -> UICollectionViewCompositionalLayout {
         /// item
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1)))
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        
-        let item2 = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-        item2.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 1, bottom: 1, trailing: 1)
+        let left = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                            heightDimension: .fractionalHeight(1)))
+        left.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 0)
+
+        let right = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+                                                            heightDimension: .fractionalHeight(1)))
+        right.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
+
         /// vertical Group
-        let vGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                                                         heightDimension: .fractionalHeight(1)),
-                                                      subitem: item2, count: 2) /// same config apply everywhere
-        /// group
-        let mainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                                          heightDimension: .fractionalHeight(0.6)),
-                                                       subitems: [vGroup, item]) /// use subitems for cell config
+        let vGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+                                                                        heightDimension: .fractionalHeight(1)),
+                                                      subitem: left,
+                                                      count: 2) /// same config apply everywhere
         
-//        NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-//                                                                              heightDimension: .fractionalHeight(0.3)),
-//                                           repeatingSubitem: item,
-//                                           count: 3)
+        /// group
+        let mainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                            heightDimension: .fractionalHeight(0.5)),
+                                                       subitems: [vGroup, right]) /// use subitems for cell config
+        
         ///section
         let section = NSCollectionLayoutSection(group: mainGroup)
-        
-        
         return UICollectionViewCompositionalLayout(section: section)
     }
 }
