@@ -67,7 +67,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        cell.configureCell(placeName: cities[indexPath.item].name, imageName: cities[indexPath.item].image )
+        cell.configureCell(placeName: cities[indexPath.item].name, imageName: cities[indexPath.item].image, index: indexPath.row)
         return cell
     }
 }
@@ -93,11 +93,11 @@ extension ViewController {
     func createFlowLayout() -> UICollectionViewCompositionalLayout {
         /// item
         let short = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                             heightDimension: .fractionalHeight(0.5)))
-        short.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 0)
+                                                             heightDimension: .fractionalHeight(0.25)))
+        short.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
 
         let tall = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(1)))
+                                                            heightDimension: .fractionalHeight(0.5)))
         tall.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
 
         let leftGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
@@ -110,7 +110,7 @@ extension ViewController {
 
         /// group
         let mainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                            heightDimension: .fractionalHeight(0.5)),
+                                                                             heightDimension: .fractionalHeight(1)),
                                                        subitems: [leftGroup, rightGroup])
         
         ///section
