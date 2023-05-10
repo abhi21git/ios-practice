@@ -29,6 +29,14 @@ class CollectionViewCell: UICollectionViewCell {
         titleLabel.textAlignment = .center
         return titleLabel
     }()
+    
+    let indexLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = .boldSystemFont(ofSize: 12)
+        titleLabel.textAlignment = .center
+        return titleLabel
+    }()
   
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,6 +56,7 @@ class CollectionViewCell: UICollectionViewCell {
         addSubview(customView)
         customView.addSubview(imageView)
         customView.addSubview(titleLabel)
+        customView.addSubview(indexLabel)
         
         NSLayoutConstraint.activate([
             customView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -63,16 +72,26 @@ class CollectionViewCell: UICollectionViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            indexLabel.heightAnchor.constraint(equalToConstant: 20.0),
+            indexLabel.widthAnchor.constraint(equalToConstant: 20.0),
+            indexLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 5),
+            indexLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5)
         ])
         imageView.layer.cornerRadius = 10.0
         imageView.layer.masksToBounds = true
         titleLabel.backgroundColor = .white.withAlphaComponent(0.5)
         titleLabel.layer.cornerRadius = 10
         titleLabel.clipsToBounds = true
+        
+        indexLabel.backgroundColor = .white.withAlphaComponent(0.5)
+        indexLabel.layer.cornerRadius = 10
+        indexLabel.clipsToBounds = true
+
     }
     
-    func configureCell(placeName: String, imageName: String) {
+    func configureCell(placeName: String, imageName: String, index: Int) {
         titleLabel.text = placeName
         imageView.image = UIImage(named: imageName)
+        indexLabel.text = "\(index)"
     }
 }
