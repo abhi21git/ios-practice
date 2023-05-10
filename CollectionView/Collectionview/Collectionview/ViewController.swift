@@ -92,24 +92,26 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
 extension ViewController {
     func createFlowLayout() -> UICollectionViewCompositionalLayout {
         /// item
-        let left = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(1)))
-        left.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 0)
+        let short = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                             heightDimension: .fractionalHeight(0.5)))
+        short.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 0)
 
-        let right = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+        let tall = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalHeight(1)))
-        right.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
+        tall.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
 
-        /// vertical Group
-        let vGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
-                                                                        heightDimension: .fractionalHeight(1)),
-                                                      subitem: left,
-                                                      count: 2) /// same config apply everywhere
+        let leftGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+                                                                           heightDimension: .fractionalHeight(1)),
+                                                         subitems:  [short, short, tall])
         
+        let rightGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+                                                                           heightDimension: .fractionalHeight(1)),
+                                                         subitems:  [tall, short, short])
+
         /// group
         let mainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                             heightDimension: .fractionalHeight(0.5)),
-                                                       subitems: [vGroup, right]) /// use subitems for cell config
+                                                       subitems: [leftGroup, rightGroup])
         
         ///section
         let section = NSCollectionLayoutSection(group: mainGroup)
