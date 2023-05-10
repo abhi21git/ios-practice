@@ -59,12 +59,10 @@ class CollectionViewCell: UICollectionViewCell {
             imageView.trailingAnchor.constraint(equalTo: customView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: customView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor),
-            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0),
-            
+            titleLabel.heightAnchor.constraint(equalToConstant: 20.0),
             titleLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor),
         ])
-        
         imageView.layer.cornerRadius = 10.0
         imageView.layer.masksToBounds = true
     }
