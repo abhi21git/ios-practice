@@ -50,16 +50,16 @@ class CollectionViewCell: UICollectionViewCell {
         customView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            customView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4.0),
-            customView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4.0),
-            customView.topAnchor.constraint(equalTo: topAnchor, constant: 10.0),
+            customView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            customView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            customView.topAnchor.constraint(equalTo: topAnchor),
             customView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             imageView.leadingAnchor.constraint(equalTo: customView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: customView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: customView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5.0),
-            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
+            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -10.0),
+            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0),
             
             titleLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor),
