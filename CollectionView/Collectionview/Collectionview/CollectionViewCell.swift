@@ -25,7 +25,7 @@ class CollectionViewCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .systemFont(ofSize: 15)
+        titleLabel.font = .italicSystemFont(ofSize: 15)
         titleLabel.textAlignment = .center
         return titleLabel
     }()
@@ -53,12 +53,13 @@ class CollectionViewCell: UICollectionViewCell {
             customView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4.0),
             customView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4.0),
             customView.topAnchor.constraint(equalTo: topAnchor, constant: 10.0),
-            customView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.0),
+            customView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             imageView.leadingAnchor.constraint(equalTo: customView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: customView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: customView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5.0),
+            imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
             
             titleLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor),
