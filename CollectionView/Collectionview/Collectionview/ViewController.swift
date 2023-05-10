@@ -62,13 +62,26 @@ class ViewController: UIViewController {
 extension ViewController: UICollectionViewDataSource {
   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cities.count
+        return cities.count * 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        cell.configureCell(placeName: cities[indexPath.item].name, imageName: cities[indexPath.item].image, index: indexPath.row)
+        let index = indexPath.item % cities.count
+        cell.configureCell(placeName: cities[index].name, imageName: cities[index].image, index: indexPath.row)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? CollectionViewCell else { return }
+        let xMultiplier: CGFloat = (indexPath.row / 3) % 2 == 0 ? -1 : 1
+        cell.transform = CGAffineTransform(translationX: cell.frame.width * xMultiplier, y: 0)
+        cell.prepareForAnimation()
+        UIView.animate(withDuration: 0.25, animations: {
+            cell.transform = .identity
+        }) { _ in
+            cell.animateItems()
+        }
     }
 }
 
