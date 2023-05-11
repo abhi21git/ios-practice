@@ -101,6 +101,14 @@ extension ViewController: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        guard let view = view as? HeaderView else { return }
+        view.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        UIView.animate(withDuration: 0.25) {
+            view.transform = .identity
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? CollectionViewCell else { return }
         let xMultiplier: CGFloat = (indexPath.row / 3) % 2 == 0 ? -1 : 1
@@ -119,7 +127,6 @@ extension ViewController:  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath)
         return headerView
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -152,6 +159,19 @@ extension ViewController {
         mainGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
         
         let section = NSCollectionLayoutSection(group: mainGroup)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .fractionalHeight(0.3))
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+        
+        header.contentInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 10.0, bottom: 0, trailing: 10.0)
+        
+        section.boundarySupplementaryItems = [header]
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
 }
