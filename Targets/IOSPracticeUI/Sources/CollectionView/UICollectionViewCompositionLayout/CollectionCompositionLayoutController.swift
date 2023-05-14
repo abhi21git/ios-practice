@@ -51,13 +51,16 @@ final class CollectionCompositionLayoutController: UIViewController {
     private func setupCollectionView() -> [NSLayoutConstraint] {
         let layout: UICollectionViewLayout = createFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        let constraints: [NSLayoutConstraint] = view.addSubview(collectionView, considerSafeArea: true, with: [.leading(), .top(), .trailing(), .bottom()])
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let constraints: [NSLayoutConstraint] = view.addSubview(collectionView,
+                                                                considerSafeArea: true,
+                                                                with: [.leading(), .top(),
+                                                                       .trailing(), .bottom()])
         collectionView.backgroundColor = view.backgroundColor
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CollectionViewCell.self)
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind:
+                                    UICollectionView.elementKindSectionHeader)
         return constraints
     }
     
