@@ -28,7 +28,7 @@ final class HomeViewController: UIViewController {
         let titleLabel: GradientTextLabel = GradientTextLabel()
         titleLabel.text = " \(title) "
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
+        titleLabel.font = UIFont(name: "Helvetica-Bold", size: 20)
         navigationItem.titleView = titleLabel
     }
     

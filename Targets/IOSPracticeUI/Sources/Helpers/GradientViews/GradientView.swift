@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GradientView: UIImageView {
+final class GradientView: UIImageView {
     
     var gradientColors: [CGColor] = [UIColor(r: 198, g: 248, b: 229).cgColor,
                                      UIColor(r: 226, g: 190, b: 241).cgColor]

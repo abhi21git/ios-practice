@@ -156,7 +156,7 @@ extension CollectionCompositionLayoutController {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
         
-        header.contentInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 10.0, bottom: 0, trailing: 10.0)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 10.0, bottom: 5.0, trailing: 10.0)
         
         section.boundarySupplementaryItems = [header]
         

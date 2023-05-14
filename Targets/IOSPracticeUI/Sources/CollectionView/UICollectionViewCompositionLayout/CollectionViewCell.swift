@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell, ReusableView {
+final class CollectionViewCell: UICollectionViewCell, ReusableView {
     
     private let imageView: UIImageView = UIImageView()
     private let titleLabel: UILabel = UILabel()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LayoutItem: NSCollectionLayoutItem {
+final class LayoutItem: NSCollectionLayoutItem {
     
     static func fractionalSize(width: CGFloat, height: CGFloat) -> LayoutItem {
         return LayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(width), heightDimension: .fractionalHeight(height)))
@@ -32,6 +32,6 @@ class LayoutItem: NSCollectionLayoutItem {
     }
 }
 
-class LayoutGroup: NSCollectionLayoutGroup {
+final class LayoutGroup: NSCollectionLayoutGroup {
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HeaderView: UICollectionReusableView, ReusableView {
+final class HeaderView: UICollectionReusableView, ReusableView {
     
     private let imageView: UIImageView = UIImageView()
     

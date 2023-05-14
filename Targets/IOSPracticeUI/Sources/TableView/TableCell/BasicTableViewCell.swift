@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasicTableViewCell: UITableViewCell, ReusableView {
+final class BasicTableViewCell: UITableViewCell, ReusableView {
     private var titleLabel: UILabel = UILabel(frame: .zero)
     private var cellImageView: UIImageView = UIImageView(frame: .zero)
     

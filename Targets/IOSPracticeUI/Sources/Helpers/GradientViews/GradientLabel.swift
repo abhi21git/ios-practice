@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GradientTextLabel: UILabel {
+final class GradientTextLabel: UILabel {
     var gradientColors: [CGColor] = [UIColor(r: 234, g: 141, b: 141).cgColor,
                                      UIColor(r: 168, g: 154, b: 254).cgColor]
     var locations: [CGFloat]? = [0.0, 1.0]

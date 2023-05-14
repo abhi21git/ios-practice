@@ -12,7 +12,9 @@ extension Project {
                                      organisationName: organisationName,
                                      platform: platform,
                                      dependencies: additionalTargets.map { TargetDependency.target(name: $0) })
-        targets += additionalTargets.flatMap({ makeFrameworkTargets(name: $0, organisationName: organisationName, platform: platform) })
+        targets.append(contentsOf: additionalTargets.flatMap({ target in
+            makeFrameworkTargets(name: target, organisationName: organisationName, platform: platform)
+        }))
         return Project(name: name,
                        organizationName: "\(organisationName).com",
                        targets: targets)
@@ -69,9 +71,7 @@ extension Project {
             bundleId: "com.\(organisationName).\(name)Tests",
             infoPlist: .default,
             sources: ["Targets/\(name)/Tests/**"],
-            dependencies: [
-                .target(name: "\(name)")
-        ])
+            dependencies: [.target(name: name)])
         return [mainTarget, testTarget]
     }
 }

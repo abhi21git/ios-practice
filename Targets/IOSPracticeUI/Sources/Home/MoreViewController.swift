@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
+final class MoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
