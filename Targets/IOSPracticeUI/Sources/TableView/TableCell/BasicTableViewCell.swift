@@ -29,26 +29,25 @@ class BasicTableViewCell: UITableViewCell, ReusableView {
     }
     
     private func setUpImageView() -> [NSLayoutConstraint] {
-        cellImageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(cellImageView)
-        let constraints: [NSLayoutConstraint] = [
-            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            cellImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            cellImageView.heightAnchor.constraint(equalToConstant: 40),
-            cellImageView.widthAnchor.constraint(equalTo: cellImageView.heightAnchor)
-        ]
+        let constraints: [NSLayoutConstraint] = contentView.addSubview(cellImageView, with: [
+            .leading(constant: 20),
+            .top(constant: 20),
+            .bottom(constant: 20),
+            .aspectRatio(multiplier: 1),
+            .height(constant: 24)
+        ])
+        cellImageView.tintColor = .orange
+        cellImageView.setContentHuggingPriority(.required, for: .horizontal)
+        cellImageView.contentMode = .scaleAspectFit
         return constraints
     }
     
     private func setUpLabel() -> [NSLayoutConstraint] {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(titleLabel)
-        let constraints: [NSLayoutConstraint] = [
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: cellImageView.trailingAnchor, constant: 20)
-        ]
+        let constraints: [NSLayoutConstraint] = contentView.addSubview(titleLabel, with: [
+            .leading(constant: 20, from: cellImageView.trailingAnchor),
+            .trailing(constant: 20),
+            .centerY()
+        ])
         return constraints
     }
     

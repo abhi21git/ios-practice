@@ -7,28 +7,22 @@
 
 import UIKit
 
-class HeaderView: UICollectionReusableView {
+class HeaderView: UICollectionReusableView, ReusableView {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "HeaderImage")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
+    private let imageView: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(imageView)
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.0),
-        ])
-        
+        setupImageView()
+    }
+    
+    private func setupImageView() {
+        let constraints: [NSLayoutConstraint] = addSubview(imageView, with: [.leading(), .trailing(), .top(), .bottom()])
+        imageView.image = UIImage(named: "HeaderImage")
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10.0
         imageView.layer.masksToBounds = true
+        NSLayoutConstraint.activate(constraints)
     }
     
     required init?(coder: NSCoder) {

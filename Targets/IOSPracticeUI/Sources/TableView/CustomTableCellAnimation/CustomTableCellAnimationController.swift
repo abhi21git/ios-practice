@@ -8,7 +8,8 @@
 import UIKit
 
 final class CustomTableCellAnimationController: UIViewController {
-    let data = Array(1...100).lazy.map({"Here is \($0)"})
+    private let data = Array(1...100).lazy.map({"Here is \($0)"})
+    
     private var tableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +20,7 @@ final class CustomTableCellAnimationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        setupViews()
     }
     
     convenience init(title: String) {
@@ -35,17 +36,17 @@ final class CustomTableCellAnimationController: UIViewController {
         navigationItem.titleView = titleLabel
     }
     
-    private func configureTableView() {
-        view.addSubview(tableView)
+    private func setupViews() {
         view.backgroundColor = .white
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+        let tableConstraints: [NSLayoutConstraint] = setupTableView()
+        NSLayoutConstraint.activate(tableConstraints)
+    }
+    
+    private func setupTableView() -> [NSLayoutConstraint] {
+        let constraints: [NSLayoutConstraint] = view.addSubview(tableView, considerSafeArea: true, with: [.leading(), .trailing(), .top(), .bottom()])
         tableView.delegate = self
         tableView.dataSource = self
+        return constraints
     }
 }
 

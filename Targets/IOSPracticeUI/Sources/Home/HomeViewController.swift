@@ -11,31 +11,34 @@ import UIKit
 final class HomeViewController: UIViewController {
     
     private let data: [HomeViewEntries] = HomeViewEntries.allCases
-    private var tableView: UITableView = UITableView(frame: .zero)
+    private var tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
     }
     
     private func setUpViews() {
+        setupNavTitle("Home")
         view.backgroundColor = .white
         let tableViewConstraint: [NSLayoutConstraint] = setUpTableView()
         NSLayoutConstraint.activate(tableViewConstraint)
     }
     
+    private func setupNavTitle(_ title: String) {
+        let titleLabel: GradientTextLabel = GradientTextLabel()
+        titleLabel.text = " \(title) "
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
+        navigationItem.titleView = titleLabel
+    }
+    
     private func setUpTableView() -> [NSLayoutConstraint] {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
+        let constraints: [NSLayoutConstraint] = view.addSubview(tableView, considerSafeArea: true, with: [.leading(), .trailing(), .top(), .bottom()])
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(white: 0.92, alpha: 1)
         tableView.register(BasicTableViewCell.self)
-        let constraints: [NSLayoutConstraint] = [
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
         return constraints
     }
 }
@@ -57,7 +60,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case .tableView:
             navigationController?.pushViewController(CustomTableCellAnimationController(title: entry.title), animated: true)
         case .collectionView:
-            navigationController?.pushViewController(CollectionCompositionLayoutController(), animated: true)
+            navigationController?.pushViewController(CollectionCompositionLayoutController(title: entry.title), animated: true)
         case .notificationCenter:
             break
         }

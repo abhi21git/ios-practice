@@ -7,35 +7,11 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CollectionViewCell: UICollectionViewCell, ReusableView {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle")
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    let titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .italicSystemFont(ofSize: 15)
-        titleLabel.textAlignment = .center
-        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
-        titleLabel.textColor = .white
-        return titleLabel
-    }()
-    
-    let indexLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .boldSystemFont(ofSize: 12)
-        titleLabel.textAlignment = .center
-        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
-        titleLabel.textColor = .white
-        return titleLabel
-    }()
+    private let imageView: UIImageView = UIImageView()
+    private let titleLabel: UILabel = UILabel()
+    private let indexLabel: UILabel = UILabel()
   
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,30 +23,35 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     private func setUpViews() {
-        contentView.addSubview(imageView)
-        imageView.addSubview(titleLabel)
-        imageView.addSubview(indexLabel)
+        let imageConstraints: [NSLayoutConstraint] = setupImageView()
+        let titleConstraints: [NSLayoutConstraint] = setupLabelView()
+        NSLayoutConstraint.activate(imageConstraints + titleConstraints)
+    }
+    
+    private func setupImageView() -> [NSLayoutConstraint] {
+        let constraints: [NSLayoutConstraint] = contentView.addSubview(imageView, with: [.leading(), .trailing(), .top(), .bottom()])
         imageView.layer.cornerRadius = 10.0
         imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
-        
+        imageView.contentMode = .scaleAspectFill
+        return constraints
+    }
+    
+    private func setupLabelView() -> [NSLayoutConstraint] {
+        let titleConstraints: [NSLayoutConstraint] = imageView.addSubview(titleLabel, with: [.leading(), .trailing(), .bottom(), .height(constant: 20)])
+        let indexConstraints: [NSLayoutConstraint] = imageView.addSubview(indexLabel, with: [.top(constant: 5), .trailing(constant: 5), .aspectRatio(), .height(constant: 20)])
+        titleLabel.font = .italicSystemFont(ofSize: 15)
+        titleLabel.textAlignment = .center
+        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
+        titleLabel.textColor = .white
+
+        indexLabel.font = .boldSystemFont(ofSize: 12)
+        indexLabel.textAlignment = .center
+        indexLabel.backgroundColor = .black.withAlphaComponent(0.6)
+        indexLabel.textColor = .white
         indexLabel.layer.cornerRadius = 5
         indexLabel.layer.masksToBounds = true
-        
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20.0),
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            indexLabel.heightAnchor.constraint(equalToConstant: 20.0),
-            indexLabel.widthAnchor.constraint(equalToConstant: 20.0),
-            indexLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 5),
-            indexLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5)
-        ])
+        return titleConstraints + indexConstraints
     }
     
     func configureCell(city: Cities, index: Int) {

@@ -9,37 +9,40 @@ import UIKit
 
 // MARK: CollectionCompositionLayoutController.swift
 final class CollectionCompositionLayoutController: UIViewController {
-
-    private var titleLabel: GradientTextLabel = GradientTextLabel()
-    private var collectionView: UICollectionView!
     
+    private var collectionView: UICollectionView!
     private let cities: [Cities] = Cities.allCases
     
-     override func viewDidLoad() {
+    convenience init(title: String) {
+        self.init()
+        setupNavTitle(title)
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
     }
     
-     override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.layoutIfNeeded()
         prepareAnimation()
     }
     
-     override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         performAnimation()
     }
     
     private func setUpViews() {
         view.backgroundColor = .white
-        setupTitleLabel()
         let collectionConstraints: [NSLayoutConstraint] = setupCollectionView()
         NSLayoutConstraint.activate(collectionConstraints)
     }
     
-    private func setupTitleLabel() {
-        titleLabel.text = " COMPOSITION LAYOUT "
+    private func setupNavTitle(_ title: String) {
+        let titleLabel: GradientTextLabel = GradientTextLabel()
+        titleLabel.text = " \(title) "
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
         navigationItem.titleView = titleLabel
@@ -48,35 +51,23 @@ final class CollectionCompositionLayoutController: UIViewController {
     private func setupCollectionView() -> [NSLayoutConstraint] {
         let layout: UICollectionViewLayout = createFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.addSubview(collectionView)
+        let constraints: [NSLayoutConstraint] = view.addSubview(collectionView, considerSafeArea: true, with: [.leading(), .top(), .trailing(), .bottom()])
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = view.backgroundColor
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.register(HeaderView.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: "HeaderView")
-        let constraints: [NSLayoutConstraint] = [
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ]
+        collectionView.register(CollectionViewCell.self)
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
         return constraints
     }
     
     private func prepareAnimation() {
-        let yTransformation = view.center.y - titleLabel.center.y
-        titleLabel.transform = CGAffineTransform(translationX: 0, y: yTransformation)
-        collectionView.transform = CGAffineTransform(translationX: 0, y: yTransformation)
+        collectionView.transform = CGAffineTransform(translationX: 0, y: collectionView.center.y)
     }
     
     private func performAnimation() {
-        UIView.animate(withDuration: 0.3, delay: 0.2) { [weak self] in
-            self?.titleLabel.transform = .identity
+        UIView.animate(withDuration: 0.25) { [weak self] in
             self?.collectionView.transform = .identity
-
         }
     }
 }
@@ -89,7 +80,7 @@ extension CollectionCompositionLayoutController: UICollectionViewDataSource {
     }
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
+        let cell: CollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let index = indexPath.item % cities.count
         cell.configureCell(city: cities[index], index: indexPath.row)
         return cell
