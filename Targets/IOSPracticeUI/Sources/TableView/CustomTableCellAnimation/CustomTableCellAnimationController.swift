@@ -9,7 +9,6 @@ import UIKit
 
 final class CustomTableCellAnimationController: UIViewController {
     let data = Array(1...100).lazy.map({"Here is \($0)"})
-    
     private var tableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,15 +22,28 @@ final class CustomTableCellAnimationController: UIViewController {
         configureTableView()
     }
     
+    convenience init(title: String) {
+        self.init()
+        setupNavTitle(title)
+    }
+    
+    private func setupNavTitle(_ title: String) {
+        let titleLabel: GradientTextLabel = GradientTextLabel()
+        titleLabel.text = " \(title) "
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
+        navigationItem.titleView = titleLabel
+    }
+    
     private func configureTableView() {
         view.addSubview(tableView)
+        view.backgroundColor = .white
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-        self.navigationController?.isNavigationBarHidden = true
         tableView.delegate = self
         tableView.dataSource = self
     }

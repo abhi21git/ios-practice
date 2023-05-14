@@ -32,23 +32,17 @@ final class CollectionCompositionLayoutController: UIViewController {
     }
     
     private func setUpViews() {
-        let titleLabelConstraints: [NSLayoutConstraint] = setupTitleLabel()
+        view.backgroundColor = .white
+        setupTitleLabel()
         let collectionConstraints: [NSLayoutConstraint] = setupCollectionView()
-        NSLayoutConstraint.activate(titleLabelConstraints + collectionConstraints)
+        NSLayoutConstraint.activate(collectionConstraints)
     }
     
-    private func setupTitleLabel() -> [NSLayoutConstraint] {
-        view.addSubview(titleLabel)
-        titleLabel.text = "COMPOSITION LAYOUT"
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func setupTitleLabel() {
+        titleLabel.text = " COMPOSITION LAYOUT "
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 28)
-        let constraints: [NSLayoutConstraint] = [
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ]
-        return constraints
+        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
+        navigationItem.titleView = titleLabel
     }
     
     private func setupCollectionView() -> [NSLayoutConstraint] {
@@ -64,7 +58,7 @@ final class CollectionCompositionLayoutController: UIViewController {
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: "HeaderView")
         let constraints: [NSLayoutConstraint] = [
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
