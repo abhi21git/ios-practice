@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: Cities
 enum Cities: String, CaseIterable {
     case ankara = "Ankara"
     case antalya = "Antalya"

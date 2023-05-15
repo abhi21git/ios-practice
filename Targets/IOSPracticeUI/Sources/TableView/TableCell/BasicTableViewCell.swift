@@ -8,10 +8,13 @@
 
 import UIKit
 
+// MARK: BasicTableViewCell
 final class BasicTableViewCell: UITableViewCell, ReusableView {
+    // MARK: Private properties
     private var titleLabel: UILabel = UILabel(frame: .zero)
     private var cellImageView: UIImageView = UIImageView(frame: .zero)
     
+    // MARK: Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpViews()
@@ -20,16 +23,27 @@ final class BasicTableViewCell: UITableViewCell, ReusableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+// MARK: Public methods
+extension BasicTableViewCell {
+    public func configure(with data: HomeViewEntries) {
+        titleLabel.text = data.title
+        cellImageView.image = UIImage(systemName: data.imageName)
+    }
+}
+
+// MARK: Private methods
+extension BasicTableViewCell {
     private func setUpViews() {
         selectionStyle = .none
-        let imageConstraint: [NSLayoutConstraint] = setUpImageView()
-        let titleConstraint: [NSLayoutConstraint] = setUpLabel()
+        let imageConstraint: Constraints = setUpImageView()
+        let titleConstraint: Constraints = setUpLabel()
         NSLayoutConstraint.activate(imageConstraint + titleConstraint)
     }
     
-    private func setUpImageView() -> [NSLayoutConstraint] {
-        let constraints: [NSLayoutConstraint] = contentView.addSubview(cellImageView, with: [
+    private func setUpImageView() -> Constraints {
+        let constraints: Constraints = contentView.addSubview(cellImageView, with: [
             .leading(constant: 20),
             .top(constant: 20),
             .bottom(constant: 20),
@@ -42,18 +56,13 @@ final class BasicTableViewCell: UITableViewCell, ReusableView {
         return constraints
     }
     
-    private func setUpLabel() -> [NSLayoutConstraint] {
-        let constraints: [NSLayoutConstraint] = contentView.addSubview(titleLabel, with: [
+    private func setUpLabel() -> Constraints {
+        let constraints: Constraints = contentView.addSubview(titleLabel, with: [
             .leading(constant: 20, from: cellImageView.trailingAnchor),
             .trailing(constant: 20),
             .centerY()
         ])
         return constraints
-    }
-    
-    public func configure(with data: HomeViewEntries) {
-        titleLabel.text = data.title
-        cellImageView.image = UIImage(systemName: data.imageName)
     }
 }
 

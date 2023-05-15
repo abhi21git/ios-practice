@@ -8,9 +8,19 @@
 
 import UIKit
 
+// MARK: MoreViewController
 final class MoreViewController: UIViewController {
+    // MARK: Properties
+    // Add here
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
     }
+}
+
+// MARK: Methods
+extension MoreViewController {
+    
 }

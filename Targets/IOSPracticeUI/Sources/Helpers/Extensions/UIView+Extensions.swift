@@ -8,7 +8,20 @@
 
 import UIKit
 
+public typealias Constraints = [NSLayoutConstraint]
+
 public extension UIView {
+    @discardableResult func cornerRadius(_ radius: CGFloat, maskToBounds: Bool = true) -> Self {
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = maskToBounds
+        return self
+    }
+    
+    @discardableResult func borderWidth(_ width: CGFloat) -> Self {
+        self.layer.borderWidth = width
+        return self
+    }
+    
     func transition(for duration: CGFloat = 0.25, after delay: CGFloat = 0, animation animations: () -> Void, completion: ((Bool) -> Void)? = nil) {
         removeTransition()
         CATransaction.begin()
@@ -33,12 +46,12 @@ public extension UIView {
         layer.removeAnimation(forKey: kCATransition)
     }
     
-    func addSubview(_ subView: UIView, considerSafeArea: Bool = false, with constraints: Array<Constraints>) -> [NSLayoutConstraint] {
+    func addSubview(_ subView: UIView, considerSafeArea: Bool = false, with constraints: Array<Constraint>) -> Constraints {
         addSubview(subView)
         return subView.addConstraints(in: self, considerSafeArea: considerSafeArea, with: constraints)
     }
     
-    func addConstraints(in view: UIView, considerSafeArea: Bool = false, with constraints: Array<Constraints>) -> [NSLayoutConstraint] {
+    func addConstraints(in view: UIView, considerSafeArea: Bool = false, with constraints: Array<Constraint>) -> Constraints {
         translatesAutoresizingMaskIntoConstraints = false
         
         return constraints.map({ constraint in
@@ -88,7 +101,7 @@ public extension UIView {
     }
 }
 
-public enum Constraints {
+public enum Constraint {
     case leading(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case top(constant: CGFloat = 0, from: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case trailing(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
