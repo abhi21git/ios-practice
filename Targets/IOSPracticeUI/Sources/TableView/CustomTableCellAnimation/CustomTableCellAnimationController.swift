@@ -7,26 +7,25 @@
 
 import UIKit
 
+// MARK: CustomTableCellAnimationController
 final class CustomTableCellAnimationController: UIViewController {
-    let data = Array(1...100).lazy.map({"Here is \($0)"})
-    private var tableView: UITableView = {
-        var tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "customCell")
-        tableView.separatorStyle = .none
-        return tableView
-    }()
-    
+    // MARK: Properties
+    private let data = Array(1...100).lazy.map({ "Here is \($0)" })
+    private var tableView: UITableView = UITableView()
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        setupViews()
     }
-    
+
     convenience init(title: String) {
         self.init()
         setupNavTitle(title)
     }
-    
+}
+// MARK: Private methods
+extension CustomTableCellAnimationController {
     private func setupNavTitle(_ title: String) {
         let titleLabel: GradientTextLabel = GradientTextLabel()
         titleLabel.text = " \(title) "
@@ -35,30 +34,42 @@ final class CustomTableCellAnimationController: UIViewController {
         navigationItem.titleView = titleLabel
     }
     
-    private func configureTableView() {
-        view.addSubview(tableView)
+    private func setupViews() {
         view.backgroundColor = .white
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+        let tableConstraints: Constraints = setupTableView()
+        (tableConstraints).activate()
+    }
+    
+    private func setupTableView() -> Constraints {
+        let constraints: Constraints = view.addSubview(tableView,
+                                                       considerSafeArea: true,
+                                                       with: [.leading(),
+                                                              .trailing(),
+                                                              .top(),
+                                                              .bottom()])
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(TableViewCell.self)
+        tableView.separatorStyle = .none
+        return constraints
+    }
+    
+    private func animateCell(_ cell: TableViewCell) {
+        cell.alpha = 0.0
+        cell.transition() {
+            cell.alpha = 1
+        }
     }
 }
 
-//MARK: - DataSource and Delegate
+//MARK: Table DataSource and Delegate
 extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? TableViewCell else {
-            return UITableViewCell()
-        }
+        let cell: TableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.selectionStyle = .none
         cell.configure(text: data[indexPath.row])
         return cell
@@ -68,11 +79,21 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? TableViewCell else { return }
+        animateCell(cell)
+    }
+}
+
+//MARK: Scroll Delegate
+extension CustomTableCellAnimationController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
             guard let cell = cell as? TableViewCell else { return }
-            UIView.animate(withDuration: 0.3) {
-                if CGRectContainsPoint(cell.convert(cell.containerView.frame, to: self.tableView), self.tableView.offset.center) {
+            let cellFrameInTable = cell.convert(cell.containerView.frame, to: self.tableView)
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                guard let self = self else { return }
+                if CGRectContainsPoint(cellFrameInTable, self.tableView.offset.center) {
                     cell.containerView.transform = .identity
                 } else {
                     cell.containerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
@@ -80,28 +101,13 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
             }
         }
     }
-    
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let cellHeight = tableView.visibleCells.first?.frame.height else { return }
         let expectedCenterY = (targetContentOffset.pointee.y + tableView.frame.height / 2)
         let cellDecimalVal = expectedCenterY / cellHeight
         let point = cellDecimalVal.truncatingRemainder(dividingBy: 1) - 0.50
         targetContentOffset.pointee.y -= cellHeight * point
-    }
-}
-
-//MARK: - Animation
-extension CustomTableCellAnimationController {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? TableViewCell else { return }
-        animateCell(cell)
-    }
-    
-    func animateCell(_ cell: TableViewCell) {
-        cell.alpha = 0.0
-        cell.transition()  {
-            cell.alpha = 1
-        }
     }
 }
 

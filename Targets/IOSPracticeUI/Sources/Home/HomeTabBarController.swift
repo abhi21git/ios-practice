@@ -8,19 +8,24 @@
 
 import UIKit
 
+// MARK: HomeTabBarController
 public final class HomeTabBarController: UITabBarController {
     
+    // MARK: Properties
     var controllers: [UIViewController] = [] {
         didSet {
             viewControllers = controllers
         }
     }
     
+    // MARK: Lifecycle
     public override func viewDidLoad() {
         super.viewDidLoad()
         setUpTabItem()
     }
-    
+}
+// MARK: Methods
+extension HomeTabBarController {
     private func setUpTabItem() {
         delegate = self
         let homeTabController = HomeViewController()

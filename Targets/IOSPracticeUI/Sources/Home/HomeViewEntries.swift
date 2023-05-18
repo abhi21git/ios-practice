@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: HomeViewEntries
 enum HomeViewEntries: String, CaseIterable {
     case tableView = "Table View"
     case collectionView = "Collection View"

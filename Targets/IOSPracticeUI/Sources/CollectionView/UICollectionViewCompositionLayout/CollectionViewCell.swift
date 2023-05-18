@@ -7,36 +7,15 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+// MARK: CollectionViewCell
+final class CollectionViewCell: UICollectionViewCell, ReusableView {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle")
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    // MARK: Properties
+    private let imageView: UIImageView = UIImageView()
+    private let titleLabel: UILabel = UILabel()
+    private let indexLabel: UILabel = UILabel()
     
-    let titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .italicSystemFont(ofSize: 15)
-        titleLabel.textAlignment = .center
-        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
-        titleLabel.textColor = .white
-        return titleLabel
-    }()
-    
-    let indexLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .boldSystemFont(ofSize: 12)
-        titleLabel.textAlignment = .center
-        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
-        titleLabel.textColor = .white
-        return titleLabel
-    }()
-  
+    // MARK: Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
@@ -45,34 +24,9 @@ class CollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setUpViews() {
-        contentView.addSubview(imageView)
-        imageView.addSubview(titleLabel)
-        imageView.addSubview(indexLabel)
-        imageView.layer.cornerRadius = 10.0
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        
-        indexLabel.layer.cornerRadius = 5
-        indexLabel.layer.masksToBounds = true
-        
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20.0),
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            indexLabel.heightAnchor.constraint(equalToConstant: 20.0),
-            indexLabel.widthAnchor.constraint(equalToConstant: 20.0),
-            indexLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 5),
-            indexLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5)
-        ])
-    }
-    
+}
+// MARK: CollectionViewCell Public Methods
+extension CollectionViewCell {
     func configureCell(city: Cities, index: Int) {
         titleLabel.text = city.name
         imageView.image = UIImage(named: city.name)
@@ -87,7 +41,53 @@ class CollectionViewCell: UICollectionViewCell {
     func animateItems(with duration: TimeInterval = 0.3) {
         UIView.animate(withDuration: duration, delay: 0.3) { [weak self] in
             self?.titleLabel.transform = .identity
-            self?.indexLabel.transform  = .identity
+            self?.indexLabel.transform = .identity
         }
+    }
+}
+
+// MARK: CollectionViewCell Private Methods
+extension CollectionViewCell {
+    private func setUpViews() {
+        let imageConstraints: Constraints = setupImageView()
+        let titleConstraints: Constraints = setupLabelView()
+        (imageConstraints + titleConstraints).activate()
+    }
+    
+    private func setupImageView() -> Constraints {
+        let constraints: Constraints = contentView.addSubview(imageView,
+                                                              with: [.leading(),
+                                                                     .trailing(),
+                                                                     .top(),
+                                                                     .bottom()])
+        imageView.cornerRadius(10)
+        imageView.contentMode = .scaleAspectFill
+        return constraints
+    }
+    
+    private func setupLabelView() -> Constraints {
+        let titleConstraints: Constraints = imageView.addSubview(titleLabel, with: [
+            .leading(),
+            .trailing(),
+            .bottom(),
+            .height(constant: 20)
+        ])
+        let indexConstraints: Constraints = imageView.addSubview(indexLabel, with: [
+            .top(constant: 5),
+            .trailing(constant: 5),
+            .aspectRatio(),
+            .height(constant: 20)
+        ])
+        titleLabel.font = .italicSystemFont(ofSize: 15)
+        titleLabel.textAlignment = .center
+        titleLabel.backgroundColor = .black.withAlphaComponent(0.6)
+        titleLabel.textColor = .white
+        
+        indexLabel.font = .boldSystemFont(ofSize: 12)
+        indexLabel.textAlignment = .center
+        indexLabel.backgroundColor = .black.withAlphaComponent(0.6)
+        indexLabel.textColor = .white
+        indexLabel.cornerRadius(5)
+        return titleConstraints + indexConstraints
     }
 }

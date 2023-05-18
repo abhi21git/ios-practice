@@ -7,45 +7,55 @@
 
 import UIKit
 
-final class TableViewCell: UITableViewCell {
-
-    var containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+// MARK: TableViewCell
+final class TableViewCell: UITableViewCell, ReusableView {
     
-    var title: UILabel = {
-        var title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        return title
-    }()
-
+    // MARK: Properties
+    public var containerView: GradientView = GradientView()
+    private var title: UILabel = UILabel()
+    
+    // MARK: Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(containerView)
-        containerView.addSubview(title)
-        
-        NSLayoutConstraint.activate([
-            containerView.heightAnchor.constraint(equalToConstant: 200),
-            containerView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            title.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            title.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-        ])
-        
-        containerView.layer.cornerRadius = 20
-        containerView.backgroundColor = UIColor.systemMint
-        title.textColor = .white
+        setupViews()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    func configure(text: String) {
+}
+
+// MARK: Public methods
+extension TableViewCell {
+    public func configure(text: String) {
         title.text = text
+    }
+}
+
+// MARK: Private methods
+extension TableViewCell {
+    private func setupViews() {
+        let containerConstraints: Constraints = setupContainerView()
+        let titleViewConstraints: Constraints = setupTitleView()
+        (containerConstraints + titleViewConstraints).activate()
+    }
+    
+    private func setupContainerView() -> Constraints {
+        let constraints: Constraints = contentView.addSubview(containerView, with: [
+            .height(constant: 200),
+            .top(constant: 20),
+            .bottom(constant: 20),
+            .leading(constant: 20),
+            .trailing(constant: 20)
+        ])
+        containerView.cornerRadius(20)
+        containerView.backgroundColor = UIColor.systemMint
+        return constraints
+    }
+    
+    private func setupTitleView() -> Constraints {
+        let constraints = contentView.addSubview(title, with: [.centerX(), .centerY()])
+        title.textColor = .black
+        return constraints
     }
 }
