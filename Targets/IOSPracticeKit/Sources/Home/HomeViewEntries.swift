@@ -9,16 +9,16 @@
 import Foundation
 
 // MARK: HomeViewEntries
-enum HomeViewEntries: String, CaseIterable {
+public enum HomeViewEntries: String, CaseIterable {
     case tableView = "Table View"
     case collectionView = "Collection View"
     case notificationCenter = "Notification Center"
     
-    var title: String {
+    public var title: String {
         return rawValue
     }
     
-    var imageName: String {
+    public var imageName: String {
         switch self {
         case .tableView:
             return "list.bullet"

@@ -1,5 +1,4 @@
 import UIKit
-import IOSPracticeKit
 import IOSPracticeUI
 
 @main

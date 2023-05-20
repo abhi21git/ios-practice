@@ -6,6 +6,8 @@
 //  Copyright © 2023 practice.com. All rights reserved.
 //
 
+import IOSPracticeKit
+import IOSPracticeUI
 import UIKit
 
 // MARK: HomeViewController
@@ -56,7 +58,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: BasicTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.configure(with: data[indexPath.row])
+        cell.configure(with: data[indexPath.row].getCellModel())
         return cell
     }
     
@@ -70,5 +72,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case .notificationCenter:
             break
         }
+    }
+}
+
+extension HomeViewEntries {
+    func getCellModel() -> BasicTableViewCellModel {
+        return BasicTableViewCellModel(title: title, image: UIImage(systemName: imageName))
     }
 }
