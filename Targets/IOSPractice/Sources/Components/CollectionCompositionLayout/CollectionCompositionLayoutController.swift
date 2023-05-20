@@ -133,7 +133,7 @@ extension CollectionCompositionLayoutController:  UICollectionViewDelegateFlowLa
 
 // MARK: ImageCollectionViewCellModelBuilder
 extension Cities {
-    func getCellModel() -> ImageCollectionCellModel {
+    fileprivate func getCellModel() -> ImageCollectionCellModel {
         return ImageCollectionCellModel(title: name, image: UIImage(named: name))
     }
 }

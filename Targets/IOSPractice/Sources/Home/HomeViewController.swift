@@ -76,7 +76,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewEntries {
-    func getCellModel() -> BasicTableViewCellModel {
+    fileprivate func getCellModel() -> BasicTableViewCellModel {
         return BasicTableViewCellModel(title: title, image: UIImage(systemName: imageName))
     }
 }
