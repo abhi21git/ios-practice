@@ -6,7 +6,6 @@
 //  Copyright © 2023 practice.com All rights reserved.
 //
 
-import IOSPracticeKit
 import UIKit
 
 public extension UIScrollView {

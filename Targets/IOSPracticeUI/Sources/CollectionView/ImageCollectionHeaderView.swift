@@ -1,5 +1,5 @@
 //
-//  HeaderView.swift
+//  ImageCollectionHeaderView.swift
 //  Collectionview
 //
 //  Created by Simran Rout on 10/05/23.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-// MARK: HeaderView
-final class HeaderView: UICollectionReusableView, ReusableView {
+// MARK: ImageCollectionHeaderView
+public final class ImageCollectionHeaderView: UICollectionReusableView, ReusableView {
     
     // MARK: Properties
     private let imageView: UIImageView = UIImageView()
@@ -25,7 +25,7 @@ final class HeaderView: UICollectionReusableView, ReusableView {
 }
 
 // MARK: Methods
-extension HeaderView {
+extension ImageCollectionHeaderView {
     private func setupImageView() {
         let constraints: Constraints = addSubview(imageView, with: [
             .leading(),

@@ -8,8 +8,18 @@
 
 import UIKit
 
+// MARK: BasicTableViewCellModel
+public struct BasicTableViewCellModel {
+    let title: String, image: UIImage?
+    
+    public init(title: String, image: UIImage?) {
+        self.title = title
+        self.image = image
+    }
+}
+
 // MARK: BasicTableViewCell
-final class BasicTableViewCell: UITableViewCell, ReusableView {
+public final class BasicTableViewCell: UITableViewCell, ReusableView {
     // MARK: Private properties
     private var titleLabel: UILabel = UILabel(frame: .zero)
     private var cellImageView: UIImageView = UIImageView(frame: .zero)
@@ -27,9 +37,9 @@ final class BasicTableViewCell: UITableViewCell, ReusableView {
 
 // MARK: Public methods
 extension BasicTableViewCell {
-    public func configure(with data: HomeViewEntries) {
-        titleLabel.text = data.title
-        cellImageView.image = UIImage(systemName: data.imageName)
+    public func configure(with model: BasicTableViewCellModel) {
+        titleLabel.text = model.title
+        cellImageView.image = model.image
     }
 }
 

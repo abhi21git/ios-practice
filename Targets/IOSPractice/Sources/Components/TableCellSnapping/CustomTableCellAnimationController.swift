@@ -5,6 +5,8 @@
 //  Created by Simran Rout on 11/04/23.
 //
 
+import IOSPracticeKit
+import IOSPracticeUI
 import UIKit
 
 // MARK: CustomTableCellAnimationController
@@ -49,12 +51,12 @@ extension CustomTableCellAnimationController {
                                                               .bottom()])
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TableViewCell.self)
+        tableView.register(PlainTextTableViewCell.self)
         tableView.separatorStyle = .none
         return constraints
     }
     
-    private func animateCell(_ cell: TableViewCell) {
+    private func animateCell(_ cell: PlainTextTableViewCell) {
         cell.alpha = 0.0
         cell.transition() {
             cell.alpha = 1
@@ -69,7 +71,7 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: PlainTextTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.selectionStyle = .none
         cell.configure(text: data[indexPath.row])
         return cell
@@ -80,7 +82,7 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? TableViewCell else { return }
+        guard let cell = cell as? PlainTextTableViewCell else { return }
         animateCell(cell)
     }
 }
@@ -89,7 +91,7 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
 extension CustomTableCellAnimationController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
-            guard let cell = cell as? TableViewCell else { return }
+            guard let cell = cell as? PlainTextTableViewCell else { return }
             let cellFrameInTable = cell.convert(cell.containerView.frame, to: self.tableView)
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self = self else { return }
@@ -110,4 +112,3 @@ extension CustomTableCellAnimationController {
         targetContentOffset.pointee.y -= cellHeight * point
     }
 }
-
