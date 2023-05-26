@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  PlainTextTableViewCell.swift
 //  TableView
 //
 //  Created by Simran Rout on 11/04/23.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-// MARK: TableViewCell
-final class TableViewCell: UITableViewCell, ReusableView {
+// MARK: PlainTextTableViewCell
+public final class PlainTextTableViewCell: UITableViewCell, ReusableView {
     
     // MARK: Properties
     public var containerView: GradientView = GradientView()
@@ -26,14 +26,14 @@ final class TableViewCell: UITableViewCell, ReusableView {
 }
 
 // MARK: Public methods
-extension TableViewCell {
+extension PlainTextTableViewCell {
     public func configure(text: String) {
         title.text = text
     }
 }
 
 // MARK: Private methods
-extension TableViewCell {
+extension PlainTextTableViewCell {
     private func setupViews() {
         let containerConstraints: Constraints = setupContainerView()
         let titleViewConstraints: Constraints = setupTitleView()

@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class GradientTextLabel: UILabel {
+public final class GradientTextLabel: UILabel {
     var gradientColors: [CGColor] = [UIColor(r: 234, g: 141, b: 141).cgColor,
                                      UIColor(r: 168, g: 154, b: 254).cgColor]
     var locations: [CGFloat]? = [0.0, 1.0]
     
-    override func drawText(in rect: CGRect) {
+    public override func drawText(in rect: CGRect) {
         if let gradientColor = drawGradientColor(in: rect, colors: gradientColors) {
             self.textColor = gradientColor
         }

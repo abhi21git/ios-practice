@@ -5,6 +5,8 @@
 //  Created by Simran Rout on 08/05/23.
 //
 
+import IOSPracticeKit
+import IOSPracticeUI
 import UIKit
 
 // MARK: CollectionCompositionLayoutController.swift
@@ -65,8 +67,8 @@ extension CollectionCompositionLayoutController {
         collectionView.backgroundColor = view.backgroundColor
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(CollectionViewCell.self)
-        collectionView.register(HeaderView.self,
+        collectionView.register(ImageCollectionViewCell.self)
+        collectionView.register(ImageCollectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
         return constraints
     }
@@ -89,14 +91,14 @@ extension CollectionCompositionLayoutController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: CollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let index = indexPath.item % cities.count
-        cell.configureCell(city: cities[index], index: indexPath.row)
+        cell.configureCell(with: cities[index].getCellModel(), index: indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        guard let view = view as? HeaderView else { return }
+        guard let view = view as? ImageCollectionHeaderView else { return }
         view.transform = CGAffineTransform(scaleX: 1, y: 0.01)
         UIView.animate(withDuration: 0.25) {
             view.transform = .identity
@@ -104,7 +106,7 @@ extension CollectionCompositionLayoutController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? CollectionViewCell else { return }
+        guard let cell = cell as? ImageCollectionViewCell else { return }
         let xMultiplier: CGFloat = (indexPath.row / 3) % 2 == 0 ? -1 : 1
         cell.transform = CGAffineTransform(translationX: cell.frame.width * xMultiplier, y: 0).scaledBy(x: 0.8, y: 0.8)
         cell.prepareForAnimation()
@@ -119,11 +121,19 @@ extension CollectionCompositionLayoutController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegateFlowLayout
 extension CollectionCompositionLayoutController:  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath)
+        let headerView: ImageCollectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath)
         return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         CGSize(width: collectionView.bounds.width / 2, height: 200.0)
+    }
+}
+
+
+// MARK: ImageCollectionViewCellModelBuilder
+extension Cities {
+    fileprivate func getCellModel() -> ImageCollectionCellModel {
+        return ImageCollectionCellModel(title: name, image: UIImage(named: name))
     }
 }

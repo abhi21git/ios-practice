@@ -8,13 +8,13 @@
 
 import UIKit
 
-final class GradientView: UIImageView {
+public final class GradientView: UIImageView {
     
     var gradientColors: [CGColor] = [UIColor(r: 198, g: 248, b: 229).cgColor,
                                      UIColor(r: 226, g: 190, b: 241).cgColor]
     var locations: [CGFloat]? = [0.0, 1.0]
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         self.contentMode = .scaleToFill
         self.image = drawGradientColor(in: self.bounds, colors: gradientColors)
     }

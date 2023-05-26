@@ -7,8 +7,18 @@
 
 import UIKit
 
-// MARK: CollectionViewCell
-final class CollectionViewCell: UICollectionViewCell, ReusableView {
+// MARK: ImageCollectionCellModel
+public struct ImageCollectionCellModel {
+    let title: String, image: UIImage?
+    
+    public init(title: String, image: UIImage?) {
+        self.title = title
+        self.image = image
+    }
+}
+
+// MARK: ImageCollectionViewCell
+public final class ImageCollectionViewCell: UICollectionViewCell, ReusableView {
     
     // MARK: Properties
     private let imageView: UIImageView = UIImageView()
@@ -26,12 +36,15 @@ final class CollectionViewCell: UICollectionViewCell, ReusableView {
     }
 }
 // MARK: CollectionViewCell Public Methods
-extension CollectionViewCell {
-    func configureCell(city: Cities, index: Int) {
-        titleLabel.text = city.name
-        imageView.image = UIImage(named: city.name)
+public extension ImageCollectionViewCell {
+    func configureCell(with model: ImageCollectionCellModel, index: Int = -1) {
+        titleLabel.text = model.title
+        imageView.image = model.image
+        indexLabel.isHidden = index == -1
         indexLabel.text = "\(index)"
     }
+    
+    
     
     func prepareForAnimation() {
         titleLabel.transform = CGAffineTransform(translationX: 0, y: 20)
@@ -47,7 +60,7 @@ extension CollectionViewCell {
 }
 
 // MARK: CollectionViewCell Private Methods
-extension CollectionViewCell {
+extension ImageCollectionViewCell {
     private func setUpViews() {
         let imageConstraints: Constraints = setupImageView()
         let titleConstraints: Constraints = setupLabelView()

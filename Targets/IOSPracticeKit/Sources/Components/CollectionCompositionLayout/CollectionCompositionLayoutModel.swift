@@ -5,10 +5,10 @@
 //  Created by Abhishek Maurya on 11/05/23.
 //
 
-import UIKit
+import Foundation
 
 // MARK: Cities
-enum Cities: String, CaseIterable {
+public enum Cities: String, CaseIterable {
     case ankara = "Ankara"
     case antalya = "Antalya"
     case aydin = "Aydin"
@@ -28,7 +28,7 @@ enum Cities: String, CaseIterable {
     case salda = "Salda"
     case sumela = "Sumela"
     
-    var name: String {
+    public var name: String {
         return rawValue
     }
 }
