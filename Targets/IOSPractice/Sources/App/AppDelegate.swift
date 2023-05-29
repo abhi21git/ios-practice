@@ -1,5 +1,4 @@
 import UIKit
-import IOSPracticeUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
