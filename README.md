@@ -1,6 +1,7 @@
 # ios-practice
 This repository is to host practice project so that we can learn cool iOS Stuff<br>
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io)
+[![iOS Practice workflow](https://github.com/abhi21git/ios-practice/actions/workflows/ios_practice_workflow.yml/badge.svg)](https://github.com/abhi21git/ios-practice/actions/workflows/ios_practice_workflow.yml)
 
 To modify configuration of project run following command
 ```
