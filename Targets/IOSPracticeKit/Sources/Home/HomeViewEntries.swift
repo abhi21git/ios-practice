@@ -12,6 +12,7 @@ import Foundation
 public enum HomeViewEntries: String, CaseIterable {
     case tableView = "Table View"
     case collectionView = "Collection View"
+    case colorPicker = "Color Picker View"
     case notificationCenter = "Notification Center"
     
     public var title: String {
@@ -24,6 +25,8 @@ public enum HomeViewEntries: String, CaseIterable {
             return "list.bullet"
         case .collectionView:
             return "square.grid.2x2"
+        case .colorPicker:
+            return "eyedropper.halffull"
         case .notificationCenter:
             return "bell.and.waveform"
         }

@@ -69,6 +69,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(CustomTableCellAnimationController(title: entry.title), animated: true)
         case .collectionView:
             navigationController?.pushViewController(CollectionCompositionLayoutController(title: entry.title), animated: true)
+        case .colorPicker:
+            navigationController?.pushViewController(ColorPickerViewController(title: entry.title), animated: true)
         case .notificationCenter:
             break
         }

@@ -11,6 +11,13 @@ import UIKit
 public typealias Constraints = [NSLayoutConstraint]
 
 public extension UIView {
+    
+    @discardableResult func makeCircularCorner() -> Self {
+        self.layer.cornerRadius = min(bounds.halfHeight, bounds.halfWidth)
+        self.layer.masksToBounds = true
+        return self
+    }
+    
     @discardableResult func cornerRadius(_ radius: CGFloat, maskToBounds: Bool = true) -> Self {
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = maskToBounds
