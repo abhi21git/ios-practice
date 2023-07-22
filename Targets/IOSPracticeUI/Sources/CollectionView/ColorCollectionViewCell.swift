@@ -11,15 +11,14 @@ import UIKit
 public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.masksToBounds = true
-        layer.cornerRadius = 16.0
+        makeCircularCorner()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setColor(color: UIColor) {
-        self.backgroundColor = color
+    public func configureCell(with color: UIColor) {
+        backgroundColor = color
     }
 }

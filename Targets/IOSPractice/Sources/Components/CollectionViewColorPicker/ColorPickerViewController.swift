@@ -9,9 +9,10 @@
 import UIKit
 import IOSPracticeUI
 
-class ColorPickerViewController: UIViewController {
+//MARK: - ColorPickerViewController
+final class ColorPickerViewController: UIViewController {
   
-    lazy private var color: [UIColor] = getRandomColors()
+    private var color: [UIColor] = (1...20).map({ _ in UIColor.randomColor })
     lazy private var collectionView: ColorCollectionView = ColorCollectionView(color: color)
     private var colorPickedView: UIView = UIView()
     
@@ -26,17 +27,22 @@ class ColorPickerViewController: UIViewController {
         setupViews()
     }
     
-    private func getRandomColors() -> [UIColor] {
-        var colors: [UIColor] = []
-        for _ in 0...20 {
-            colors.append(UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1) )
-        }
-        return colors
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        prepareUI()
     }
 }
 
 //MARK: - Setup views
 extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
+    
+    private func setupNavTitle(_ title: String) {
+        let titleLabel: GradientTextLabel = GradientTextLabel()
+        titleLabel.text = " \(title) "
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
+        navigationItem.titleView = titleLabel
+    }
     
     private func setupViews() {
         view.backgroundColor = .white
@@ -45,17 +51,20 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
         (collectionConstraints + colorPickedViewConstraint).activate()
     }
     
-    private func setupColorPickedView() -> Constraints {
-        colorPickedView.cornerRadius(16.0)
-        colorPickedView.backgroundColor = .purple
-        colorPickedView.layer.borderColor = UIColor.white.cgColor
-        colorPickedView.layer.borderWidth = 2.0
-        colorPickedView.layer.shadowColor = UIColor.black.cgColor
-        colorPickedView.layer.shadowRadius = 8
-        colorPickedView.layer.shadowOpacity = 0.4
-        colorPickedView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+    private func prepareUI() {
+        view.layoutIfNeeded()
+        collectionView.addShadow(radius: 2, colour: .darkGray, opacity: 0.2, offset: .zero)
+        collectionView.addBorder(width: 1, colour: .white)
+        collectionView.makeCircularCorner()
         
-        colorPickedView.layer.masksToBounds = false
+        colorPickedView.makeCircularCorner()
+        colorPickedView.addBorder(width: 2, colour: .white)
+        colorPickedView.addShadow(radius: 8, colour: .darkGray, opacity: 0.4)
+
+    }
+    
+    private func setupColorPickedView() -> Constraints {
+        colorPickedView.backgroundColor = .purple
         let constraint: Constraints = view.addSubview(colorPickedView, with: [.centerX(from: collectionView.centerXAnchor) ,
                                                                               .centerY(from: collectionView.centerYAnchor),
                                                                               .aspectRatio(),
@@ -69,13 +78,5 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
                                                                                                      .top(constant: 20.0),
                                                                                                      .height(constant: 80.0)])
         return constraint
-    }
-    
-    private func setupNavTitle(_ title: String) {
-        let titleLabel: GradientTextLabel = GradientTextLabel()
-        titleLabel.text = " \(title) "
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
-        navigationItem.titleView = titleLabel
     }
 }

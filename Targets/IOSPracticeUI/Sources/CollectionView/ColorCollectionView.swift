@@ -28,15 +28,10 @@ public final class ColorCollectionView: UICollectionView {
     private func setupView() {
         delegate = self
         dataSource = self
-        register(ColorCollectionViewCell.self)
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
-        backgroundColor = .white
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        makeCircularCorner()
+        backgroundColor = .clear
+        register(ColorCollectionViewCell.self)
     }
     
     public func getSize(multiplier: CGFloat = 4) -> CGFloat {
@@ -45,25 +40,22 @@ public final class ColorCollectionView: UICollectionView {
 }
 
 extension ColorCollectionView: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView,
-                               layout collectionViewLayout: UICollectionViewLayout,
-                               minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         flowLayout.minimumLineSpacing
     }
     
-    public func collectionView(_ collectionView: UICollectionView,
-                               layout collectionViewLayout: UICollectionViewLayout,
-                               minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         flowLayout.minimumInteritemSpacing
     }
     
-    public func collectionView(_ collectionView: UICollectionView,
-                               layout collectionViewLayout: UICollectionViewLayout,
-                               sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = getSize()
         return CGSize(width: size, height: size)
     }
     
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: flowLayout.minimumLineSpacing * 2, bottom: 0, right: flowLayout.minimumLineSpacing * 2)
+    }
 }
 
 extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -73,7 +65,7 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ColorCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.setColor(color: colors[indexPath.item])
+        cell.configureCell(with: colors[indexPath.item])
         return cell
     }
 }
