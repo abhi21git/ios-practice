@@ -11,7 +11,7 @@ import UIKit
 public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        makeCircularCorner()
+        cornerRadius(16)
     }
     
     required init?(coder: NSCoder) {

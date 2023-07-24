@@ -56,15 +56,13 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
         collectionView.addShadow(radius: 2, colour: .darkGray, opacity: 0.2, offset: .zero)
         collectionView.addBorder(width: 1, colour: .white)
         collectionView.makeCircularCorner()
-        
-        colorPickedView.makeCircularCorner()
+        colorPickedView.cornerRadius(16)
         colorPickedView.addBorder(width: 2, colour: .white)
         colorPickedView.addShadow(radius: 8, colour: .darkGray, opacity: 0.4)
 
     }
     
     private func setupColorPickedView() -> Constraints {
-        colorPickedView.backgroundColor = .purple
         let constraint: Constraints = view.addSubview(colorPickedView, with: [.centerX(from: collectionView.centerXAnchor) ,
                                                                               .centerY(from: collectionView.centerYAnchor),
                                                                               .aspectRatio(),
@@ -73,10 +71,17 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func setupCollectionView() -> Constraints {
+        collectionView.colorDelegate = self
         let constraint: Constraints = view.addSubview(collectionView, considerSafeArea: true, with: [.leading(constant: 20.0),
                                                                                                      .trailing(constant: 20.0),
                                                                                                      .top(constant: 20.0),
                                                                                                      .height(constant: 80.0)])
         return constraint
+    }
+}
+
+extension ColorPickerViewController: ColorCollectionViewDelegate {
+    func didChangeColor(to color: UIColor) {
+        colorPickedView.backgroundColor = color
     }
 }

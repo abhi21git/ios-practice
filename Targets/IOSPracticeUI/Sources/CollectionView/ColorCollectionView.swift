@@ -8,9 +8,14 @@
 
 import UIKit
 
+public protocol ColorCollectionViewDelegate: AnyObject {
+    func didChangeColor(to color: UIColor)
+}
+
 public final class ColorCollectionView: UICollectionView {
+    public weak var colorDelegate: ColorCollectionViewDelegate?
     var colors: [UIColor]
-    private let flowLayout = UICollectionViewFlowLayout()
+    private let flowLayout = CollectionSnapFlowLayout()
     
     public init(frame: CGRect = .zero, color: [UIColor]) {
         flowLayout.minimumLineSpacing = 5.0
@@ -54,11 +59,12 @@ extension ColorCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: flowLayout.minimumLineSpacing * 2, bottom: 0, right: flowLayout.minimumLineSpacing * 2)
+        let halfSize = getSize() / 2
+        return UIEdgeInsets(top: 0, left: frame.halfWidth - halfSize , bottom: 0, right: frame.halfWidth - halfSize)//flowLayout.minimumLineSpacing * 2)
     }
 }
 
-extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         colors.count
     }
@@ -68,4 +74,16 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
         cell.configureCell(with: colors[indexPath.item])
         return cell
     }
+
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let index = indexPathForItem(at: scrollView.offset.center) else {
+            return
+        }
+        colorDelegate?.didChangeColor(to: colors[index.item])
+    }
 }
+

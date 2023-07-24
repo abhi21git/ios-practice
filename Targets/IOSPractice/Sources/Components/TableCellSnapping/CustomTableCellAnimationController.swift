@@ -104,7 +104,8 @@ extension CustomTableCellAnimationController {
         }
     }
 
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let cellHeight = tableView.visibleCells.first?.frame.height else { return }
         let expectedCenterY = (targetContentOffset.pointee.y + tableView.frame.height / 2)
         let cellDecimalVal = expectedCenterY / cellHeight
