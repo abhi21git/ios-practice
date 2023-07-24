@@ -72,6 +72,7 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ColorCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.configureCell(with: colors[indexPath.item])
+        cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         return cell
     }
 
@@ -80,10 +81,20 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let index = indexPathForItem(at: scrollView.offset.center) else {
-            return
+        for cell in visibleCells {
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                if self?.indexPathForItem(at: scrollView.offset.center) == self?.indexPath(for: cell) {
+                    cell.addBorder(width: 2, colour: .white)
+                    cell.addShadow(radius: 8, colour: .darkGray, opacity: 0.4)
+                    cell.transform = .identity
+                } else {
+                    cell.addBorder(width: 0, colour: .white)
+                    cell.addShadow(radius: 8, colour: .darkGray, opacity: 0)
+                    cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                }
+            }
+            
         }
-        colorDelegate?.didChangeColor(to: colors[index.item])
     }
 }
 

@@ -14,7 +14,6 @@ final class ColorPickerViewController: UIViewController {
   
     private var color: [UIColor] = (1...20).map({ _ in UIColor.randomColor })
     lazy private var collectionView: ColorCollectionView = ColorCollectionView(color: color)
-    private var colorPickedView: UIView = UIView()
     
     // MARK: Lifecycle
     convenience init(title: String) {
@@ -47,8 +46,7 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
     private func setupViews() {
         view.backgroundColor = .white
         let collectionConstraints: Constraints = setupCollectionView()
-        let colorPickedViewConstraint: Constraints = setupColorPickedView()
-        (collectionConstraints + colorPickedViewConstraint).activate()
+        (collectionConstraints).activate()
     }
     
     private func prepareUI() {
@@ -56,18 +54,6 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
         collectionView.addShadow(radius: 2, colour: .darkGray, opacity: 0.2, offset: .zero)
         collectionView.addBorder(width: 1, colour: .white)
         collectionView.makeCircularCorner()
-        colorPickedView.cornerRadius(16)
-        colorPickedView.addBorder(width: 2, colour: .white)
-        colorPickedView.addShadow(radius: 8, colour: .darkGray, opacity: 0.4)
-
-    }
-    
-    private func setupColorPickedView() -> Constraints {
-        let constraint: Constraints = view.addSubview(colorPickedView, with: [.centerX(from: collectionView.centerXAnchor) ,
-                                                                              .centerY(from: collectionView.centerYAnchor),
-                                                                              .aspectRatio(),
-                                                                              .height(constant: -10, equalTo: collectionView.heightAnchor) ])
-        return constraint
     }
     
     private func setupCollectionView() -> Constraints {
@@ -82,6 +68,5 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
 
 extension ColorPickerViewController: ColorCollectionViewDelegate {
     func didChangeColor(to color: UIColor) {
-        colorPickedView.backgroundColor = color
     }
 }
