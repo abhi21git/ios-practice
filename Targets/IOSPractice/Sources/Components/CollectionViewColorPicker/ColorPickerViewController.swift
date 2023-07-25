@@ -12,8 +12,8 @@ import IOSPracticeUI
 //MARK: - ColorPickerViewController
 final class ColorPickerViewController: UIViewController {
   
-    private var color: [UIColor] = (1...20).map({ _ in UIColor.randomColor })
-    lazy private var collectionView: ColorCollectionView = ColorCollectionView(color: color)
+    private var collectionView: ColorCollectionView = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
+    private var messageLabel: UILabel = UILabel()
     
     // MARK: Lifecycle
     convenience init(title: String) {
@@ -46,27 +46,45 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
     private func setupViews() {
         view.backgroundColor = .white
         let collectionConstraints: Constraints = setupCollectionView()
-        (collectionConstraints).activate()
+        let infoLabelConstraints: Constraints = setupMessasgeLabel()
+        (collectionConstraints + infoLabelConstraints).activate()
     }
     
     private func prepareUI() {
         view.layoutIfNeeded()
-        collectionView.addShadow(radius: 2, colour: .darkGray, opacity: 0.2, offset: .zero)
+        collectionView.addShadow(radius: 3, colour: .darkGray, opacity: 0.2, offset: .zero)
         collectionView.addBorder(width: 1, colour: .white)
         collectionView.makeCircularCorner()
     }
     
     private func setupCollectionView() -> Constraints {
         collectionView.colorDelegate = self
-        let constraint: Constraints = view.addSubview(collectionView, considerSafeArea: true, with: [.leading(constant: 20.0),
-                                                                                                     .trailing(constant: 20.0),
-                                                                                                     .top(constant: 20.0),
-                                                                                                     .height(constant: 80.0)])
+        let constraint: Constraints = view.addSubview(collectionView, considerSafeArea: true, with: [
+            .leading(constant: 20.0),
+            .trailing(constant: 20.0),
+            .top(constant: 20.0),
+            .height(constant: 80.0)
+        ])
+        return constraint
+    }
+    
+    private func setupMessasgeLabel() -> Constraints {
+        let constraint: Constraints = view.addSubview(messageLabel, with: [
+            .leading(constant: 20),
+            .centerX(),
+            .centerY()
+        ])
+        messageLabel.textAlignment = .center
+        messageLabel.font = .boldSystemFont(ofSize: 18)
+        messageLabel.text = "No colour is selected"
+        messageLabel.numberOfLines = 0
         return constraint
     }
 }
 
 extension ColorPickerViewController: ColorCollectionViewDelegate {
     func didChangeColor(to color: UIColor) {
+        messageLabel.text = "Selected color is \(color.accessibilityName.capitalized)"
+        messageLabel.textColor = color
     }
 }

@@ -37,6 +37,9 @@ public final class ColorCollectionView: UICollectionView {
         showsHorizontalScrollIndicator = false
         backgroundColor = .clear
         register(ColorCollectionViewCell.self)
+        if let color = colors.first {
+            colorDelegate?.didChangeColor(to: color)
+        }
     }
     
     public func getSize(multiplier: CGFloat = 4) -> CGFloat {
@@ -81,6 +84,8 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let index = indexPathForItem(at: scrollView.offset.center) else { return }
+        colorDelegate?.didChangeColor(to: colors[index.item])
         for cell in visibleCells {
             UIView.animate(withDuration: 0.2) { [weak self] in
                 if self?.indexPathForItem(at: scrollView.offset.center) == self?.indexPath(for: cell) {

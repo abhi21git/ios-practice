@@ -20,6 +20,11 @@ final class CustomTableCellAnimationController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.layoutIfNeeded()
+    }
 
     convenience init(title: String) {
         self.init()
@@ -84,6 +89,10 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? PlainTextTableViewCell else { return }
         animateCell(cell)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
     }
 }
 
