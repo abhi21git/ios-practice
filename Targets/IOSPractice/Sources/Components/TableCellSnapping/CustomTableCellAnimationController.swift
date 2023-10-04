@@ -20,6 +20,11 @@ final class CustomTableCellAnimationController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.layoutIfNeeded()
+    }
 
     convenience init(title: String) {
         self.init()
@@ -85,6 +90,10 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
         guard let cell = cell as? PlainTextTableViewCell else { return }
         animateCell(cell)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    }
 }
 
 //MARK: Scroll Delegate
@@ -104,7 +113,8 @@ extension CustomTableCellAnimationController {
         }
     }
 
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let cellHeight = tableView.visibleCells.first?.frame.height else { return }
         let expectedCenterY = (targetContentOffset.pointee.y + tableView.frame.height / 2)
         let cellDecimalVal = expectedCenterY / cellHeight
