@@ -6,21 +6,17 @@
 //  Copyright © 2023 practice.com. All rights reserved.
 //
 
-import UIKit
 import IOSPracticeUI
+import UIKit
+
 
 //MARK: - ColorPickerViewController
-final class ColorPickerViewController: UIViewController {
+final class ColorPickerViewController: BaseViewController {
   
     private var collectionView: ColorCollectionView = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
     private var messageLabel: UILabel = UILabel()
     
     // MARK: Lifecycle
-    convenience init(title: String) {
-        self.init()
-        setupNavTitle(title)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -34,14 +30,6 @@ final class ColorPickerViewController: UIViewController {
 
 //MARK: - Setup views
 extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
-    
-    private func setupNavTitle(_ title: String) {
-        let titleLabel: GradientTextLabel = GradientTextLabel()
-        titleLabel.text = " \(title) "
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
-        navigationItem.titleView = titleLabel
-    }
     
     private func setupViews() {
         view.backgroundColor = .white

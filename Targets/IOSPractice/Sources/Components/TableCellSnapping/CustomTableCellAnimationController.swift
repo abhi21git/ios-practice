@@ -10,7 +10,7 @@ import IOSPracticeUI
 import UIKit
 
 // MARK: CustomTableCellAnimationController
-final class CustomTableCellAnimationController: UIViewController {
+final class CustomTableCellAnimationController: BaseViewController {
     // MARK: Properties
     private let data = Array(1...100).lazy.map({ "Here is \($0)" })
     private var tableView: UITableView = UITableView()
@@ -25,21 +25,10 @@ final class CustomTableCellAnimationController: UIViewController {
         super.viewWillAppear(animated)
         view.layoutIfNeeded()
     }
-
-    convenience init(title: String) {
-        self.init()
-        setupNavTitle(title)
-    }
 }
+
 // MARK: Private methods
 extension CustomTableCellAnimationController {
-    private func setupNavTitle(_ title: String) {
-        let titleLabel: GradientTextLabel = GradientTextLabel()
-        titleLabel.text = " \(title) "
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
-        navigationItem.titleView = titleLabel
-    }
     
     private func setupViews() {
         view.backgroundColor = .white
