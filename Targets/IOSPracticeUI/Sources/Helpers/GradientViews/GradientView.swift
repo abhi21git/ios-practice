@@ -8,6 +8,11 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Gradient View") {
+    GradientView()
+} #endif
+
 public final class GradientView: UIImageView {
     
     var gradientColors: [CGColor] = [UIColor.randomColor.cgColor,

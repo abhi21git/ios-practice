@@ -9,6 +9,11 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
+#if DEBUG
+#Preview("Custom Table Cell Animation Controller") {
+    CustomTableCellAnimationController()
+} #endif
+
 // MARK: CustomTableCellAnimationController
 final class CustomTableCellAnimationController: BaseViewController {
     // MARK: Properties

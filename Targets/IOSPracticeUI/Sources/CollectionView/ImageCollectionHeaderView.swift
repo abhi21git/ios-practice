@@ -7,6 +7,11 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Image Collection Header View", traits: .fixedLayout(width: 300, height: 200)) {
+    ImageCollectionHeaderView()
+} #endif
+
 // MARK: ImageCollectionHeaderView
 public final class ImageCollectionHeaderView: UICollectionReusableView, ReusableView {
     

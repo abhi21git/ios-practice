@@ -7,6 +7,13 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Image Collection Header View", traits: .fixedLayout(width: 200, height: 200)) {
+    let cell = ImageCollectionViewCell()
+    cell.configureCell(with: ImageCollectionCellModel(title: "Ankara", image: UIImage(named: "Ankara")), index: 0)
+    return cell
+} #endif
+
 // MARK: ImageCollectionCellModel
 public struct ImageCollectionCellModel {
     let title: String, image: UIImage?

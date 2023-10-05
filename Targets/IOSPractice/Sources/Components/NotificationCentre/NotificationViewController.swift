@@ -10,6 +10,11 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
+#if DEBUG
+#Preview("Notification View Controller") {
+    NotificationViewController()
+} #endif
+
 //MARK: - NotificationViewController
 class NotificationViewController: BaseViewController {
 

@@ -7,6 +7,14 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Gradient Text Label") {
+    let label = GradientTextLabel()
+    label.font = .systemFont(ofSize: 48)
+    label.text = "Hello World!"
+    return label
+} #endif
+
 public final class GradientTextLabel: UILabel {
     var gradientColors: [CGColor] = [UIColor(r: 234, g: 141, b: 141).cgColor,
                                      UIColor(r: 168, g: 154, b: 254).cgColor]
