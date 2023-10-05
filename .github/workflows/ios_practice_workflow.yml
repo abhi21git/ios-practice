@@ -9,13 +9,13 @@ on:
 jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
       - name: Checkout 🔰
         uses: actions/checkout@v3
       - name: Prepare 💬
-        uses: tuist/tuist-action@0.13.0
+        uses: abhi21git/tuist-action@0.2.0
         with:
           command: 'build'
           arguments: ''
