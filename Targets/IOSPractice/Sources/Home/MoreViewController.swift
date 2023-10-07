@@ -10,6 +10,11 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
+#if DEBUG
+#Preview("More View Controller") {
+    UINavigationController(rootViewController: MoreViewController(title: "More"))
+} #endif
+
 // MARK: MoreViewController
 final class MoreViewController: BaseViewController {
     // MARK: Properties

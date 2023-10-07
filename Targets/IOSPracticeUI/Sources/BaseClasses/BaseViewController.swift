@@ -8,6 +8,11 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Base View Controller") {
+    UINavigationController(rootViewController: BaseViewController(title: "Base View Controller"))
+} #endif
+
 // MARK: - BaseViewController
 open class BaseViewController: UIViewController {
 

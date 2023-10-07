@@ -9,6 +9,10 @@
 import IOSPracticeUI
 import UIKit
 
+#if DEBUG
+#Preview("Color Picker View Controller") {
+    ColorPickerViewController()
+} #endif
 
 //MARK: - ColorPickerViewController
 final class ColorPickerViewController: BaseViewController {

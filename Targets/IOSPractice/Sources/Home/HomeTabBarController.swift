@@ -8,6 +8,11 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Home Tab Bar Controller") {
+    HomeTabBarController()
+} #endif
+
 // MARK: HomeTabBarController
 public final class HomeTabBarController: UITabBarController {
     

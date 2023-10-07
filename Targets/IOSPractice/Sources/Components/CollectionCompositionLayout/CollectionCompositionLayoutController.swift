@@ -9,6 +9,11 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
+#if DEBUG
+#Preview("Collection Composition Layout Controller") {
+    CollectionCompositionLayoutController()
+} #endif
+
 // MARK: CollectionCompositionLayoutController.swift
 final class CollectionCompositionLayoutController: BaseViewController {
     

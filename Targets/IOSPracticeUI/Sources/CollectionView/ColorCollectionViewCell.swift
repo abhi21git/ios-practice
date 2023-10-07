@@ -8,6 +8,13 @@
 
 import UIKit
 
+#if DEBUG
+#Preview("Color Collection View Cell", traits: .fixedLayout(width: 200, height: 200)) {
+    let cell = ColorCollectionViewCell()
+    cell.configureCell(with: UIColor.randomColor)
+    return cell
+} #endif
+
 //MARK: - ColorCollectionViewCell
 public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {
     public override init(frame: CGRect) {

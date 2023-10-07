@@ -10,6 +10,11 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
+#if DEBUG
+#Preview("Home View Controller") {
+    UINavigationController(rootViewController: HomeViewController(title: "Home"))
+} #endif
+
 // MARK: HomeViewController
 final class HomeViewController: BaseViewController {
     // MARK: Properties
