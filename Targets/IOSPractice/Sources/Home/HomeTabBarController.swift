@@ -21,27 +21,28 @@ public final class HomeTabBarController: UITabBarController {
     // MARK: Lifecycle
     public override func viewDidLoad() {
         super.viewDidLoad()
-        setUpTabItem()
+        setupTabItem()
     }
 }
 // MARK: Methods
 extension HomeTabBarController {
-    private func setUpTabItem() {
+    private func setupTabItem() {
         delegate = self
-        let homeTabController = HomeViewController()
+        let homeTabController = HomeViewController(title: "Home")
         let homeTabItem = UITabBarItem(title: "Home",
                                        image: UIImage(systemName: "house.circle"),
                                        selectedImage: UIImage(systemName: "house.circle.fill"))
         homeTabController.tabBarItem = homeTabItem
         let homeNavController = UINavigationController(rootViewController: homeTabController)
         
-        let moreTabController = MoreViewController()
+        let moreTabController = MoreViewController(title: "More")
         let moreTabItem = UITabBarItem(title: "More",
                                        image: UIImage(systemName: "ellipsis.circle"),
                                        selectedImage: UIImage(systemName: "ellipsis.circle.fill"))
         moreTabController.tabBarItem = moreTabItem
-        
-        controllers = [homeNavController, moreTabController]
+        let moreNavController = UINavigationController(rootViewController: moreTabController)
+
+        controllers = [homeNavController, moreNavController]
     }
 }
 

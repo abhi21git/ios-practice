@@ -49,7 +49,6 @@ extension PlainTextTableViewCell {
             .trailing(constant: 20)
         ])
         containerView.cornerRadius(20)
-        containerView.backgroundColor = UIColor.systemMint
         return constraints
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - ColorCollectionViewCell
 public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
