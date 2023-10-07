@@ -10,8 +10,8 @@ import UIKit
 
 public final class GradientView: UIImageView {
     
-    var gradientColors: [CGColor] = [UIColor(r: 198, g: 248, b: 229).cgColor,
-                                     UIColor(r: 226, g: 190, b: 241).cgColor]
+    var gradientColors: [CGColor] = [UIColor.randomColor.cgColor,
+                                     UIColor.randomColor.cgColor]
     var locations: [CGFloat]? = [0.0, 1.0]
     
     public override func layoutSubviews() {
@@ -39,4 +39,11 @@ public final class GradientView: UIImageView {
         UIGraphicsEndImageContext()
         return gradientImage
     }
+}
+
+//MARK: - Preview
+#Preview(GradientView.name, traits: GradientView.traits, body: GradientView.preview)
+extension GradientView: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 300, height: 300) }
+    public static var buildPreview: UIView { GradientView() }
 }

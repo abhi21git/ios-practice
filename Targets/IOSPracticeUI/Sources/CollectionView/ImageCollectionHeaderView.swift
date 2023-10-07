@@ -39,3 +39,10 @@ extension ImageCollectionHeaderView {
         (constraints).activate()
     }
 }
+
+//MARK: - Preview
+#Preview(ImageCollectionHeaderView.name, traits: ImageCollectionHeaderView.traits, body: ImageCollectionHeaderView.preview)
+extension ImageCollectionHeaderView: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 400, height: 190) }
+    public static var buildPreview: UIView { ImageCollectionHeaderView() }
+}

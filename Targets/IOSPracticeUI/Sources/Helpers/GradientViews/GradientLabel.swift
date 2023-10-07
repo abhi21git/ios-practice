@@ -42,8 +42,14 @@ public final class GradientTextLabel: UILabel {
     }
 }
 
-extension UIColor {
-    convenience init(r: Int, g: Int, b: Int, a: CGFloat = 1.0) {
-        self.init(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: a)
+//MARK: - Preview
+#Preview(GradientTextLabel.name, traits: GradientTextLabel.traits, body: GradientTextLabel.preview)
+extension GradientTextLabel: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 400, height: 120) }
+    public static var buildPreview: UIView {
+        let label = GradientTextLabel()
+        label.font = .systemFont(ofSize: 48)
+        label.text = "Hello World!"
+        return label
     }
 }

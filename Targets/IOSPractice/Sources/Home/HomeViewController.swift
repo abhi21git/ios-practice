@@ -11,7 +11,7 @@ import IOSPracticeUI
 import UIKit
 
 // MARK: HomeViewController
-final class HomeViewController: UIViewController {
+final class HomeViewController: BaseViewController {
     // MARK: Properties
     private let data: [HomeViewEntries] = HomeViewEntries.allCases
     private var tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -19,25 +19,16 @@ final class HomeViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
     }
 }
 
 // MARK: Methods
 extension HomeViewController {
-    private func setUpViews() {
-        setupNavTitle("Home")
+    private func setupViews() {
         view.backgroundColor = .white
         let tableViewConstraint: Constraints = setUpTableView()
         (tableViewConstraint).activate()
-    }
-    
-    private func setupNavTitle(_ title: String) {
-        let titleLabel: GradientTextLabel = GradientTextLabel()
-        titleLabel.text = " \(title) "
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-Bold", size: 20)
-        navigationItem.titleView = titleLabel
     }
     
     private func setUpTableView() -> Constraints {
@@ -51,7 +42,7 @@ extension HomeViewController {
     }
 }
 
-//MARK: Tbale Data Source and Delegate
+//MARK: Table Data Source and Delegate
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
@@ -63,20 +54,32 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let entry: HomeViewEntries = data[indexPath.row]
-        switch entry {
-        case .tableView:
-            navigationController?.pushViewController(CustomTableCellAnimationController(title: entry.title), animated: true)
-        case .collectionView:
-            navigationController?.pushViewController(CollectionCompositionLayoutController(title: entry.title), animated: true)
-        case .notificationCenter:
-            break
-        }
+        let vc = data[indexPath.row].getCurrentController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension HomeViewEntries {
-    fileprivate func getCellModel() -> BasicTableViewCellModel {
+// MARK: - Preview
+#Preview(HomeViewController.name, body: HomeViewController.preview)
+extension HomeViewController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { UINavigationController(rootViewController: HomeViewController(title: "Home")) }
+}
+
+private extension HomeViewEntries {
+    func getCurrentController() -> BaseViewController {
+        switch self {
+        case .tableView:
+            return CustomTableCellAnimationController(title: title)
+        case .collectionView:
+            return CollectionCompositionLayoutController(title: title)
+        case .colorPicker:
+            return ColorPickerViewController(title: title)
+        case .notificationCenter:
+            return NotificationViewController(title: title)
+        }
+    }
+    
+    func getCellModel() -> BasicTableViewCellModel {
         return BasicTableViewCellModel(title: title, image: UIImage(systemName: imageName))
     }
 }

@@ -10,21 +10,17 @@ import IOSPracticeUI
 import UIKit
 
 // MARK: CollectionCompositionLayoutController.swift
-final class CollectionCompositionLayoutController: UIViewController {
+final class CollectionCompositionLayoutController: BaseViewController {
     
     // MARK: Properties
     private var collectionView: UICollectionView!
     private let cities: [Cities] = Cities.allCases
     
     // MARK: Lifecycle
-    convenience init(title: String) {
-        self.init()
-        setupNavTitle(title)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,18 +37,10 @@ final class CollectionCompositionLayoutController: UIViewController {
 
 // MARK: Methods
 extension CollectionCompositionLayoutController {
-    private func setUpViews() {
+    private func setupViews() {
         view.backgroundColor = .white
         let collectionConstraints: Constraints = setupCollectionView()
         (collectionConstraints).activate()
-    }
-    
-    private func setupNavTitle(_ title: String) {
-        let titleLabel: GradientTextLabel = GradientTextLabel()
-        titleLabel.text = " \(title) "
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
-        navigationItem.titleView = titleLabel
     }
     
     private func setupCollectionView() -> Constraints {
@@ -136,4 +124,10 @@ extension Cities {
     fileprivate func getCellModel() -> ImageCollectionCellModel {
         return ImageCollectionCellModel(title: name, image: UIImage(named: name))
     }
+}
+
+// MARK: - Preview
+#Preview(CollectionCompositionLayoutController.name, body: CollectionCompositionLayoutController.preview)
+extension CollectionCompositionLayoutController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { CollectionCompositionLayoutController() }
 }

@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: Notification Name
-struct NotificationName {
+public struct NotificationName {
     
     private init() {}
     
-    static let observer1 = "observer1"
-    static let observer2 = "observer2"
-    static let observer3 = "observer3"
-    static let observer4 = "observer4"
+    public static let observer1 = "observer1"
+    public static let observer2 = "observer2"
+    public static let observer3 = "observer3"
+    public static let observer4 = "observer4"
 }

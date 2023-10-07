@@ -10,7 +10,7 @@ import IOSPracticeUI
 import UIKit
 
 // MARK: CustomTableCellAnimationController
-final class CustomTableCellAnimationController: UIViewController {
+final class CustomTableCellAnimationController: BaseViewController {
     // MARK: Properties
     private let data = Array(1...100).lazy.map({ "Here is \($0)" })
     private var tableView: UITableView = UITableView()
@@ -20,21 +20,15 @@ final class CustomTableCellAnimationController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
-
-    convenience init(title: String) {
-        self.init()
-        setupNavTitle(title)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.layoutIfNeeded()
     }
 }
+
 // MARK: Private methods
 extension CustomTableCellAnimationController {
-    private func setupNavTitle(_ title: String) {
-        let titleLabel: GradientTextLabel = GradientTextLabel()
-        titleLabel.text = " \(title) "
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
-        navigationItem.titleView = titleLabel
-    }
     
     private func setupViews() {
         view.backgroundColor = .white
@@ -85,6 +79,10 @@ extension CustomTableCellAnimationController: UITableViewDelegate, UITableViewDa
         guard let cell = cell as? PlainTextTableViewCell else { return }
         animateCell(cell)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    }
 }
 
 //MARK: Scroll Delegate
@@ -104,11 +102,18 @@ extension CustomTableCellAnimationController {
         }
     }
 
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let cellHeight = tableView.visibleCells.first?.frame.height else { return }
         let expectedCenterY = (targetContentOffset.pointee.y + tableView.frame.height / 2)
         let cellDecimalVal = expectedCenterY / cellHeight
         let point = cellDecimalVal.truncatingRemainder(dividingBy: 1) - 0.50
         targetContentOffset.pointee.y -= cellHeight * point
     }
+}
+
+// MARK: - Preview
+#Preview(CustomTableCellAnimationController.name, body: CustomTableCellAnimationController.preview)
+extension CustomTableCellAnimationController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { CustomTableCellAnimationController() }
 }
