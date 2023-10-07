@@ -10,11 +10,6 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("Notification View Controller") {
-    NotificationViewController()
-} #endif
-
 //MARK: - NotificationViewController
 class NotificationViewController: BaseViewController {
 
@@ -81,4 +76,10 @@ extension NotificationViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+// MARK: - Preview
+#Preview(NotificationViewController.name, body: NotificationViewController.preview)
+extension NotificationViewController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { NotificationViewController() }
 }

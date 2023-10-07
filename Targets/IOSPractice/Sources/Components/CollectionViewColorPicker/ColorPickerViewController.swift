@@ -9,11 +9,6 @@
 import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("Color Picker View Controller") {
-    ColorPickerViewController()
-} #endif
-
 //MARK: - ColorPickerViewController
 final class ColorPickerViewController: BaseViewController {
   
@@ -79,4 +74,10 @@ extension ColorPickerViewController: ColorCollectionViewDelegate {
         messageLabel.text = "Selected color is \(color.accessibilityName.capitalized)"
         messageLabel.textColor = color
     }
+}
+
+// MARK: - Preview
+#Preview(ColorPickerViewController.name, body: ColorPickerViewController.preview)
+extension ColorPickerViewController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { ColorPickerViewController() }
 }

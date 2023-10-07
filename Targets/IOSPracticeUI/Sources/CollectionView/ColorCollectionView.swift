@@ -8,17 +8,6 @@
 
 import UIKit
 
-#if DEBUG
-#Preview("Color Collection View") {
-    let view = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
-    view.heightAnchor.constraint(equalToConstant: 80).isActive = true
-    view.addShadow(radius: 3, colour: .darkGray, opacity: 0.2, offset: .zero)
-    view.addBorder(width: 1, colour: .white)
-    view.layer.cornerRadius = 40
-    view.clipsToBounds = true
-    return view
-} #endif
-
 public protocol ColorCollectionViewDelegate: AnyObject {
     func didChangeColor(to color: UIColor)
 }
@@ -114,3 +103,17 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
+// MARK: - Preview
+#Preview(ColorCollectionView.name, traits: ColorCollectionView.traits, body: ColorCollectionView.preview)
+extension ColorCollectionView: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 400, height: 100)}
+    public static var buildPreview: UIView {
+        let view = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
+        view.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        view.addShadow(radius: 3, colour: .darkGray, opacity: 0.2, offset: .zero)
+        view.addBorder(width: 1, colour: .white)
+        view.layer.cornerRadius = 40
+        view.clipsToBounds = true
+        return view
+    }
+}

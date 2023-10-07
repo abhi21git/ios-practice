@@ -10,11 +10,6 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("More View Controller") {
-    UINavigationController(rootViewController: MoreViewController(title: "More"))
-} #endif
-
 // MARK: MoreViewController
 final class MoreViewController: BaseViewController {
     // MARK: Properties
@@ -62,4 +57,10 @@ extension MoreViewController {
         guard let data = data as? String else {  return }
         notificationLabel.text?.append(" \(data)")
     }
+}
+
+// MARK: - Preview
+#Preview(MoreViewController.name, body: MoreViewController.preview)
+extension MoreViewController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { UINavigationController(rootViewController: MoreViewController(title: "More")) }
 }

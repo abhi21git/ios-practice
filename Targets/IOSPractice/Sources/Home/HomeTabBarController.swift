@@ -6,15 +6,11 @@
 //  Copyright © 2023 practice.com. All rights reserved.
 //
 
+import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("Home Tab Bar Controller") {
-    HomeTabBarController()
-} #endif
-
 // MARK: HomeTabBarController
-public final class HomeTabBarController: UITabBarController {
+final class HomeTabBarController: UITabBarController {
     
     // MARK: Properties
     var controllers: [UIViewController] = [] {
@@ -56,4 +52,10 @@ extension HomeTabBarController: UITabBarControllerDelegate {
     public func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         ///
     }
+}
+
+// MARK: - Preview
+#Preview(HomeTabBarController.name, body: HomeTabBarController.preview)
+extension HomeTabBarController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { HomeTabBarController() }
 }

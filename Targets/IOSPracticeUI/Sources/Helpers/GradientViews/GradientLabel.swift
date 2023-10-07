@@ -7,14 +7,6 @@
 
 import UIKit
 
-#if DEBUG
-#Preview("Gradient Text Label") {
-    let label = GradientTextLabel()
-    label.font = .systemFont(ofSize: 48)
-    label.text = "Hello World!"
-    return label
-} #endif
-
 public final class GradientTextLabel: UILabel {
     var gradientColors: [CGColor] = [UIColor(r: 234, g: 141, b: 141).cgColor,
                                      UIColor(r: 168, g: 154, b: 254).cgColor]
@@ -47,5 +39,17 @@ public final class GradientTextLabel: UILabel {
         UIGraphicsEndImageContext()
         guard let image = gradientImage else { return nil }
         return UIColor(patternImage: image)
+    }
+}
+
+//MARK: - Preview
+#Preview(GradientTextLabel.name, traits: GradientTextLabel.traits, body: GradientTextLabel.preview)
+extension GradientTextLabel: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 400, height: 120) }
+    public static var buildPreview: UIView {
+        let label = GradientTextLabel()
+        label.font = .systemFont(ofSize: 48)
+        label.text = "Hello World!"
+        return label
     }
 }

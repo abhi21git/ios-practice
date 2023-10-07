@@ -10,11 +10,6 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("Home View Controller") {
-    UINavigationController(rootViewController: HomeViewController(title: "Home"))
-} #endif
-
 // MARK: HomeViewController
 final class HomeViewController: BaseViewController {
     // MARK: Properties
@@ -62,6 +57,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = data[indexPath.row].getCurrentController()
         navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+// MARK: - Preview
+#Preview(HomeViewController.name, body: HomeViewController.preview)
+extension HomeViewController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { UINavigationController(rootViewController: HomeViewController(title: "Home")) }
 }
 
 private extension HomeViewEntries {

@@ -58,3 +58,14 @@ extension PlainTextTableViewCell {
         return constraints
     }
 }
+
+//MARK: - Preview
+#Preview(PlainTextTableViewCell.name, traits: PlainTextTableViewCell.traits, body: PlainTextTableViewCell.preview)
+extension PlainTextTableViewCell: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 300, height: 160) }
+    public static var buildPreview: UIView {
+        let cell = PlainTextTableViewCell()
+        cell.configure(text: "Test")
+        return cell
+    }
+}

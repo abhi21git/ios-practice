@@ -8,11 +8,6 @@
 
 import UIKit
 
-#if DEBUG
-#Preview("Base View Controller") {
-    UINavigationController(rootViewController: BaseViewController(title: "Base View Controller"))
-} #endif
-
 // MARK: - BaseViewController
 open class BaseViewController: UIViewController {
 
@@ -29,5 +24,9 @@ open class BaseViewController: UIViewController {
         titleLabel.font = UIFont(name: "Helvetica-BoldOblique", size: 18)
         navigationItem.titleView = titleLabel
     }
+}
 
+// MARK: - Preview
+#Preview("Base View Controller") {
+    UINavigationController(rootViewController: BaseViewController(title: "Base View Controller"))
 }

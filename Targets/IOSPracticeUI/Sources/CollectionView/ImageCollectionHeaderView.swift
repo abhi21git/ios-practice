@@ -7,11 +7,6 @@
 
 import UIKit
 
-#if DEBUG
-#Preview("Image Collection Header View", traits: .fixedLayout(width: 300, height: 200)) {
-    ImageCollectionHeaderView()
-} #endif
-
 // MARK: ImageCollectionHeaderView
 public final class ImageCollectionHeaderView: UICollectionReusableView, ReusableView {
     
@@ -43,4 +38,11 @@ extension ImageCollectionHeaderView {
         imageView.cornerRadius(10)
         (constraints).activate()
     }
+}
+
+//MARK: - Preview
+#Preview(ImageCollectionHeaderView.name, traits: ImageCollectionHeaderView.traits, body: ImageCollectionHeaderView.preview)
+extension ImageCollectionHeaderView: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 400, height: 190) }
+    public static var buildPreview: UIView { ImageCollectionHeaderView() }
 }
