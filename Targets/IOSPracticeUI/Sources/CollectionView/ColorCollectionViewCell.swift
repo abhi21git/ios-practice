@@ -8,13 +8,6 @@
 
 import UIKit
 
-#if DEBUG
-#Preview("Color Collection View Cell", traits: .fixedLayout(width: 200, height: 200)) {
-    let cell = ColorCollectionViewCell()
-    cell.configureCell(with: UIColor.randomColor)
-    return cell
-} #endif
-
 //MARK: - ColorCollectionViewCell
 public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {
     public override init(frame: CGRect) {
@@ -28,5 +21,16 @@ public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {
     
     public func configureCell(with color: UIColor) {
         backgroundColor = color
+    }
+}
+
+//MARK: - Preview
+#Preview(ColorCollectionViewCell.name, traits: ColorCollectionViewCell.traits, body: ColorCollectionViewCell.preview)
+extension ColorCollectionViewCell: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> {  .fixedLayout(width: 200, height: 200) }
+    public static var buildPreview: UIView {
+        let cell = ColorCollectionViewCell(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        cell.configureCell(with: UIColor.randomColor)
+        return cell
     }
 }

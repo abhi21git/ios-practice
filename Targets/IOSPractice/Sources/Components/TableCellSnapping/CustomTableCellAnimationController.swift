@@ -9,11 +9,6 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("Custom Table Cell Animation Controller") {
-    CustomTableCellAnimationController()
-} #endif
-
 // MARK: CustomTableCellAnimationController
 final class CustomTableCellAnimationController: BaseViewController {
     // MARK: Properties
@@ -115,4 +110,10 @@ extension CustomTableCellAnimationController {
         let point = cellDecimalVal.truncatingRemainder(dividingBy: 1) - 0.50
         targetContentOffset.pointee.y -= cellHeight * point
     }
+}
+
+// MARK: - Preview
+#Preview(CustomTableCellAnimationController.name, body: CustomTableCellAnimationController.preview)
+extension CustomTableCellAnimationController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { CustomTableCellAnimationController() }
 }

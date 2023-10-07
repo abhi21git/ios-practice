@@ -8,11 +8,6 @@
 
 import UIKit
 
-#if DEBUG
-#Preview("Gradient View") {
-    GradientView()
-} #endif
-
 public final class GradientView: UIImageView {
     
     var gradientColors: [CGColor] = [UIColor.randomColor.cgColor,
@@ -44,4 +39,11 @@ public final class GradientView: UIImageView {
         UIGraphicsEndImageContext()
         return gradientImage
     }
+}
+
+//MARK: - Preview
+#Preview(GradientView.name, traits: GradientView.traits, body: GradientView.preview)
+extension GradientView: PreviewBuilderProtocol {
+    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 300, height: 300) }
+    public static var buildPreview: UIView { GradientView() }
 }

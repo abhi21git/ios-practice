@@ -9,11 +9,6 @@ import IOSPracticeKit
 import IOSPracticeUI
 import UIKit
 
-#if DEBUG
-#Preview("Collection Composition Layout Controller") {
-    CollectionCompositionLayoutController()
-} #endif
-
 // MARK: CollectionCompositionLayoutController.swift
 final class CollectionCompositionLayoutController: BaseViewController {
     
@@ -129,4 +124,10 @@ extension Cities {
     fileprivate func getCellModel() -> ImageCollectionCellModel {
         return ImageCollectionCellModel(title: name, image: UIImage(named: name))
     }
+}
+
+// MARK: - Preview
+#Preview(CollectionCompositionLayoutController.name, body: CollectionCompositionLayoutController.preview)
+extension CollectionCompositionLayoutController: PreviewBuilderProtocol {
+    static var buildPreview: UIViewController { CollectionCompositionLayoutController() }
 }
