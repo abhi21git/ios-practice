@@ -24,7 +24,9 @@ import MyPlugin
 let localHelper = LocalHelper(name: "MyPlugin")
 
 // Creates our project using a helper function defined in ProjectDescriptionHelpers
-let project = Project.app(name: "IOSPractice",
-                          organisationName: "practice",
-                          platform: .iOS,
-                          additionalTargets: ["IOSPracticeKit", "IOSPracticeUI"])
+let project = Project.app(
+    name: "IOSPractice",
+    organisationName: "practice",
+    destinations: .iOS,
+    additionalTargets: ["IOSPracticeKit", "IOSPracticeUI"]
+)
