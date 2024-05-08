@@ -7,13 +7,13 @@ import ProjectDescription
 
 extension Project {
     /// Helper function to create the Project for this ExampleApp
-    public static func app(name: String, organisationName: String, platform: Platform, additionalTargets: [String]) -> Project {
+    public static func app(name: String, organisationName: String, destinations: Destinations, additionalTargets: [String]) -> Project {
         var targets = makeAppTargets(name: name,
                                      organisationName: organisationName,
-                                     platform: platform,
+                                     destinations: destinations,
                                      dependencies: additionalTargets.map { TargetDependency.target(name: $0) })
         targets.append(contentsOf: additionalTargets.flatMap({ target in
-            makeFrameworkTargets(name: target, organisationName: organisationName, platform: platform)
+            makeFrameworkTargets(name: target, organisationName: organisationName, destinations: destinations)
         }))
         return Project(name: name,
                        organizationName: "\(organisationName).com",
@@ -23,29 +23,32 @@ extension Project {
     // MARK: - Private
 
     /// Helper function to create a framework target and an associated unit test target
-    private static func makeFrameworkTargets(name: String, organisationName: String, platform: Platform) -> [Target] {
-        let sources = Target(name: name,
-                platform: platform,
-                product: .framework,
-                bundleId: "com.\(organisationName).\(name)",
-                infoPlist: .default,
-                sources: ["Targets/\(name)/Sources/**"],
-                resources: [],
-                dependencies: [])
-        let tests = Target(name: "\(name)Tests",
-                platform: platform,
-                product: .unitTests,
-                bundleId: "com.\(organisationName).\(name)Tests",
-                infoPlist: .default,
-                sources: ["Targets/\(name)/Tests/**"],
-                resources: [],
-                dependencies: [.target(name: name)])
+    private static func makeFrameworkTargets(name: String, organisationName: String, destinations: Destinations) -> [Target] {
+        let sources: Target = .target(
+            name: name,
+            destinations: destinations,
+            product: .framework,
+            bundleId: "com.\(organisationName).\(name)",
+            infoPlist: .default,
+            sources: ["Targets/\(name)/Sources/**"],
+            resources: [],
+            dependencies: []
+        )
+        let tests: Target = .target(
+            name: "\(name)Tests",
+            destinations: destinations,
+            product: .unitTests,
+            bundleId: "com.\(organisationName).\(name)Tests",
+            infoPlist: .default,
+            sources: ["Targets/\(name)/Tests/**"],
+            resources: [],
+            dependencies: [.target(name: name)]
+        )
         return [sources, tests]
     }
 
     /// Helper function to create the application target and the unit test target.
-    private static func makeAppTargets(name: String, organisationName: String, platform: Platform, dependencies: [TargetDependency]) -> [Target] {
-        let platform: Platform = platform
+    private static func makeAppTargets(name: String, organisationName: String, destinations: Destinations, dependencies: [TargetDependency]) -> [Target] {
         let infoPlist: [String: Plist.Value] = [
             "CFBundleShortVersionString": "1.0",
             "CFBundleVersion": "1",
@@ -53,9 +56,9 @@ extension Project {
             "UILaunchStoryboardName": "LaunchScreen"
             ]
 
-        let mainTarget = Target(
+        let mainTarget: Target = .target(
             name: name,
-            platform: platform,
+            destinations: destinations,
             product: .app,
             bundleId: "com.\(organisationName).\(name)",
             infoPlist: .extendingDefault(with: infoPlist),
@@ -64,9 +67,9 @@ extension Project {
             dependencies: dependencies
         )
 
-        let testTarget = Target(
+        let testTarget: Target = .target(
             name: "\(name)Tests",
-            platform: platform,
+            destinations: destinations,
             product: .unitTests,
             bundleId: "com.\(organisationName).\(name)Tests",
             infoPlist: .default,
