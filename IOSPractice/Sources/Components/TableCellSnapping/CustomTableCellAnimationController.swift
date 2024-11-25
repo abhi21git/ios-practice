@@ -5,8 +5,8 @@
 //  Created by Simran Rout on 11/04/23.
 //
 
-import IOSPracticeKit
-import IOSPracticeUI
+import iOSPracticeKit
+import iOSPracticeUI
 import UIKit
 
 // MARK: CustomTableCellAnimationController

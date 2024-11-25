@@ -5,8 +5,8 @@
 //  Created by Simran Rout on 08/05/23.
 //
 
-import IOSPracticeKit
-import IOSPracticeUI
+import iOSPracticeKit
+import iOSPracticeUI
 import UIKit
 
 // MARK: CollectionCompositionLayoutController.swift

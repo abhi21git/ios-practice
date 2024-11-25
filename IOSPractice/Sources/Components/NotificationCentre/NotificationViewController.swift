@@ -6,8 +6,8 @@
 //  Copyright © 2023 practice.com. All rights reserved.
 //
 
-import IOSPracticeKit
-import IOSPracticeUI
+import iOSPracticeKit
+import iOSPracticeUI
 import UIKit
 
 //MARK: - NotificationViewController
