@@ -37,12 +37,12 @@ extension CustomTableCellAnimationController {
     }
     
     private func setupTableView() -> Constraints {
-        let constraints: Constraints = view.addSubview(tableView,
-                                                       considerSafeArea: true,
-                                                       with: [.leading(),
-                                                              .trailing(),
-                                                              .top(),
-                                                              .bottom()])
+        let constraints: Constraints = view.addSubview(tableView, considerSafeArea: true) {[
+            .leading(),
+            .trailing(),
+            .top(),
+            .bottom()
+        ]}
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PlainTextTableViewCell.self)

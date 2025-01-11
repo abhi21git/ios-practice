@@ -68,29 +68,30 @@ extension ImageCollectionViewCell {
     }
     
     private func setupImageView() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(imageView,
-                                                              with: [.leading(),
-                                                                     .trailing(),
-                                                                     .top(),
-                                                                     .bottom()])
+        let constraints: Constraints = contentView.addSubview(imageView) {[
+            .leading(),
+            .trailing(),
+            .top(),
+            .bottom()
+        ]}
         imageView.cornerRadius(10)
         imageView.contentMode = .scaleAspectFill
         return constraints
     }
     
     private func setupLabelView() -> Constraints {
-        let titleConstraints: Constraints = imageView.addSubview(titleLabel, with: [
+        let titleConstraints: Constraints = imageView.addSubview(titleLabel) {[
             .leading(),
             .trailing(),
             .bottom(),
             .height(constant: 20)
-        ])
-        let indexConstraints: Constraints = imageView.addSubview(indexLabel, with: [
+        ]}
+        let indexConstraints: Constraints = imageView.addSubview(indexLabel) {[
             .top(constant: 5),
             .trailing(constant: 5),
             .aspectRatio(),
             .height(constant: 20)
-        ])
+        ]}
         titleLabel.font = .italicSystemFont(ofSize: 15)
         titleLabel.textAlignment = .center
         titleLabel.backgroundColor = .black.withAlphaComponent(0.6)

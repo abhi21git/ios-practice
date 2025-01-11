@@ -27,16 +27,16 @@ public final class ImageCollectionHeaderView: UICollectionReusableView, Reusable
 // MARK: Methods
 extension ImageCollectionHeaderView {
     private func setupImageView() {
-        let constraints: Constraints = addSubview(imageView, with: [
+        let constraints: Constraints = addSubview(imageView) {[
             .leading(),
             .trailing(),
             .top(),
             .bottom()
-        ])
+        ]}
         imageView.image = UIImage(named: "HeaderImage")
         imageView.contentMode = .scaleAspectFill
         imageView.cornerRadius(10)
-        (constraints).activate()
+        constraints.activate()
     }
 }
 

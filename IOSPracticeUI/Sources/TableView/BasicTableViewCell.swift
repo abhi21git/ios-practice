@@ -53,13 +53,13 @@ extension BasicTableViewCell {
     }
     
     private func setUpImageView() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(cellImageView, with: [
+        let constraints: Constraints = contentView.addSubview(cellImageView) {[
             .leading(constant: 20),
             .top(constant: 20),
             .bottom(constant: 20),
             .aspectRatio(multiplier: 1),
             .height(constant: 24)
-        ])
+        ]}
         cellImageView.tintColor = .orange
         cellImageView.setContentHuggingPriority(.required, for: .horizontal)
         cellImageView.contentMode = .scaleAspectFit
@@ -67,11 +67,11 @@ extension BasicTableViewCell {
     }
     
     private func setUpLabel() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(titleLabel, with: [
+        let constraints: Constraints = contentView.addSubview(titleLabel) {[
             .leading(constant: 20, from: cellImageView.trailingAnchor),
             .trailing(constant: 20),
             .centerY()
-        ])
+        ]}
         return constraints
     }
 }
