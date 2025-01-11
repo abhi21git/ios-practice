@@ -25,6 +25,7 @@ public final class GradientView: UIImageView {
         defer { currentContext?.restoreGState() }
         
         let size = rect.size
+        guard size.width != 0 && size.height != 0 else { return nil }
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                                         colors: colors as CFArray,

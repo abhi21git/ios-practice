@@ -31,7 +31,7 @@ public extension Array where Element == NSLayoutConstraint {
         return currentConstraints
     }
     
-    func activate() {
+    @inlinable func activate() {
         NSLayoutConstraint.activate(self)
     }
 }
