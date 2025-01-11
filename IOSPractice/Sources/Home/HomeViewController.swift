@@ -32,12 +32,7 @@ extension HomeViewController {
     }
     
     private func setUpTableView() -> Constraints {
-        let constraints: Constraints = view.addSubview(tableView, considerSafeArea: true) {[
-            .leading(),
-            .trailing(),
-            .top(),
-            .bottom()
-        ]}
+        let constraints: Constraints = view.addSubview(tableView, considerSafeArea: true) { .fill() }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none

@@ -68,12 +68,7 @@ extension ImageCollectionViewCell {
     }
     
     private func setupImageView() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(imageView) {[
-            .leading(),
-            .trailing(),
-            .top(),
-            .bottom()
-        ]}
+        let constraints: Constraints = contentView.addSubview(imageView) { .fill() }
         imageView.cornerRadius(10)
         imageView.contentMode = .scaleAspectFill
         return constraints

@@ -42,11 +42,8 @@ extension PlainTextTableViewCell {
     
     private func setupContainerView() -> Constraints {
         let constraints: Constraints = contentView.addSubview(containerView) {[
-            .height(constant: 200),
-            .top(constant: 20),
-            .bottom(constant: 20),
-            .leading(constant: 20),
-            .trailing(constant: 20)
+            .height(constant: 150),
+            .fill(inset: 20)
         ]}
         containerView.cornerRadius(20)
         return constraints
