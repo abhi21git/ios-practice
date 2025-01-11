@@ -18,7 +18,7 @@ public extension NSLayoutConstraint {
 }
 
 
-public enum Constraint {
+public enum Constraint: Equatable {
     case leading(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case top(constant: CGFloat = 0, from: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case trailing(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
@@ -28,6 +28,7 @@ public enum Constraint {
     case height(constant: CGFloat = 0, equalTo: NSLayoutDimension? = nil, priority: UILayoutPriority = .required)
     case width(constant: CGFloat = 0, equalTo: NSLayoutDimension? = nil, priority: UILayoutPriority = .required)
     case aspectRatio(multiplier: CGFloat = 1, priority: UILayoutPriority = .required)
+    case fill(inset: CGFloat = 0, priority: UILayoutPriority = .required)
     
 //    func constant(_ value: CGFloat) -> Constraint {
 //        return switch self {
@@ -82,6 +83,22 @@ public enum Constraint {
 //        case .aspectRatio(let multiplier, _): .aspectRatio(multiplier: multiplier, priority: value)
 //        }
 //    }
+    
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        return switch (lhs, rhs) {
+        case (.leading, .leading): true
+        case (.top, .top): true
+        case (.trailing, .trailing): true
+        case (.bottom, .bottom): true
+        case (.centerX, .centerX): true
+        case (.centerY, .centerY): true
+        case (.width, .width): true
+        case (.height, .height): true
+        case (.aspectRatio, .aspectRatio): true
+        case (.fill, .fill): true
+        default: false
+        }
+    }
 }
 
 
