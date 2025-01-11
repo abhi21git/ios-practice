@@ -41,19 +41,22 @@ extension PlainTextTableViewCell {
     }
     
     private func setupContainerView() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(containerView, with: [
+        let constraints: Constraints = contentView.addSubview(containerView) {[
             .height(constant: 200),
             .top(constant: 20),
             .bottom(constant: 20),
             .leading(constant: 20),
             .trailing(constant: 20)
-        ])
+        ]}
         containerView.cornerRadius(20)
         return constraints
     }
     
     private func setupTitleView() -> Constraints {
-        let constraints = contentView.addSubview(title, with: [.centerX(), .centerY()])
+        let constraints = contentView.addSubview(title) {[
+            .centerX(),
+            .centerY()
+        ]}
         title.textColor = .black
         return constraints
     }

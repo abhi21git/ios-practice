@@ -37,11 +37,11 @@ extension MoreViewController {
     }
     
     private func setupTitleLabel() -> Constraints {
-        let constraint: Constraints = view.addSubview(notificationLabel, considerSafeArea: true, with: [
+        let constraint: Constraints = view.addSubview(notificationLabel, considerSafeArea: true) {[
             .leading(constant: 20),
             .top(constant: 20),
             .centerX()
-        ])
+        ]}
         notificationLabel.font = .boldSystemFont(ofSize: 18)
         notificationLabel.text = "Notification text:"
         notificationLabel.textColor = .black
