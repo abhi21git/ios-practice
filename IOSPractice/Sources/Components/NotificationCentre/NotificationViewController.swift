@@ -43,11 +43,11 @@ extension NotificationViewController {
     }
     
     private func setupTitleLabel() -> Constraints {
-        let constraint: Constraints = view.addSubview(titleLabel, considerSafeArea: true, with: [
+        let constraint: Constraints = view.addSubview(titleLabel, considerSafeArea: true) {[
             .leading(constant: 20),
             .top(constant: 20),
             .centerX()
-        ])
+        ]}
         titleLabel.font = .boldSystemFont(ofSize: 18)
         titleLabel.textColor = .black
         titleLabel.text = "Enter the text you want to post"
@@ -56,11 +56,11 @@ extension NotificationViewController {
     }
     
     private func setupInputField() -> Constraints {
-        let constraint: Constraints = view.addSubview(inputField, with: [
+        let constraint: Constraints = view.addSubview(inputField) {[
             .leading(from: titleLabel.leadingAnchor),
             .top(constant: 20, from: titleLabel.bottomAnchor),
             .centerX()
-        ])
+        ]}
         inputField.font = .boldSystemFont(ofSize: 18)
         inputField.borderStyle = .roundedRect
         inputField.placeholder = "Your text here"
