@@ -89,9 +89,9 @@ extension CustomTableCellAnimationController {
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self = self else { return }
                 if CGRectContainsPoint(cellFrameInTable, self.tableView.offset.center) {
-                    cell.containerView.transform = .identity
+                    cell.finalAnimation()
                 } else {
-                    cell.containerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    cell.initialAnimation()
                 }
             }
         }

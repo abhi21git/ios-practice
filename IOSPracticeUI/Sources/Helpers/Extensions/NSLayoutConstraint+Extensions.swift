@@ -17,7 +17,7 @@ public extension NSLayoutConstraint {
     }
 }
 
-
+// MARK: - Constraint
 public enum Constraint: Equatable {
     case leading(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case top(constant: CGFloat = 0, from: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required)
@@ -101,7 +101,7 @@ public enum Constraint: Equatable {
     }
 }
 
-
+// MARK: - AutoLayoutBuilder
 @resultBuilder
 public struct AutoLayoutBuilder {
     
@@ -120,5 +120,37 @@ public struct AutoLayoutBuilder {
     
     public static func buildExpression(_ expression: [Constraint]) -> [Constraint] {
         expression
+    }
+    
+    public static func buildOptional(_ component: [Constraint]?) -> [Constraint] {
+        component ?? []
+    }
+    
+    public static func buildEither(first component: [Constraint]) -> [Constraint] {
+        component
+    }
+    
+    public static func buildEither(second component: [Constraint]) -> [Constraint] {
+        component
+    }
+    
+    public static func buildArray(_ components: [[Constraint]]) -> [Constraint] {
+        components.flatMap { $0 }
+    }
+    
+    public static func buildExpression(_ expression: [[Constraint]]) -> [Constraint] {
+        expression.flatMap { $0 }
+    }
+    
+    public static func buildLimitedAvailability(_ component: [Constraint]) -> [Constraint] {
+        component
+    }
+    
+    public static func buildExpression(_ expression: Void) -> [Constraint] {
+        []
+    }
+    
+    public static func buildExpression(_ expression: Constraint?) -> [Constraint] {
+        []
     }
 }
