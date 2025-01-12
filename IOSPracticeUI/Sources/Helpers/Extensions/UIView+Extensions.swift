@@ -32,6 +32,7 @@ public extension UIView {
     
     @discardableResult func cornerRadius(_ radius: CGFloat, maskToBounds: Bool = true) -> Self {
         layer.cornerRadius = radius
+        layer.cornerCurve = .continuous
         layer.masksToBounds = maskToBounds
         return self
     }
