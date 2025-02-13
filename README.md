@@ -5,13 +5,17 @@ This repository is to host practice project so that we can learn cool iOS Stuff<
 
 ### Setup
 Before proceeding making sure you have tuist installed in your system<br>
-  - Install:
+  - Install mise (if not already, alternative methods [here](https://mise.jdx.dev/getting-started.html#alternate-installation-methods)):
 ```
-  curl -Ls https://install.tuist.io | bash
+  brew tap tuist/tuist
+```  
+  - Install (alternative methods [here](https://docs.tuist.io/guide/introduction/installation)):
+```
+  brew install --formula tuist
 ```
   - Uninstall:
 ```
-  curl -Ls https://raw.githubusercontent.com/tuist/tuist/main/script/uninstall | bash
+  brew uninstall tuist
 ```
 ### Edit
 To modify configuration of project run following command

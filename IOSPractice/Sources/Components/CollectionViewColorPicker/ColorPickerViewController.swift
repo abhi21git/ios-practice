@@ -6,7 +6,7 @@
 //  Copyright © 2023 practice.com. All rights reserved.
 //
 
-import IOSPracticeUI
+import iOSPracticeUI
 import UIKit
 
 //MARK: - ColorPickerViewController

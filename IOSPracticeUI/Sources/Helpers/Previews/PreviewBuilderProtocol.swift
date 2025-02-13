@@ -21,7 +21,7 @@ public extension PreviewBuilderProtocol {
         String(describing: self).replacingOccurrences(of: "([a-z])([A-Z][a-z])", with: "$1 $2", options: .regularExpression)
     }
     
-    static var traits: PreviewTrait<Preview.ViewTraits> {
+    @MainActor static var traits: PreviewTrait<Preview.ViewTraits> {
         return .defaultLayout
     }
     
