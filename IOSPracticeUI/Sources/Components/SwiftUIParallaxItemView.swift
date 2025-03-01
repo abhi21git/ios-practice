@@ -10,8 +10,11 @@ import SwiftUI
 
 // MARK: - ParallaxItemView
 public struct SwiftUIParallaxItemView: View {
-    @State var imageURL: String
-    @State var author: String
+    let imageURL: String
+    let author: String
+    
+    @State var counter: Int = 0
+    @State var origin: CGPoint = .zero
     
     public init(imageURL url: String, author name: String) {
         imageURL = url
@@ -45,6 +48,13 @@ public struct SwiftUIParallaxItemView: View {
                     .background(.ultraThinMaterial)
             }
         }
+        .onPressingChanged { point in
+            if let point {
+                origin = point
+                counter += 1
+            }
+        }
+        .modifier(RippleEffect(at: origin, trigger: counter))
     }
 }
 

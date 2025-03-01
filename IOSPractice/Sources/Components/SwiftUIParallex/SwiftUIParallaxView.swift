@@ -20,10 +20,11 @@ struct SwiftUIParallaxView: View {
                     ParallaxView(imageURL: data.imageURL, author: data.author)
                 }
             }
+            .scrollTargetLayout()
         }
         .contentMargins(32)
         .background(Color.primary.colorInvert())
-        .scrollTargetBehavior(.paging)
+        .scrollTargetBehavior(.viewAligned)
         .onAppear {
             viewModel.loadData()
         }
@@ -32,8 +33,10 @@ struct SwiftUIParallaxView: View {
 
 // MARK: - ParallaxView
 struct ParallaxView: View {
-    @State var imageURL: String
-    @State var author: String
+    let imageURL: String
+    let author: String
+
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
         ZStack {
@@ -42,8 +45,9 @@ struct ParallaxView: View {
                     content.offset(x: phase.isIdentity ? 0 : phase.value * -200)
                 }
         }
-        .containerRelativeFrame(.horizontal)
+        .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 1 : 2, spacing: 16)
         .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
     }
 }
 
