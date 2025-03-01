@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 public protocol PreviewBuilderProtocol {
     associatedtype someView
     static var name: String { get }
@@ -21,7 +22,7 @@ public extension PreviewBuilderProtocol {
         String(describing: self).replacingOccurrences(of: "([a-z])([A-Z][a-z])", with: "$1 $2", options: .regularExpression)
     }
     
-    @MainActor static var traits: PreviewTrait<Preview.ViewTraits> {
+    static var traits: PreviewTrait<Preview.ViewTraits> {
         return .defaultLayout
     }
     

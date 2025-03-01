@@ -67,6 +67,7 @@ extension HomeViewController: PreviewBuilderProtocol {
 }
 
 private extension HomeViewEntries {
+    @MainActor
     func getCurrentController() -> UIViewController {
         switch self {
         case .tableView:
