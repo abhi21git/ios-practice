@@ -5,6 +5,7 @@
 //  Created by Abhishek Maurya on 01/03/25.
 //
 
+import NukeUI
 import SwiftUI
 
 // MARK: - ParallaxItemView
@@ -19,18 +20,22 @@ public struct SwiftUIParallaxItemView: View {
     
     public var body: some View {
         ZStack {
-            AsyncImage(url: URL(string: imageURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea()
-            } placeholder: {
-                Image(systemName: "photo.artframe")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .ignoresSafeArea()
-                    .padding(.all, 32)
-            }
+            LazyImage(url: URL(string: imageURL)) { state in
+                if let image = state.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .ignoresSafeArea()
+                } else {
+                    Image(systemName: "photo.artframe")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .ignoresSafeArea()
+                        .padding(.all, 32)
+                }
+            }.processors(
+                [.resize(width: 400)]
+            )
             VStack(alignment: .leading) {
                 Spacer()
                 Text(author)

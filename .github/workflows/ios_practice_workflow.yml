@@ -16,6 +16,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Prepare 💬
         uses: jdx/mise-action@v2
+      - name: Resolve Dependencies 📦
+        run: |
+          tuist install
       - name: Build 🛠️
         run: |
           tuist build

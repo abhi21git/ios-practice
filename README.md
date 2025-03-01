@@ -22,7 +22,12 @@ To modify configuration of project run following command
 ```
 tuist edit
 ```
-<sup> It wraps the configuration in a macOS application to easily understand project structure.</sup> 
+<sup> It wraps the configuration in a macOS application to easily understand project structure.</sup>
+### Install Dependencies
+To install all defined SPM packages run following command
+```
+tuist install
+``` 
 ### Generate
 To generate project run following command
 ```
