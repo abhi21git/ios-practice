@@ -99,7 +99,6 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
                     cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 }
             }
-            
         }
     }
 }
@@ -107,9 +106,8 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
 // MARK: - Preview
 #Preview(ColorCollectionView.name, traits: ColorCollectionView.traits, body: ColorCollectionView.preview)
 extension ColorCollectionView: PreviewBuilderProtocol {
-    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 400, height: 100)}
     public static var buildPreview: UIView {
-        let view = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
+        let view = ColorCollectionView(color: (1...80).map({ _ in UIColor.randomColor }))
         view.heightAnchor.constraint(equalToConstant: 80).isActive = true
         view.addShadow(radius: 3, colour: .darkGray, opacity: 0.2, offset: .zero)
         view.addBorder(width: 1, colour: .white)

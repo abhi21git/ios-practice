@@ -12,7 +12,7 @@ import UIKit
 //MARK: - ColorPickerViewController
 final class ColorPickerViewController: BaseViewController {
   
-    private var collectionView: ColorCollectionView = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
+    private var collectionView: ColorCollectionView = ColorCollectionView(color: (1...80).map({ _ in UIColor.randomColor }))
     private var messageLabel: UILabel = UILabel()
     
     // MARK: Lifecycle

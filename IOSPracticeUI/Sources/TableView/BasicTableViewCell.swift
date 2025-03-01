@@ -79,7 +79,6 @@ extension BasicTableViewCell {
 //MARK: - Preview
 #Preview(BasicTableViewCell.name, traits: BasicTableViewCell.traits, body: BasicTableViewCell.preview)
 extension BasicTableViewCell: PreviewBuilderProtocol {
-    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 300, height: 60) }
     public static var buildPreview: UIView {
         let cell = BasicTableViewCell()
         cell.configure(with: .init(title: "Test", image: UIImage(systemName: "square.grid.2x2")))
