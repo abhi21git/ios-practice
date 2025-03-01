@@ -14,6 +14,7 @@ public enum HomeViewEntries: String, CaseIterable {
     case collectionView = "Collection View"
     case colorPicker = "Color Picker View"
     case notificationCenter = "Notification Center"
+    case swiftUIParallax = "SwiftUI Parallax"
     
     public var title: String {
         return rawValue
@@ -29,6 +30,8 @@ public enum HomeViewEntries: String, CaseIterable {
             return "eyedropper.halffull"
         case .notificationCenter:
             return "bell.and.waveform"
+        case .swiftUIParallax:
+            return "photo.on.rectangle.angled.fill"
         }
     }
 }

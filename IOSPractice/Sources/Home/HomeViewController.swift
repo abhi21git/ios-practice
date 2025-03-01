@@ -8,6 +8,7 @@
 
 import iOSPracticeKit
 import iOSPracticeUI
+import SwiftUI
 import UIKit
 
 // MARK: HomeViewController
@@ -66,7 +67,7 @@ extension HomeViewController: PreviewBuilderProtocol {
 }
 
 private extension HomeViewEntries {
-    func getCurrentController() -> BaseViewController {
+    func getCurrentController() -> UIViewController {
         switch self {
         case .tableView:
             return CustomTableCellAnimationController(title: title)
@@ -76,6 +77,10 @@ private extension HomeViewEntries {
             return ColorPickerViewController(title: title)
         case .notificationCenter:
             return NotificationViewController(title: title)
+        case .swiftUIParallax:
+            let vc = UIHostingController(rootView: SwiftUIParallaxView(viewModel: LPViewModel()))
+            vc.title = title
+            return vc
         }
     }
     
