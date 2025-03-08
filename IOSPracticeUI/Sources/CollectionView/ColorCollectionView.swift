@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 public protocol ColorCollectionViewDelegate: AnyObject {
     func didChangeColor(to color: UIColor)
 }

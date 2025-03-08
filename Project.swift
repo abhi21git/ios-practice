@@ -43,7 +43,7 @@ fileprivate enum Targets: String, CaseIterable {
         switch self {
         case .app: ["\(name)/Resources/**"]
         case .kit: []
-        case .ui: []
+        case .ui: ["\(name)/Resources/**"]
         case .appTests, .kitTests, .uiTests: []
         }
     }
@@ -55,7 +55,7 @@ fileprivate enum Targets: String, CaseIterable {
     private var product: Product {
         switch self {
         case .app: .app
-        case .kit, .ui: .staticFramework
+        case .kit, .ui: .framework
         case .appTests, .kitTests, .uiTests: .unitTests
         }
     }
@@ -69,7 +69,7 @@ fileprivate enum Targets: String, CaseIterable {
         case .appTests: [.target(name: Targets.app.name)]
         case .kit: []
         case .kitTests: [.target(name: Targets.kit.name)]
-        case .ui: []
+        case .ui: [.external(name: "NukeUI")]
         case .uiTests: [.target(name: Targets.ui.name)]
         }
     }
