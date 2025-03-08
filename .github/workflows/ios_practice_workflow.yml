@@ -9,13 +9,16 @@ on:
 jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
       - name: Checkout 🔰
         uses: actions/checkout@v4
       - name: Prepare 💬
         uses: jdx/mise-action@v2
+      - name: Resolve Dependencies 📦
+        run: |
+          tuist install
       - name: Build 🛠️
         run: |
           tuist build
