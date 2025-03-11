@@ -25,8 +25,8 @@ struct SwiftUIParallaxView: View {
         .contentMargins(32)
         .background(Color.primary.colorInvert())
         .scrollTargetBehavior(.viewAligned)
-        .onAppear {
-            viewModel.loadData()
+        .task {
+            await viewModel.loadData()
         }
     }
 }
@@ -35,6 +35,9 @@ struct SwiftUIParallaxView: View {
 struct ParallaxView: View {
     let imageURL: String
     let author: String
+    
+    @State private(set) var counter: Int = 0
+    @State private(set) var origin: CGPoint = .zero
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
@@ -48,6 +51,13 @@ struct ParallaxView: View {
         .containerRelativeFrame(.horizontal, count: verticalSizeClass == .regular ? 1 : 2, spacing: 16)
         .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+        .onPressingChanged { point in
+            if let point {
+                origin = point
+                counter += 1
+            }
+        }
+        .modifier(RippleEffect(at: origin, trigger: counter))
     }
 }
 

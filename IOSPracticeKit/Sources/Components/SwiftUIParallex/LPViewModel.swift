@@ -14,20 +14,18 @@ public final class LPViewModel: ObservableObject {
         
     }
     
-    public func loadData() {
-        Task {
-            guard let url = URL(string: LPModel.url) else { return }
-            let request = URLRequest(url: url)
-            do {
-                let response: (data: Data, response: URLResponse) = try await URLSession.shared.data(for: request)
-                let decoder = JSONDecoder()
-                let data = try decoder.decode([LPModel].self, from: response.data)
-                Task { @MainActor [weak self] in
-                    self?.data = data
-                }
-            } catch {
-                debugPrint(error)
+    public func loadData() async {
+        guard let url = URL(string: LPModel.url) else { return }
+        let request = URLRequest(url: url)
+        do {
+            let response: (data: Data, response: URLResponse) = try await URLSession.shared.data(for: request)
+            let decoder = JSONDecoder()
+            let data = try decoder.decode([LPModel].self, from: response.data)
+            await MainActor.run { [weak self] in
+                self?.data = data
             }
+        } catch {
+            debugPrint(error)
         }
     }
 }
