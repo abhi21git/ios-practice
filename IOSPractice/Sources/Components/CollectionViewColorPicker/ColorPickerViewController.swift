@@ -40,8 +40,8 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
     private func prepareUI() {
         view.layoutIfNeeded()
         collectionView.addShadow(radius: 3, colour: .darkGray, opacity: 0.2, offset: .zero)
-        collectionView.addBorder(width: 1, colour: .white)
-        collectionView.makeCircularCorner()
+            .addBorder(width: 1, colour: .white)
+            .makeCircularCorner()
     }
     
     private func setupCollectionView() -> Constraints {

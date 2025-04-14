@@ -91,12 +91,12 @@ extension ColorCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
             UIView.animate(withDuration: 0.2) { [weak self] in
                 if self?.indexPathForItem(at: scrollView.offset.center) == self?.indexPath(for: cell) {
                     cell.addBorder(width: 2, colour: .white)
-                    cell.addShadow(radius: 8, colour: .darkGray, opacity: 0.4)
-                    cell.transform = .identity
+                        .addShadow(radius: 8, colour: .darkGray, opacity: 0.4)
+                        .transform = .identity
                 } else {
                     cell.addBorder(width: 0, colour: .white)
-                    cell.addShadow(radius: 8, colour: .darkGray, opacity: 0)
-                    cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                        .addShadow(radius: 8, colour: .darkGray, opacity: 0)
+                        .transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 }
             }
             
