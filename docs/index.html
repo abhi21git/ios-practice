@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Xcode Releases</title>
+<meta name="description" content="Every Xcode release, its SDKs, compilers and downloads.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="https://developer.apple.com/assets/elements/icons/xcode-s/xcode-s-96x96_2x.png">
+<style>
+:root {
+  --blue: #0071e3;
+  --bg: #fbfbfd;
+  --card: #fff;
+  --label: #1d1d1f;
+  --label-2: #6e6e73;
+  --label-3: #86868b;
+  --sep: rgba(0,0,0,.08);
+  --fill: rgba(118,118,128,.12);
+  --fill-2: rgba(118,118,128,.08);
+  --seg-on: #fff;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+  --shadow-lift: 0 2px 6px rgba(0,0,0,.06), 0 18px 44px rgba(0,0,0,.09);
+  --green: #248a3d; --orange: #b25000; --purple: #6f42c1;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #0a84ff;
+    --bg: #0a0a0c;
+    --card: #1c1c1e;
+    --label: #f5f5f7;
+    --label-2: #a1a1a6;
+    --label-3: #8e8e93;
+    --sep: rgba(255,255,255,.1);
+    --fill: rgba(142,142,147,.3);
+    --fill-2: rgba(142,142,147,.16);
+    --seg-on: rgba(142,142,147,.55);
+    --shadow: none;
+    --shadow-lift: 0 0 0 1px rgba(255,255,255,.06), 0 18px 44px rgba(0,0,0,.6);
+    --green: #30d158; --orange: #ff9f0a; --purple: #bf5af2;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--label);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -.011em;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* parallax backdrop: two decorative layers drifting at different rates */
+.aurora {
+  position: fixed; z-index: -1; pointer-events: none;
+  left: 50%; translate: -50% 0; width: 160vmax; aspect-ratio: 1;
+  filter: blur(20px); opacity: .5;
+}
+.aurora.a { top: -85vmax; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--blue) 42%, transparent), transparent 60%); }
+.aurora.b { top: -70vmax; width: 110vmax; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--purple) 34%, transparent), transparent 62%); }
+@supports (animation-timeline: scroll(root)) {
+  .aurora, .hero-inner { animation: linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+  .aurora.a { animation-name: drift-slow; }
+  .aurora.b { animation-name: drift-fast; }
+  .hero-inner { animation-name: hero-out; }
+  .app-icon img { /* lags behind the title for real depth */
+    animation: icon-out linear both; animation-timeline: scroll(root); animation-range: 0 70vh;
+  }
+  @keyframes icon-out { to { translate: 0 40px; scale: .78; opacity: .15; rotate: -6deg; } }
+  @keyframes drift-slow { to { translate: -50% 14vh; scale: 1.18; opacity: .22; } }
+  @keyframes drift-fast { to { translate: -50% 30vh; scale: .9; opacity: .12; } }
+  @keyframes hero-out { to { translate: 0 -60px; opacity: .35; scale: .97; } }
+}
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 22px 96px; }
+
+/* hero */
+.hero { padding: 96px 0 34px; text-align: center; }
+.app-icon img {
+  width: 96px; height: 96px; display: block; margin: 0 auto 22px;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.28));
+}
+.hero h1 {
+  margin: 0;
+  font-size: clamp(40px, 7.5vw, 68px); font-weight: 700;
+  letter-spacing: -.026em; line-height: 1.04;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+.hero p { margin: 14px auto 0; max-width: 34em; color: var(--label-2); font-size: 19px; letter-spacing: -.012em; }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 40px 0 26px; }
+.stat {
+  background: var(--card); border: 1px solid var(--sep); border-radius: 18px;
+  padding: 18px 20px; box-shadow: var(--shadow);
+}
+.stat .k { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--label-3); }
+.stat .v { font-size: 26px; font-weight: 600; letter-spacing: -.02em; margin-top: 4px; }
+.stat .s { font-size: 13px; color: var(--label-2); }
+
+/* controls */
+#sentinel { height: 1px; margin-bottom: -1px; }
+.controls {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  margin-inline: calc(50% - 50vw);
+  padding: 14px max(22px, calc(50vw - 468px)) 16px;
+  background: transparent;
+  -webkit-backdrop-filter: blur(0px) saturate(100%);
+  backdrop-filter: blur(0px) saturate(100%);
+  box-shadow: 0 1px 0 transparent;
+  transition: backdrop-filter .3s var(--ease), -webkit-backdrop-filter .3s var(--ease), box-shadow .3s var(--ease);
+}
+/* glass only once it is actually pinned to the top */
+.controls.stuck {
+  -webkit-backdrop-filter: blur(18px) saturate(35%);
+  backdrop-filter: blur(18px) saturate(35%);
+  box-shadow: 0 1px 0 var(--sep);
+}
+.search { position: relative; flex: 1 1 240px; }
+.search input {
+  width: 100%; appearance: none; outline: 0;
+  background: transparent; border: 1px solid var(--sep);
+  color: var(--label);
+  font: inherit; font-size: 15px;
+  padding: 8px 14px 8px 36px; border-radius: 980px;
+  transition: border-color .2s var(--ease);
+}
+.search input:hover { border-color: color-mix(in srgb, var(--label-3) 45%, transparent); }
+.search input::placeholder { color: var(--label-3); }
+.search input:focus { border-color: var(--blue); box-shadow: 0 0 0 3.5px color-mix(in srgb, var(--blue) 24%, transparent); }
+.search svg { position: absolute; left: 14px; top: 50%; translate: 0 -50%; width: 15px; height: 15px; fill: var(--label-3); }
+/* outline, not border, so the padding box matches the border box and the thumb maths stay exact */
+.seg { position: relative; display: flex; outline: 1px solid var(--sep); outline-offset: -1px; border-radius: 980px; padding: 2px; gap: 2px; }
+.seg .thumb {
+  position: absolute; top: 0; left: 0; width: 0; height: 0; border-radius: 980px;
+  background: var(--seg-on); box-shadow: 0 1px 3px rgba(0,0,0,.16);
+}
+.seg .thumb.animated { transition: translate .34s cubic-bezier(.32,.72,0,1), width .34s cubic-bezier(.32,.72,0,1); }
+.seg button {
+  appearance: none; border: 0; background: transparent; color: var(--label);
+  font: inherit; font-size: 14px; font-weight: 500; letter-spacing: -.01em;
+  padding: 6px 14px; border-radius: 980px; cursor: pointer;
+  position: relative; /* above the thumb */
+}
+
+/* collapsible major-version group */
+details.group { margin-top: 30px; }
+details.group > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 8px 2px 12px; border-bottom: 1px solid var(--sep);
+}
+details.group > summary::-webkit-details-marker { display: none; }
+details.group > summary h2 {
+  margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.019em;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+details.group > summary .count { font-size: 14px; color: var(--label-3); }
+details.group > summary:hover h2 { color: var(--blue); }
+details.group > summary .chev { margin-left: auto; align-self: center; }
+details.group > .glist { padding-top: 12px; }
+.chev { width: 13px; height: 13px; fill: var(--label-3); flex: none; transition: rotate .25s var(--ease); }
+details.group[open] > summary .chev { rotate: 90deg; }
+
+/* release card: expands on hover (tap-free), or on keyboard focus */
+.rel {
+  background: var(--card); border: 1px solid var(--sep); border-radius: 16px;
+  margin-bottom: 8px; box-shadow: var(--shadow); outline: 0;
+  transition: box-shadow .3s var(--ease), translate .3s var(--ease), border-color .3s var(--ease);
+}
+.rel:hover, .rel:focus-visible, .rel:focus-within {
+  box-shadow: var(--shadow-lift); translate: 0 -1px;
+  border-color: color-mix(in srgb, var(--blue) 30%, var(--sep));
+}
+.rel:focus-visible { box-shadow: var(--shadow-lift), 0 0 0 3.5px color-mix(in srgb, var(--blue) 28%, transparent); }
+.head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; }
+.head .chev { rotate: 0deg; }
+.rel:hover .head .chev, .rel:focus-within .head .chev { rotate: 90deg; }
+.ver { font-size: 17px; font-weight: 600; letter-spacing: -.014em; min-width: 5.5em; }
+.build { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--label-2); }
+.badge {
+  font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 999px; white-space: nowrap;
+  background: var(--fill); color: var(--label-2);
+}
+.badge.release { background: color-mix(in srgb, var(--green) 16%, transparent); color: var(--green); }
+.badge.rc { background: color-mix(in srgb, var(--purple) 16%, transparent); color: var(--purple); }
+.badge.beta { background: color-mix(in srgb, var(--orange) 18%, transparent); color: var(--orange); }
+.date { margin-left: auto; font-size: 14px; color: var(--label-2); white-space: nowrap; }
+
+.reveal { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s var(--ease); }
+.rel:hover .reveal, .rel:focus-within .reveal { grid-template-rows: 1fr; }
+.body { overflow: hidden; min-height: 0; }
+/* details left, actions parked on the right rail while there is room */
+.body-in {
+  padding: 4px 18px 18px; margin-top: 2px; border-top: 1px solid var(--sep);
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0 24px;
+}
+.body-in .rows { flex: 1 1 24em; }
+.body-in .actions { flex: 0 0 auto; flex-direction: column; align-items: stretch; margin-top: 14px; }
+@media (max-width: 680px) {
+  .body-in { display: block; }
+  .body-in .actions { flex-direction: row; }
+}
+@media (hover: none) { /* no hover on touch: keep everything open */
+  .reveal { grid-template-rows: 1fr; }
+  .head .chev { display: none; }
+}
+.rows { display: grid; grid-template-columns: max-content 1fr; gap: 10px 18px; margin: 14px 0 0; font-size: 15px; }
+.rows dt { color: var(--label-2); }
+.rows dd { margin: 0; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 13px; background: var(--fill-2); border: 1px solid var(--sep); padding: 3px 9px; border-radius: 8px; white-space: nowrap; }
+.pill b { font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.hero-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 30px; }
+.hero-actions .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.hero-actions .links { gap: 22px; font-size: 15px; margin-top: 2px; }
+.hero-actions .links a::after { content: ' ›'; opacity: .7; }
+.btn.big {
+  font-size: 17px; font-weight: 500; padding: 14px 30px;
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--blue) 32%, transparent);
+  transition: scale .25s var(--ease), filter .25s var(--ease);
+}
+.btn.big:hover { scale: 1.025; }
+.btn.big:active { scale: .985; }
+.btn .sub { font-weight: 400; opacity: .72; }
+.btn {
+  font-size: 14px; font-weight: 500; letter-spacing: -.01em; text-align: center;
+  padding: 8px 16px; border-radius: 980px; border: 1px solid var(--blue); color: var(--blue);
+  white-space: nowrap;
+}
+.btn:hover { text-decoration: none; background: color-mix(in srgb, var(--blue) 10%, transparent); }
+.btn.primary { background: var(--blue); color: #fff; }
+.btn.primary:hover { filter: brightness(1.08); }
+.sha { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--label-3); word-break: break-all; }
+
+.msg { text-align: center; color: var(--label-2); padding: 60px 0; }
+footer { text-align: center; color: var(--label-3); font-size: 13px; padding: 40px 0 0; border-top: 1px solid var(--sep); margin-top: 48px; }
+@media (max-width: 620px) {
+  .date { display: none; }
+  .rows { grid-template-columns: 1fr; gap: 4px 0; }
+  .rows dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .aurora { opacity: .3; }
+}
+</style>
+</head>
+<body>
+
+<div class="aurora a" aria-hidden="true"></div>
+<div class="aurora b" aria-hidden="true"></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-inner">
+      <picture class="app-icon">
+        <source srcset="https://developer.apple.com/assets/elements/icons/xcode-s-dark/xcode-s-dark-96x96_2x.png" media="(prefers-color-scheme: dark)">
+        <img src="https://developer.apple.com/assets/elements/icons/xcode-s/xcode-s-96x96_2x.png" width="96" height="96" alt="Xcode">
+      </picture>
+      <h1>Every Xcode, ever.</h1>
+      <p>Versions, build numbers, bundled SDKs, Swift and Clang compilers, release notes and direct downloads.</p>
+      <div class="hero-actions" id="cta">
+        <a class="btn primary big" href="https://apps.apple.com/app/xcode/id497799835">Get Xcode from the App Store</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats" hidden></section>
+
+  <div id="sentinel" aria-hidden="true"></div>
+
+  <div class="controls">
+    <label class="search">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.7 10.3a5.5 5.5 0 1 0-1.4 1.4l3 3a1 1 0 0 0 1.4-1.4l-3-3ZM6.5 10a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/></svg>
+      <input id="q" type="search" placeholder="Search version, build, SDK or Swift…" autocomplete="off" spellcheck="false">
+    </label>
+    <div class="seg" id="seg" role="group" aria-label="Filter by release type">
+      <span class="thumb" aria-hidden="true"></span>
+      <button data-f="all" aria-pressed="true">All</button>
+      <button data-f="release" aria-pressed="false">Release</button>
+      <button data-f="rc" aria-pressed="false">RC</button>
+      <button data-f="beta" aria-pressed="false">Beta</button>
+    </div>
+  </div>
+
+  <div id="list"><p class="msg">Loading…</p></div>
+
+  <footer>
+    Built with the <a href="https://xcodereleases.com/data.json">Xcode Releases</a> dataset.
+    Latest Xcode on the <a href="https://apps.apple.com/app/xcode/id497799835">App Store</a>. Not affiliated with Apple.
+  </footer>
+</main>
+
+<script>
+const SRC = 'https://xcodereleases.com/data.json';
+const KIND = { release: 'Release', gm: 'GM', gmSeed: 'GM Seed', rc: 'RC', beta: 'Beta', dp: 'Developer Preview' };
+const FAMILY = { release: 'release', gm: 'release', rc: 'rc', gmSeed: 'rc', beta: 'beta', dp: 'beta' };
+const SDK_ORDER = ['iOS', 'iPadOS', 'macOS', 'tvOS', 'watchOS', 'visionOS', 'DriverKit'];
+const CHEV = '<svg class="chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.3 2.3a1 1 0 0 0 0 1.4L9.6 8l-4.3 4.3a1 1 0 1 0 1.4 1.4l5-5a1 1 0 0 0 0-1.4l-5-5a1 1 0 0 0-1.4 0Z"/></svg>';
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function kind(r) {
+  const key = Object.keys(r.version.release || {})[0] || 'release';
+  const n = r.version.release?.[key];
+  return { key, family: FAMILY[key] || 'release', label: KIND[key] || key, num: typeof n === 'number' ? n : null };
+}
+const kindLabel = k => k.label + (k.num ? ' ' + k.num : '');
+
+function when(d) {
+  if (!d) return '';
+  return new Date(d.year, d.month - 1, d.day)
+    .toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+const list = o => Object.entries(o || {})
+  .sort((a, b) => (SDK_ORDER.indexOf(a[0]) + 1 || 99) - (SDK_ORDER.indexOf(b[0]) + 1 || 99))
+  .map(([name, v]) => [name, (v || []).map(x => x.number).filter(Boolean).join(', ')])
+  .filter(([, v]) => v);
+
+const swiftOf = r => r.compilers?.swift?.[0]?.number;
+
+// download.developer.apple.com serves the file straight out and 302s to /unauthorized/
+// without a session. Apple's services-account downloader takes the same path, handles
+// sign-in, then hands over the file — this is what xcodereleases.com links to.
+const dlURL = u => u.replace('https://download.developer.apple.com/',
+  'https://developer.apple.com/services-account/download?path=/');
+
+function card(r) {
+  const k = kind(r);
+  const sdks = list(r.sdks), comps = list(r.compilers);
+  const dl = r.links?.download?.url, notes = r.links?.notes?.url;
+  const pills = a => `<div class="pills">${a.map(([n, v]) => `<span class="pill">${esc(n)} <b>${esc(v)}</b></span>`).join('')}</div>`;
+  return `<article class="rel" tabindex="0">
+    <div class="head">
+      ${CHEV}
+      <span class="ver">${esc(r.version.number || '—')}</span>
+      <span class="badge ${k.family}">${esc(kindLabel(k))}</span>
+      <span class="build">${esc(r.version.build || '')}</span>
+      <span class="date">${esc(when(r.date))}</span>
+    </div>
+    <div class="reveal"><div class="body"><div class="body-in">
+      <dl class="rows">
+        <dt>Released</dt><dd>${esc(when(r.date)) || '—'}</dd>
+        ${r.requires ? `<dt>Requires</dt><dd>macOS ${esc(r.requires)} or later</dd>` : ''}
+        ${comps.length ? `<dt>Compilers</dt><dd>${pills(comps)}</dd>` : ''}
+        ${sdks.length ? `<dt>SDKs</dt><dd>${pills(sdks)}</dd>` : ''}
+        ${r.checksums?.sha1 ? `<dt>SHA‑1</dt><dd class="sha">${esc(r.checksums.sha1)}</dd>` : ''}
+        ${dl ? `<dt>Package</dt><dd class="sha">${esc(dl.split('/').pop())}</dd>` : ''}
+      </dl>
+      <div class="actions">
+        ${dl ? `<a class="btn primary" href="${esc(dlURL(dl))}">Download</a>` : ''}
+        ${notes ? `<a class="btn" href="${esc(notes)}">Release notes</a>` : ''}
+      </div>
+    </div></div></div>
+  </article>`;
+}
+
+let DATA = [], filter = 'all', query = '';
+
+function render() {
+  const q = query.trim().toLowerCase();
+  const rows = DATA.filter(r => {
+    if (filter !== 'all' && kind(r).family !== filter) return false;
+    return !q || r._hay.includes(q);
+  });
+  if (!rows.length) { $('#list').innerHTML = `<p class="msg">No releases match “${esc(query)}”.</p>`; return; }
+
+  const groups = new Map();
+  for (const r of rows) {
+    const major = 'Xcode ' + String(r.version.number || '?').split('.')[0];
+    (groups.get(major) || groups.set(major, []).get(major)).push(r);
+  }
+  // First group open, rest collapsed — searching or filtering opens everything.
+  const openAll = !!q || filter !== 'all';
+  $('#list').innerHTML = [...groups].map(([g, rs], i) => `<details class="group"${openAll || i === 0 ? ' open' : ''}>
+      <summary><h2>${esc(g)}</h2><span class="count">${rs.length} release${rs.length > 1 ? 's' : ''}</span>${CHEV}</summary>
+      <div class="glist">${rs.map(card).join('')}</div>
+    </details>`).join('');
+}
+
+const APPSTORE = 'https://apps.apple.com/app/xcode/id497799835';
+const RESOURCES = 'https://developer.apple.com/xcode/resources/';
+const WHATSNEW = 'https://developer.apple.com/xcode/whats-new/';
+
+function hero() {
+  const dl = f => DATA.find(r => kind(r).family === f && r.links?.download?.url);
+  const stable = dl('release'), beta = dl('beta') || dl('rc');
+  const label = r => `${esc(r.version.number)} <span class="sub">(${esc(kindLabel(kind(r)))})</span>`;
+  $('#cta').innerHTML = `
+    <a class="btn primary big" href="${esc(stable ? dlURL(stable.links.download.url) : APPSTORE)}">
+      ${stable ? `Download Xcode ${esc(stable.version.number)} <span class="sub">latest stable</span>`
+               : 'Get Xcode from the App Store'}
+    </a>
+    <div class="row">
+      ${beta ? `<a class="btn" href="${esc(dlURL(beta.links.download.url))}">Get beta ${label(beta)}</a>` : ''}
+      <a class="btn" href="${APPSTORE}">Get from the App Store</a>
+    </div>
+    <div class="row links">
+      <a href="${WHATSNEW}">What’s new in Xcode</a>
+      <a href="${RESOURCES}">Resources &amp; documentation</a>
+    </div>`;
+}
+
+function stats() {
+  const latest = DATA.find(r => kind(r).family === 'release');
+  const majors = new Set(DATA.map(r => String(r.version.number).split('.')[0])).size;
+  const tiles = [
+    ['Releases', DATA.length, majors + ' major versions'],
+    ['Latest', latest?.version.number ?? '—', latest ? when(latest.date) : ''],
+    ['Swift', latest ? (swiftOf(latest) ?? '—') : '—', 'in the latest release'],
+    ['Requires', latest?.requires ? 'macOS ' + latest.requires : '—', 'for the latest release'],
+  ];
+  $('#stats').innerHTML = tiles.map(([k, v, s]) =>
+    `<div class="stat"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div><div class="s">${esc(s)}</div></div>`).join('');
+  $('#stats').hidden = false;
+}
+
+$('#q').addEventListener('input', e => { query = e.target.value; render(); });
+$('#seg').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b || b.getAttribute('aria-pressed') === 'true') return;
+  filter = b.dataset.f;
+  for (const x of $('#seg').querySelectorAll('button')) x.setAttribute('aria-pressed', String(x === b));
+  thumbTo(b);
+  render();
+});
+
+function thumbTo(b) {
+  const seg = $('#seg').getBoundingClientRect(), r = b.getBoundingClientRect();
+  Object.assign($('#seg .thumb').style, {
+    width: r.width + 'px', height: r.height + 'px',
+    translate: `${r.left - seg.left}px ${r.top - seg.top}px`,
+  });
+}
+const pressed = () => $('#seg button[aria-pressed="true"]');
+addEventListener('resize', () => thumbTo(pressed()));
+document.fonts?.ready.then(() => thumbTo(pressed()));
+thumbTo(pressed());
+requestAnimationFrame(() => $('#seg .thumb').classList.add('animated')); // don't animate the first placement
+
+// The bar only frosts once it is pinned: the sentinel sits directly above it.
+new IntersectionObserver(([e]) => $('.controls').classList.toggle('stuck', !e.isIntersecting))
+  .observe($('#sentinel'));
+
+function show(data) {
+  DATA = data;
+  DATA.sort((a, b) => new Date(b.date.year, b.date.month - 1, b.date.day) - new Date(a.date.year, a.date.month - 1, a.date.day));
+  for (const r of DATA) {
+    r._hay = [r.version.number, r.version.build, kindLabel(kind(r)), swiftOf(r),
+      ...list(r.sdks).map(([n, v]) => n + ' ' + v)].join(' ').toLowerCase();
+  }
+  hero();
+  stats();
+  render();
+}
+
+(async () => {
+  try {
+    const res = await fetch(SRC, { cache: 'no-cache' });
+    if (!res.ok) throw new Error(res.status);
+    show(await res.json());
+  } catch {
+    $('#list').innerHTML = `<p class="msg">Couldn’t load the dataset. <a href="${SRC}">Open it directly</a>.</p>`;
+  }
+})();
+</script>
+</body>
+</html>
