@@ -396,7 +396,10 @@ const WHATSNEW = 'https://developer.apple.com/xcode/whats-new/';
 
 function hero() {
   const dl = f => DATA.find(r => kind(r).family === f && r.links?.download?.url);
-  const stable = dl('release'), beta = dl('beta') || dl('rc');
+  const stable = dl('release');
+  // DATA is newest-first, so this is the newest prerelease whatever its kind — an RC
+  // that lands after the last beta has to win, which `dl('beta') || dl('rc')` got wrong.
+  const pre = DATA.find(r => kind(r).family !== 'release' && r.links?.download?.url);
   const label = r => `${esc(r.version.number)} <span class="sub">(${esc(kindLabel(kind(r)))})</span>`;
   $('#cta').innerHTML = `
     <a class="btn primary big" href="${esc(stable ? dlURL(stable.links.download.url) : APPSTORE)}">
@@ -404,7 +407,7 @@ function hero() {
                : 'Get Xcode from the App Store'}
     </a>
     <div class="row">
-      ${beta ? `<a class="btn" href="${esc(dlURL(beta.links.download.url))}">Get beta ${label(beta)}</a>` : ''}
+      ${pre ? `<a class="btn" href="${esc(dlURL(pre.links.download.url))}">Get ${label(pre)}</a>` : ''}
       <a class="btn" href="${APPSTORE}">Get from the App Store</a>
     </div>
     <div class="row links">

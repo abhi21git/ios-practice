@@ -59,6 +59,17 @@ api.hero();
 assert.ok(out.cta.innerHTML.includes('btn primary big') && out.cta.innerHTML.includes('https://dl.example/x.xip'));
 assert.ok(out.cta.innerHTML.includes('Download Xcode 16.2'));
 assert.ok(out.cta.innerHTML.includes('https://dl.example/beta.xip') && out.cta.innerHTML.includes('Beta 3'));
+
+// a newer RC must beat an older beta for the prerelease button
+api.DATA([
+  { version: { number: '27.0', release: { rc: 1 } }, date: { year: 2026, month: 9, day: 9 },
+    links: { download: { url: 'https://dl.example/rc.xip' } }, _hay: '' },
+  { version: { number: '27.0', release: { beta: 6 } }, date: { year: 2026, month: 8, day: 1 },
+    links: { download: { url: 'https://dl.example/beta6.xip' } }, _hay: '' },
+]);
+api.hero();
+assert.ok(out.cta.innerHTML.includes('rc.xip') && out.cta.innerHTML.includes('RC 1'), 'newest prerelease wins');
+assert.ok(!out.cta.innerHTML.includes('beta6.xip'), 'older beta not preferred over newer RC');
 assert.ok(out.cta.innerHTML.includes('id497799835'));
 assert.ok(out.cta.innerHTML.includes('/xcode/whats-new/') && out.cta.innerHTML.includes('/xcode/resources/'));
 
