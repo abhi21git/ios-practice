@@ -61,14 +61,14 @@ public extension UIView {
         layer.removeAnimation(forKey: kCATransition)
     }
     
-    func addSubview(_ subView: UIView, considerSafeArea: Bool = false, _ constraints: () -> [Constraint]) -> Constraints {
+    func addSubview(_ subView: UIView, considerSafeArea: Bool = false, _ constraints: () -> ConstraintChain) -> Constraints {
         addSubview(subView)
         return subView.addConstraints(in: self, considerSafeArea: considerSafeArea, constraints)
     }
     
-    @inlinable func addConstraints(in view: UIView, considerSafeArea: Bool = false, _ constraints: () -> [Constraint]) -> Constraints {
+    func addConstraints(in view: UIView, considerSafeArea: Bool = false, _ constraints: () -> ConstraintChain) -> Constraints {
         translatesAutoresizingMaskIntoConstraints = false
-        return constraints().map({ constraint in
+        return constraints().constraints.map({ constraint in
             switch constraint {
             case .leading(let constant, let anchor, let priority):
                 let leading = anchor ?? (considerSafeArea ? view.safeAreaLayoutGuide.leadingAnchor : view.leadingAnchor)
