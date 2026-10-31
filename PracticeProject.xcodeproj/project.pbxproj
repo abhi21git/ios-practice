@@ -353,7 +353,7 @@
 				BF2645A0B9ADAF1DB3E492E3 /* Sources */,
 				8CF74AB37875128A3D4DCA08 /* Tests */,
 			);
-			path = iOSPractice;
+			path = IOSPractice;
 			sourceTree = "<group>";
 		};
 		36D3F713337F35A863EBD5C9 /* NotificationCentre */ = {
@@ -498,7 +498,7 @@
 				0E862E8472BF58954D36261B /* Sources */,
 				FAD25AF4DE418E45D0DCE74B /* Tests */,
 			);
-			path = iOSPracticeKit;
+			path = IOSPracticeKit;
 			sourceTree = "<group>";
 		};
 		BCDB17AD9083124406352B89 /* Components */ = {
@@ -530,7 +530,7 @@
 				15A6E3B32D3A77C8B4135D6E /* Sources */,
 				F9FABAD2B415A3519BA8BDF0 /* Tests */,
 			);
-			path = iOSPracticeUI;
+			path = IOSPracticeUI;
 			sourceTree = "<group>";
 		};
 		C3C5BD8B9A23FAE80AA057A6 /* SwiftUIParallex */ = {
