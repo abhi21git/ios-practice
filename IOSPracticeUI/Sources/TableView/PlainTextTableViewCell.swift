@@ -30,6 +30,16 @@ extension PlainTextTableViewCell {
     public func configure(text: String) {
         title.text = text
     }
+    
+    public func initialAnimation() {
+        containerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        title.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+    }
+    
+    public func finalAnimation() {
+        containerView.transform = .identity
+        title.transform = .identity
+    }
 }
 
 // MARK: Private methods
@@ -41,19 +51,23 @@ extension PlainTextTableViewCell {
     }
     
     private func setupContainerView() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(containerView, with: [
-            .height(constant: 200),
-            .top(constant: 20),
-            .bottom(constant: 20),
-            .leading(constant: 20),
-            .trailing(constant: 20)
-        ])
+        let constraints: Constraints = contentView.addSubview(containerView) {
+            .height(200)
+            .leading(20)
+            .trailing(20)
+            .top
+            .bottom
+        }
         containerView.cornerRadius(20)
         return constraints
     }
     
     private func setupTitleView() -> Constraints {
-        let constraints = contentView.addSubview(title, with: [.centerX(), .centerY()])
+        let constraints = contentView.addSubview(title) {
+            .centerX
+            .centerY
+        }
+        title.font = .systemFont(ofSize: 24)
         title.textColor = .black
         return constraints
     }

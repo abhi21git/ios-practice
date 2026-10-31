@@ -53,13 +53,13 @@ extension BasicTableViewCell {
     }
     
     private func setUpImageView() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(cellImageView, with: [
-            .leading(constant: 20),
-            .top(constant: 20),
-            .bottom(constant: 20),
-            .aspectRatio(multiplier: 1),
-            .height(constant: 24)
-        ])
+        let constraints: Constraints = contentView.addSubview(cellImageView) {
+            .leading(20)
+            .top(20)
+            .bottom(20)
+            .aspectRatio(1)
+            .height(24)
+        }
         cellImageView.tintColor = .orange
         cellImageView.setContentHuggingPriority(.required, for: .horizontal)
         cellImageView.contentMode = .scaleAspectFit
@@ -67,11 +67,11 @@ extension BasicTableViewCell {
     }
     
     private func setUpLabel() -> Constraints {
-        let constraints: Constraints = contentView.addSubview(titleLabel, with: [
-            .leading(constant: 20, from: cellImageView.trailingAnchor),
-            .trailing(constant: 20),
-            .centerY()
-        ])
+        let constraints: Constraints = contentView.addSubview(titleLabel) {
+            .leading(20, from: cellImageView.trailingAnchor)
+            .trailing(20)
+            .centerY
+        }
         return constraints
     }
 }
@@ -79,7 +79,6 @@ extension BasicTableViewCell {
 //MARK: - Preview
 #Preview(BasicTableViewCell.name, traits: BasicTableViewCell.traits, body: BasicTableViewCell.preview)
 extension BasicTableViewCell: PreviewBuilderProtocol {
-    public static var traits: PreviewTrait<Preview.ViewTraits> { .fixedLayout(width: 300, height: 60) }
     public static var buildPreview: UIView {
         let cell = BasicTableViewCell()
         cell.configure(with: .init(title: "Test", image: UIImage(systemName: "square.grid.2x2")))

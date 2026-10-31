@@ -76,7 +76,18 @@ fileprivate enum Targets: String, CaseIterable {
     
     private var infoPlist: InfoPlist {
         switch self {
-        case .app: .extendingDefault(with: ["UILaunchStoryboardName": "LaunchScreen.storyboard"])
+        case .app: .extendingDefault(with: [
+            "UILaunchStoryboardName": "LaunchScreen.storyboard",
+            "UIApplicationSceneManifest": [
+                "UIApplicationSupportsMultipleScenes": false,
+                "UISceneConfigurations": [
+                    "UIWindowSceneSessionRoleApplication": [[
+                        "UISceneConfigurationName": "Default Configuration",
+                        "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+                    ]]
+                ]
+            ]
+        ])
         case .kit: .default
         case .ui: .default
         case .appTests, .kitTests, .uiTests: .default

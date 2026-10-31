@@ -12,7 +12,7 @@ import UIKit
 //MARK: - ColorPickerViewController
 final class ColorPickerViewController: BaseViewController {
   
-    private var collectionView: ColorCollectionView = ColorCollectionView(color: (1...20).map({ _ in UIColor.randomColor }))
+    private var collectionView: ColorCollectionView = ColorCollectionView(color: (1...80).map({ _ in UIColor.randomColor }))
     private var messageLabel: UILabel = UILabel()
     
     // MARK: Lifecycle
@@ -46,21 +46,21 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
     
     private func setupCollectionView() -> Constraints {
         collectionView.colorDelegate = self
-        let constraint: Constraints = view.addSubview(collectionView, considerSafeArea: true, with: [
-            .leading(constant: 20.0),
-            .trailing(constant: 20.0),
-            .top(constant: 20.0),
-            .height(constant: 80.0)
-        ])
+        let constraint: Constraints = view.addSubview(collectionView, considerSafeArea: true) {
+            .leading(20)
+            .trailing(20)
+            .top(20)
+            .height(80)
+        }
         return constraint
     }
     
     private func setupMessasgeLabel() -> Constraints {
-        let constraint: Constraints = view.addSubview(messageLabel, with: [
-            .leading(constant: 20),
-            .centerX(),
-            .centerY()
-        ])
+        let constraint: Constraints = view.addSubview(messageLabel) {
+            .leading(20)
+            .centerX
+            .centerY
+        }
         messageLabel.textAlignment = .center
         messageLabel.font = .boldSystemFont(ofSize: 18)
         messageLabel.text = "No colour is selected"
