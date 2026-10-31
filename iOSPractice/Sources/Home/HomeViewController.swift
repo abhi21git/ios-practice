@@ -26,7 +26,7 @@ final class HomeViewController: BaseViewController {
 // MARK: Methods
 extension HomeViewController {
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
         let tableViewConstraint: Constraints = setUpTableView()
         (tableViewConstraint).activate()
     }
@@ -36,7 +36,7 @@ extension HomeViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor(white: 0.92, alpha: 1)
+        tableView.backgroundColor = .clear
         tableView.register(BasicTableViewCell.self)
         return constraints
     }
