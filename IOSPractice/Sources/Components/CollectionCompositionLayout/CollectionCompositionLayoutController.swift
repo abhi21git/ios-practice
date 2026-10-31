@@ -46,7 +46,7 @@ extension CollectionCompositionLayoutController {
     private func setupCollectionView() -> Constraints {
         let layout: UICollectionViewLayout = CustomCollectionViewCompositionalLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        let constraints: Constraints = view.addSubview(collectionView, considerSafeArea: true) { .fill() }
+        let constraints: Constraints = view.addSubview(collectionView, considerSafeArea: true) { .fill }
         collectionView.backgroundColor = view.backgroundColor
         collectionView.delegate = self
         collectionView.dataSource = self
