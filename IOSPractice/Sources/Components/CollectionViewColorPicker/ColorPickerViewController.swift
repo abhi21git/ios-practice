@@ -47,20 +47,20 @@ extension ColorPickerViewController: UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() -> Constraints {
         collectionView.colorDelegate = self
         let constraint: Constraints = view.addSubview(collectionView, considerSafeArea: true) {
-            Constraint.leading(constant: 20.0)
-            Constraint.trailing(constant: 20.0)
-            Constraint.top(constant: 20.0)
-            Constraint.height(constant: 80.0)
+            .leading(20)
+            .trailing(20)
+            .top(20)
+            .height(80)
         }
         return constraint
     }
     
     private func setupMessasgeLabel() -> Constraints {
-        let constraint: Constraints = view.addSubview(messageLabel) {[
-            .leading(constant: 20),
-            .centerX(),
-            .centerY()
-        ]}
+        let constraint: Constraints = view.addSubview(messageLabel) {
+            .leading(20)
+            .centerX
+            .centerY
+        }
         messageLabel.textAlignment = .center
         messageLabel.font = .boldSystemFont(ofSize: 18)
         messageLabel.text = "No colour is selected"
