@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iOSPracticeUI
 
 @MainActor
 public protocol ColorCollectionViewDelegate: AnyObject {

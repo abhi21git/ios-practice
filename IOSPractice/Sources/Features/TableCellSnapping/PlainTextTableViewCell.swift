@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSPracticeUI
 
 // MARK: PlainTextTableViewCell
 public final class PlainTextTableViewCell: UITableViewCell, ReusableView {

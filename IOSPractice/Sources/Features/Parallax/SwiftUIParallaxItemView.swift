@@ -7,6 +7,7 @@
 
 import NukeUI
 import SwiftUI
+import iOSPracticeUI
 
 // MARK: - ParallaxItemView
 public struct SwiftUIParallaxItemView: View {

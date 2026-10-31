@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iOSPracticeUI
 
 //MARK: - ColorCollectionViewCell
 public final class ColorCollectionViewCell: UICollectionViewCell, ReusableView {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSPracticeUI
 
 // MARK: ImageCollectionCellModel
 public struct ImageCollectionCellModel {

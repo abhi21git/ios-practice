@@ -5,7 +5,6 @@
 //  Created by Simran Rout on 08/05/23.
 //
 
-import iOSPracticeKit
 import iOSPracticeUI
 import UIKit
 

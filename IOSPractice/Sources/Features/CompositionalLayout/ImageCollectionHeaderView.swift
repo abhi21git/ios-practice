@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSPracticeUI
 
 // MARK: ImageCollectionHeaderView
 public final class ImageCollectionHeaderView: UICollectionReusableView, ReusableView {

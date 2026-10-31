@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import iOSPracticeUI
 
 public class CollectionSnapFlowLayout: UICollectionViewFlowLayout {
     
