@@ -1,21 +1,12 @@
 //
-//  NSLayoutConstraint+Extensions.swift
+//  Constraint.swift
 //  IOSPracticeUI
 //
-//  Created by Abhishek Maurya on 14/05/23.
-//  Copyright © 2023 practice.com. All rights reserved.
+//  Created by Abhishek Maurya on 31/10/26.
+//  Copyright © 2026 practice.com. All rights reserved.
 //
 
 import UIKit
-
-public typealias Constraints = [NSLayoutConstraint]
-
-public extension NSLayoutConstraint {
-    func atPriority(_ priority: UILayoutPriority) -> Self {
-        self.priority = priority
-        return self
-    }
-}
 
 // MARK: - LayoutAnchors
 protocol LayoutAnchors {
