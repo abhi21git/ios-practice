@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 110;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -422,7 +422,7 @@
 			packageReferences = (
 				5E0A1C2B3D4E5F6071829304 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
-			preferredProjectObjectVersion = 110;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 3FCD6550D2A75845D38809F0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
