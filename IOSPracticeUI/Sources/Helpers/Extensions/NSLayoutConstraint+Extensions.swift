@@ -18,7 +18,7 @@ public extension NSLayoutConstraint {
 }
 
 // MARK: - Constraint
-public enum Constraint: Equatable {
+public enum Constraint {
     case leading(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case top(constant: CGFloat = 0, from: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case trailing(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
@@ -28,129 +28,51 @@ public enum Constraint: Equatable {
     case height(constant: CGFloat = 0, equalTo: NSLayoutDimension? = nil, priority: UILayoutPriority = .required)
     case width(constant: CGFloat = 0, equalTo: NSLayoutDimension? = nil, priority: UILayoutPriority = .required)
     case aspectRatio(multiplier: CGFloat = 1, priority: UILayoutPriority = .required)
-    case fill(inset: CGFloat = 0, priority: UILayoutPriority = .required)
-    
-//    func constant(_ value: CGFloat) -> Constraint {
-//        return switch self {
-//        case .leading(_, let anchor, let priority): .leading(constant: value, from: anchor, priority: priority)
-//        case .top(_, let anchor, let priority): .top(constant: value, from: anchor, priority: priority)
-//        case .trailing(_, let anchor, let priority): .trailing(constant: value, from: anchor, priority: priority)
-//        case .bottom(_, let anchor, let priority): .bottom(constant: value, from: anchor, priority: priority)
-//        case .centerX(_, let anchor, let priority): .centerX(constant: value, from: anchor, priority: priority)
-//        case .centerY(_, let anchor, let priority): .centerY(constant: value, from: anchor, priority: priority)
-//        case .width(_, let anchor, let priority): .width(constant: value, equalTo: anchor, priority: priority)
-//        case .height(_, let anchor, let priority): .height(constant: value, equalTo: anchor, priority: priority)
-//        case .aspectRatio(let multiplier, priority: let priority): .aspectRatio(multiplier: multiplier, priority: priority)
-//        }
-//    }
-//    
-//    func anchor(_ anchor: NSLayoutXAxisAnchor) -> Constraint {
-//        return switch self {
-//        case .leading(let constant, _, let priority): .leading(constant: constant, from: anchor, priority: priority)
-//        case .trailing(let constant, _, let priority): .trailing(constant: constant, from: anchor, priority: priority)
-//        case .centerX(let constant, _, let priority): .centerX(constant: constant, from: anchor, priority: priority)
-//        default: self // Return self for cases where this anchor doesn't apply
-//        }
-//    }
-//    
-//    func anchor(_ anchor: NSLayoutYAxisAnchor) -> Constraint {
-//        return switch self {
-//        case .top(let constant, _, let priority): .top(constant: constant, from: anchor, priority: priority)
-//        case .bottom(let constant, _, let priority): .bottom(constant: constant, from: anchor, priority: priority)
-//        case .centerY(let constant, _, let priority): .centerY(constant: constant, from: anchor, priority: priority)
-//        default: self // Return self for cases where this anchor doesn't apply
-//        }
-//    }
-//    
-//    func anchor(_ anchor: NSLayoutDimension) -> Constraint {
-//        return switch self {
-//        case .width(let constant, _, let priority): .width(constant: constant, equalTo: anchor, priority: priority)
-//        case .height(let constant, _, let priority): .height(constant: constant, equalTo: anchor, priority: priority)
-//        default: self // Return self for cases where this anchor doesn't apply
-//        }
-//    }
-//    
-//    func priority(_ value: UILayoutPriority) -> Constraint {
-//        return switch self {
-//        case .leading(let constant, let anchor, _): .leading(constant: constant, from: anchor, priority: value)
-//        case .top(let constant, let anchor, _): .top(constant: constant, from: anchor, priority: value)
-//        case .trailing(let constant, let anchor, _): .trailing(constant: constant, from: anchor, priority: value)
-//        case .bottom(let constant, let anchor, _): .bottom(constant: constant, from: anchor, priority: value)
-//        case .centerX(let constant, let anchor, _): .centerX(constant: constant, from: anchor, priority: value)
-//        case .centerY(let constant, let anchor, _): .centerY(constant: constant, from: anchor, priority: value)
-//        case .width(let constant, let anchor, _): .width(constant: constant, equalTo: anchor, priority: value)
-//        case .height(let constant, let anchor, _): .height(constant: constant, equalTo: anchor, priority: value)
-//        case .aspectRatio(let multiplier, _): .aspectRatio(multiplier: multiplier, priority: value)
-//        }
-//    }
-    
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return switch (lhs, rhs) {
-        case (.leading, .leading): true
-        case (.top, .top): true
-        case (.trailing, .trailing): true
-        case (.bottom, .bottom): true
-        case (.centerX, .centerX): true
-        case (.centerY, .centerY): true
-        case (.width, .width): true
-        case (.height, .height): true
-        case (.aspectRatio, .aspectRatio): true
-        case (.fill, .fill): true
-        default: false
-        }
-    }
 }
 
-// MARK: - AutoLayoutBuilder
-@resultBuilder
-public struct AutoLayoutBuilder {
-    
-    public static func buildBlock(_ components: Constraint...) -> [Constraint] {
-        components
-    }
-    
-    public static func buildBlock(_ components: [Constraint]...) -> [Constraint] {
-        components.flatMap { $0 }
-    }
-    
-    /// Add support for both single and collections of constraints.
-    public static func buildExpression(_ expression: Constraint) -> [Constraint] {
-        [expression]
-    }
-    
-    public static func buildExpression(_ expression: [Constraint]) -> [Constraint] {
-        expression
-    }
-    
-    public static func buildOptional(_ component: [Constraint]?) -> [Constraint] {
-        component ?? []
-    }
-    
-    public static func buildEither(first component: [Constraint]) -> [Constraint] {
-        component
-    }
-    
-    public static func buildEither(second component: [Constraint]) -> [Constraint] {
-        component
-    }
-    
-    public static func buildArray(_ components: [[Constraint]]) -> [Constraint] {
-        components.flatMap { $0 }
-    }
-    
-    public static func buildExpression(_ expression: [[Constraint]]) -> [Constraint] {
-        expression.flatMap { $0 }
-    }
-    
-    public static func buildLimitedAvailability(_ component: [Constraint]) -> [Constraint] {
-        component
-    }
-    
-    public static func buildExpression(_ expression: Void) -> [Constraint] {
-        []
-    }
-    
-    public static func buildExpression(_ expression: Constraint?) -> [Constraint] {
-        []
+// MARK: - Chaining
+/// Swift joins a line that starts with `.` to the previous line, so a closure body like
+/// `.leading(20)` / `.centerX` (one per line) is a single chained expression on `[Constraint]`.
+public extension Array where Element == Constraint {
+    static var leading: Self { Self().leading() }
+    static var top: Self { Self().top() }
+    static var trailing: Self { Self().trailing() }
+    static var bottom: Self { Self().bottom() }
+    static var centerX: Self { Self().centerX() }
+    static var centerY: Self { Self().centerY() }
+    static var aspectRatio: Self { Self().aspectRatio() }
+    static var fill: Self { Self().fill() }
+
+    var leading: Self { leading() }
+    var top: Self { top() }
+    var trailing: Self { trailing() }
+    var bottom: Self { bottom() }
+    var centerX: Self { centerX() }
+    var centerY: Self { centerY() }
+    var aspectRatio: Self { aspectRatio() }
+    var fill: Self { fill() }
+
+    static func leading(_ constant: CGFloat = 0, from anchor: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { Self().leading(constant, from: anchor, priority: priority) }
+    static func top(_ constant: CGFloat = 0, from anchor: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { Self().top(constant, from: anchor, priority: priority) }
+    static func trailing(_ constant: CGFloat = 0, from anchor: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { Self().trailing(constant, from: anchor, priority: priority) }
+    static func bottom(_ constant: CGFloat = 0, from anchor: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { Self().bottom(constant, from: anchor, priority: priority) }
+    static func centerX(_ constant: CGFloat = 0, from anchor: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { Self().centerX(constant, from: anchor, priority: priority) }
+    static func centerY(_ constant: CGFloat = 0, from anchor: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { Self().centerY(constant, from: anchor, priority: priority) }
+    static func height(_ constant: CGFloat = 0, equalTo dimension: NSLayoutDimension? = nil, priority: UILayoutPriority = .required) -> Self { Self().height(constant, equalTo: dimension, priority: priority) }
+    static func width(_ constant: CGFloat = 0, equalTo dimension: NSLayoutDimension? = nil, priority: UILayoutPriority = .required) -> Self { Self().width(constant, equalTo: dimension, priority: priority) }
+    static func aspectRatio(_ multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Self { Self().aspectRatio(multiplier, priority: priority) }
+    static func fill(_ inset: CGFloat = 0, priority: UILayoutPriority = .required) -> Self { Self().fill(inset, priority: priority) }
+
+    func leading(_ constant: CGFloat = 0, from anchor: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { self + [.leading(constant: constant, from: anchor, priority: priority)] }
+    func top(_ constant: CGFloat = 0, from anchor: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { self + [.top(constant: constant, from: anchor, priority: priority)] }
+    func trailing(_ constant: CGFloat = 0, from anchor: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { self + [.trailing(constant: constant, from: anchor, priority: priority)] }
+    func bottom(_ constant: CGFloat = 0, from anchor: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { self + [.bottom(constant: constant, from: anchor, priority: priority)] }
+    func centerX(_ constant: CGFloat = 0, from anchor: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { self + [.centerX(constant: constant, from: anchor, priority: priority)] }
+    func centerY(_ constant: CGFloat = 0, from anchor: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required) -> Self { self + [.centerY(constant: constant, from: anchor, priority: priority)] }
+    func height(_ constant: CGFloat = 0, equalTo dimension: NSLayoutDimension? = nil, priority: UILayoutPriority = .required) -> Self { self + [.height(constant: constant, equalTo: dimension, priority: priority)] }
+    func width(_ constant: CGFloat = 0, equalTo dimension: NSLayoutDimension? = nil, priority: UILayoutPriority = .required) -> Self { self + [.width(constant: constant, equalTo: dimension, priority: priority)] }
+    func aspectRatio(_ multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Self { self + [.aspectRatio(multiplier: multiplier, priority: priority)] }
+    func fill(_ inset: CGFloat = 0, priority: UILayoutPriority = .required) -> Self {
+        leading(inset, priority: priority).top(inset, priority: priority).trailing(inset, priority: priority).bottom(inset, priority: priority)
     }
 }

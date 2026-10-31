@@ -61,24 +61,14 @@ public extension UIView {
         layer.removeAnimation(forKey: kCATransition)
     }
     
-    func addSubview(_ subView: UIView, considerSafeArea: Bool = false, @AutoLayoutBuilder _ constraints: (() -> [Constraint])) -> Constraints {
+    func addSubview(_ subView: UIView, considerSafeArea: Bool = false, _ constraints: () -> [Constraint]) -> Constraints {
         addSubview(subView)
         return subView.addConstraints(in: self, considerSafeArea: considerSafeArea, constraints)
     }
     
-    @inlinable func addConstraints(in view: UIView, considerSafeArea: Bool = false, @AutoLayoutBuilder _ constraints: () -> [Constraint]) -> Constraints {
+    @inlinable func addConstraints(in view: UIView, considerSafeArea: Bool = false, _ constraints: () -> [Constraint]) -> Constraints {
         translatesAutoresizingMaskIntoConstraints = false
-        var constraints = constraints()
-        if case .fill(let inset, let priority) = constraints.first(where: { $0 == .fill() }) {
-            constraints.removeAll(where: { $0 == .fill() })
-            constraints.append(contentsOf: [
-                .leading(constant: inset, priority: priority),
-                .top(constant: inset, priority: priority),
-                .trailing(constant: inset, priority: priority),
-                .bottom(constant: inset, priority: priority)
-            ])
-        }
-        return constraints.compactMap({ constraint in
+        return constraints().map({ constraint in
             switch constraint {
             case .leading(let constant, let anchor, let priority):
                 let leading = anchor ?? (considerSafeArea ? view.safeAreaLayoutGuide.leadingAnchor : view.leadingAnchor)
@@ -120,9 +110,6 @@ public extension UIView {
                 
             case .aspectRatio(let multiplier, let priority):
                 return widthAnchor.constraint(equalTo: heightAnchor, multiplier: multiplier).atPriority(priority)
-                
-            case .fill:
-                return nil
             }
         })
     }
