@@ -17,8 +17,8 @@ public extension NSLayoutConstraint {
     }
 }
 
-// MARK: - Constraint
-enum Constraint {
+// MARK: - ConstraintKind
+enum ConstraintKind {
     case leading(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case top(constant: CGFloat = 0, from: NSLayoutYAxisAnchor? = nil, priority: UILayoutPriority = .required)
     case trailing(constant: CGFloat = 0, from: NSLayoutXAxisAnchor? = nil, priority: UILayoutPriority = .required)
@@ -32,9 +32,9 @@ enum Constraint {
 
 // MARK: - Chaining
 /// Swift joins a line that starts with `.` to the previous line, so a closure body like
-/// `.leading(20)` / `.centerX` (one per line) is a single chained expression on `ConstraintChain`.
-public struct ConstraintChain {
-    let constraints: [Constraint]
+/// `.leading(20)` / `.centerX` (one per line) is a single chained expression on `Constraint`.
+public struct Constraint {
+    let constraints: [ConstraintKind]
 
     public static var leading: Self { Self(constraints: []).leading() }
     public static var top: Self { Self(constraints: []).top() }
