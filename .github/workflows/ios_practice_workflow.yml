@@ -14,14 +14,9 @@ jobs:
     steps:
       - name: Checkout 🔰
         uses: actions/checkout@v4
-      - name: Prepare 💬
-        uses: jdx/mise-action@v2
-      - name: Resolve Dependencies 📦
-        run: |
-          tuist install
       - name: Build 🛠️
         run: |
-          tuist build
+          xcodebuild build -project PracticeProject.xcodeproj -scheme iOSPractice -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO
       - name: Test 📲
         run: |
-          tuist test
+          xcodebuild test -project PracticeProject.xcodeproj -scheme iOSPractice -destination 'platform=iOS Simulator,name=iPhone 16'
