@@ -43,7 +43,7 @@ assert.equal(api.dlURL('https://elsewhere.example/x.xip'), 'https://elsewhere.ex
 assert.ok(h.includes('class="btn primary" href="https://dl.example/x.xip"'), 'Download button is the package link');
 assert.ok(h.includes('<dt>Package</dt>') && h.includes('x.xip'), 'package filename shown');
 assert.ok(!card(beta).includes('<dt>SDKs'), 'no SDK row when sdks absent');
-assert.ok(card(beta).includes('tabindex="0"'), 'card is keyboard focusable (hover-expand needs focus fallback)');
+assert.ok(h.startsWith('<details class="rel">') && h.includes('<summary class="head">'), 'card opens on click via <details>');
 assert.ok(card({ version: { number: '1<b>', release: {} }, date: rel.date }).includes('1&lt;b&gt;'), 'escaping');
 
 // grouping: one <details> per major version, first open and the rest collapsed
