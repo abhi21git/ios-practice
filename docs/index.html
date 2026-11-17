@@ -14,7 +14,7 @@
   --card: #fff;
   --label: #1d1d1f;
   --label-2: #6e6e73;
-  --label-3: #86868b;
+  --label-3: #737378;
   --sep: rgba(0,0,0,.08);
   --fill: rgba(118,118,128,.12);
   --fill-2: rgba(118,118,128,.08);
@@ -61,21 +61,18 @@ a:hover { text-decoration: underline; }
 .aurora {
   position: fixed; z-index: -1; pointer-events: none;
   left: 50%; translate: -50% 0; width: 160vmax; aspect-ratio: 1;
-  filter: blur(20px); opacity: .5;
+  opacity: .5;
 }
 .aurora.a { top: -85vmax; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--blue) 42%, transparent), transparent 60%); }
-.aurora.b { top: -70vmax; width: 110vmax; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--purple) 34%, transparent), transparent 62%); }
 @supports (animation-timeline: scroll(root)) {
   .aurora, .hero-inner { animation: linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
   .aurora.a { animation-name: drift-slow; }
-  .aurora.b { animation-name: drift-fast; }
   .hero-inner { animation-name: hero-out; }
   .app-icon img { /* lags behind the title for real depth */
     animation: icon-out linear both; animation-timeline: scroll(root); animation-range: 0 70vh;
   }
   @keyframes icon-out { to { translate: 0 40px; scale: .78; opacity: .15; rotate: -6deg; } }
   @keyframes drift-slow { to { translate: -50% 14vh; scale: 1.18; opacity: .22; } }
-  @keyframes drift-fast { to { translate: -50% 30vh; scale: .9; opacity: .12; } }
   @keyframes hero-out { to { translate: 0 -60px; opacity: .35; scale: .97; } }
 }
 
@@ -96,14 +93,8 @@ a:hover { text-decoration: underline; }
 .hero p { margin: 14px auto 0; max-width: 34em; color: var(--label-2); font-size: 19px; letter-spacing: -.012em; }
 
 /* stats */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 40px 0 26px; }
-.stat {
-  background: var(--card); border: 1px solid var(--sep); border-radius: 18px;
-  padding: 18px 20px; box-shadow: var(--shadow);
-}
-.stat .k { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--label-3); }
-.stat .v { font-size: 26px; font-weight: 600; letter-spacing: -.02em; margin-top: 4px; }
-.stat .s { font-size: 13px; color: var(--label-2); }
+.stats { margin: 36px 0 22px; text-align: center; font-size: 14px; color: var(--label-2); text-wrap: balance; }
+.stats b { color: var(--label); font-weight: 600; }
 
 /* controls */
 #sentinel { height: 1px; margin-bottom: -1px; }
@@ -116,12 +107,13 @@ a:hover { text-decoration: underline; }
   -webkit-backdrop-filter: blur(0px) saturate(100%);
   backdrop-filter: blur(0px) saturate(100%);
   box-shadow: 0 1px 0 transparent;
-  transition: backdrop-filter .3s var(--ease), -webkit-backdrop-filter .3s var(--ease), box-shadow .3s var(--ease);
+  transition: background-color .3s var(--ease), backdrop-filter .3s var(--ease), -webkit-backdrop-filter .3s var(--ease), box-shadow .3s var(--ease);
 }
 /* glass only once it is actually pinned to the top */
 .controls.stuck {
-  -webkit-backdrop-filter: blur(18px) saturate(35%);
-  backdrop-filter: blur(18px) saturate(35%);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
   box-shadow: 0 1px 0 var(--sep);
 }
 .search { position: relative; flex: 1 1 240px; }
@@ -150,6 +142,7 @@ a:hover { text-decoration: underline; }
   padding: 6px 14px; border-radius: 980px; cursor: pointer;
   position: relative; /* above the thumb */
 }
+@media (pointer: coarse) { .seg button { min-height: 44px; } }
 
 /* collapsible major-version group */
 details.group { margin-top: 30px; }
@@ -170,20 +163,21 @@ details.group > .glist { padding-top: 12px; }
 .chev { width: 13px; height: 13px; fill: var(--label-3); flex: none; transition: rotate .25s var(--ease); }
 details.group[open] > summary .chev { rotate: 90deg; }
 
-/* release card: expands on hover (tap-free), or on keyboard focus */
+/* release card */
 .rel {
   background: var(--card); border: 1px solid var(--sep); border-radius: 16px;
-  margin-bottom: 8px; box-shadow: var(--shadow); outline: 0;
+  margin-bottom: 8px; box-shadow: var(--shadow);
   transition: box-shadow .3s var(--ease), translate .3s var(--ease), border-color .3s var(--ease);
 }
-.rel:hover, .rel:focus-visible, .rel:focus-within {
+.rel:hover, .rel:has(> summary:focus-visible) {
   box-shadow: var(--shadow-lift); translate: 0 -1px;
   border-color: color-mix(in srgb, var(--blue) 30%, var(--sep));
 }
-.rel:focus-visible { box-shadow: var(--shadow-lift), 0 0 0 3.5px color-mix(in srgb, var(--blue) 28%, transparent); }
-.head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; }
-.head .chev { rotate: 0deg; }
-.rel:hover .head .chev, .rel:focus-within .head .chev { rotate: 90deg; }
+.rel:has(> summary:focus-visible) { box-shadow: var(--shadow-lift), 0 0 0 3.5px color-mix(in srgb, var(--blue) 28%, transparent); }
+.head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; list-style: none; cursor: pointer; border-radius: 16px; outline: 0; }
+.head::-webkit-details-marker { display: none; }
+.rel[open]:not(.closing) > .head .chev { rotate: 90deg; }
+.body { overflow: hidden; }
 .ver { font-size: 17px; font-weight: 600; letter-spacing: -.014em; min-width: 5.5em; }
 .build { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--label-2); }
 .badge {
@@ -196,9 +190,6 @@ details.group[open] > summary .chev { rotate: 90deg; }
 .badge.beta { background: color-mix(in srgb, var(--orange) 18%, transparent); color: var(--orange); }
 .date { margin-left: auto; font-size: 14px; color: var(--label-2); white-space: nowrap; }
 
-.reveal { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s var(--ease); }
-.rel:hover .reveal, .rel:focus-within .reveal { grid-template-rows: 1fr; }
-.body { overflow: hidden; min-height: 0; }
 /* details left, actions parked on the right rail while there is room */
 .body-in {
   padding: 4px 18px 18px; margin-top: 2px; border-top: 1px solid var(--sep);
@@ -209,10 +200,6 @@ details.group[open] > summary .chev { rotate: 90deg; }
 @media (max-width: 680px) {
   .body-in { display: block; }
   .body-in .actions { flex-direction: row; }
-}
-@media (hover: none) { /* no hover on touch: keep everything open */
-  .reveal { grid-template-rows: 1fr; }
-  .head .chev { display: none; }
 }
 .rows { display: grid; grid-template-columns: max-content 1fr; gap: 10px 18px; margin: 14px 0 0; font-size: 15px; }
 .rows dt { color: var(--label-2); }
@@ -250,6 +237,34 @@ footer { text-align: center; color: var(--label-3); font-size: 13px; padding: 40
   .rows { grid-template-columns: 1fr; gap: 4px 0; }
   .rows dd { margin-bottom: 10px; }
 }
+/* section rail: replaces the native scrollbar, one tick per major version */
+html, body { scrollbar-width: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+.rail { position: fixed; top: 50%; right: 6px; z-index: 25; width: 32px; transform: translateY(-50%); touch-action: none; opacity: 0; transition: opacity .4s ease-out; }
+.rail.show, .rail:hover, .rail.drag { opacity: 1; transition-duration: .15s; }
+.rail-ticks { transition: opacity .3s ease-out; }
+.rail.scrolling .rail-ticks { opacity: .7; transition-duration: .15s; }
+.rail:not(.scrolling) .rail-ticks { opacity: 0; }
+.rail.rail:hover .rail-ticks, .rail.rail.drag .rail-ticks { opacity: 1; transition-duration: .15s; }
+.rail::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; margin-left: -.5px; background: color-mix(in srgb, var(--label) 16%, transparent); }
+.rail-tick { position: absolute; left: 0; width: 32px; height: 20px; margin-top: -10px; cursor: pointer; }
+.rail-tick::after { content: ""; position: absolute; top: 9.5px; left: 12px; width: 8px; height: 1px; border-radius: 1px; background: color-mix(in srgb, var(--label) 32%, transparent); transition: background .15s ease-out, transform .15s ease-out, width .2s cubic-bezier(.23, 1, .32, 1), height .2s cubic-bezier(.23, 1, .32, 1), top .2s cubic-bezier(.23, 1, .32, 1), left .2s cubic-bezier(.23, 1, .32, 1), border-radius .2s; }
+.rail:not(:hover):not(.drag) .rail-tick::after { top: 8.5px; left: 14.5px; width: 3px; height: 3px; border-radius: 50%; background: color-mix(in srgb, var(--label) 45%, transparent); }
+.rail-tick:hover::after { background: var(--label); transform: scaleX(1.3); }
+.rail-dot { position: absolute; top: 0; left: -6px; width: 44px; height: 44px; margin-top: -22px; cursor: grab; transition: transform .22s cubic-bezier(.23, 1, .32, 1); }
+.rail-dot::after { content: ""; position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 999px; background: var(--blue); box-shadow: 0 0 0 3px var(--bg); transition: height .18s cubic-bezier(.23, 1, .32, 1), margin .18s cubic-bezier(.23, 1, .32, 1), width .18s cubic-bezier(.23, 1, .32, 1); }
+.rail-dot.line::after { width: 4px; height: 16px; margin: -8px 0 0 -2px; }
+.rail-dot:hover::after { width: 12px; height: 12px; margin: -6px 0 0 -6px; }
+.rail-dot.line:hover::after { width: 4px; height: 16px; margin: -8px 0 0 -2px; }
+.rail.drag .rail-dot { cursor: grabbing; }
+.rail.scrolling .rail-dot { transition: none; }
+.tip {
+  position: fixed; z-index: 50; transform: translate(calc(-100% - 8px), -50%); padding: 5px 12px; border-radius: 999px;
+  background: rgb(30 30 32 / .92); color: #fff; font-size: 12px; font-weight: 500; white-space: nowrap;
+  pointer-events: none; opacity: 0; transition: opacity .1s ease-in-out;
+}
+.tip.show { opacity: 1; }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
   .aurora { opacity: .3; }
@@ -259,7 +274,8 @@ footer { text-align: center; color: var(--label-3); font-size: 13px; padding: 40
 <body>
 
 <div class="aurora a" aria-hidden="true"></div>
-<div class="aurora b" aria-hidden="true"></div>
+<nav class="rail" id="rail" aria-hidden="true" hidden><div class="rail-ticks"></div><div class="rail-dot"></div></nav>
+<div class="tip" id="tip"></div>
 
 <main class="wrap">
   <section class="hero">
@@ -276,7 +292,7 @@ footer { text-align: center; color: var(--label-3); font-size: 13px; padding: 40
     </div>
   </section>
 
-  <section class="stats" id="stats" hidden></section>
+  <p class="stats" id="stats" hidden></p>
 
   <div id="sentinel" aria-hidden="true"></div>
 
@@ -342,15 +358,15 @@ function card(r) {
   const sdks = list(r.sdks), comps = list(r.compilers);
   const dl = r.links?.download?.url, notes = r.links?.notes?.url;
   const pills = a => `<div class="pills">${a.map(([n, v]) => `<span class="pill">${esc(n)} <b>${esc(v)}</b></span>`).join('')}</div>`;
-  return `<article class="rel" tabindex="0">
-    <div class="head">
+  return `<details class="rel">
+    <summary class="head">
       ${CHEV}
       <span class="ver">${esc(r.version.number || '—')}</span>
       <span class="badge ${k.family}">${esc(kindLabel(k))}</span>
       <span class="build">${esc(r.version.build || '')}</span>
       <span class="date">${esc(when(r.date))}</span>
-    </div>
-    <div class="reveal"><div class="body"><div class="body-in">
+    </summary>
+    <div class="body"><div class="body-in">
       <dl class="rows">
         <dt>Released</dt><dd>${esc(when(r.date)) || '—'}</dd>
         ${r.requires ? `<dt>Requires</dt><dd>macOS ${esc(r.requires)} or later</dd>` : ''}
@@ -363,8 +379,8 @@ function card(r) {
         ${dl ? `<a class="btn primary" href="${esc(dlURL(dl))}">Download</a>` : ''}
         ${notes ? `<a class="btn" href="${esc(notes)}">Release notes</a>` : ''}
       </div>
-    </div></div></div>
-  </article>`;
+    </div></div>
+  </details>`;
 }
 
 let DATA = [], filter = 'all', query = '';
@@ -419,18 +435,58 @@ function hero() {
 function stats() {
   const latest = DATA.find(r => kind(r).family === 'release');
   const majors = new Set(DATA.map(r => String(r.version.number).split('.')[0])).size;
-  const tiles = [
-    ['Releases', DATA.length, majors + ' major versions'],
-    ['Latest', latest?.version.number ?? '—', latest ? when(latest.date) : ''],
-    ['Swift', latest ? (swiftOf(latest) ?? '—') : '—', 'in the latest release'],
-    ['Requires', latest?.requires ? 'macOS ' + latest.requires : '—', 'for the latest release'],
-  ];
-  $('#stats').innerHTML = tiles.map(([k, v, s]) =>
-    `<div class="stat"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div><div class="s">${esc(s)}</div></div>`).join('');
+  const swift = latest && swiftOf(latest);
+  $('#stats').innerHTML = [
+    `<b>${DATA.length}</b> releases across <b>${majors}</b> major versions`,
+    latest && `Latest <b>${esc(latest.version.number)}</b>, ${esc(when(latest.date))}`,
+    swift && `Swift <b>${esc(swift)}</b>`,
+    latest?.requires && `Needs macOS <b>${esc(latest.requires)}</b>`,
+  ].filter(Boolean).join(' · ');
   $('#stats').hidden = false;
 }
 
 $('#q').addEventListener('input', e => { query = e.target.value; render(); });
+
+// Hover intent: open after the mouse rests on a card. pointermove never fires from scrolling alone.
+const isOpen = c => c.open && !c.classList.contains('closing');
+function setOpen(c, open) {
+  if (isOpen(c) === open) return;
+  const body = c.querySelector('.body'), from = c.open ? body.offsetHeight : 0;
+  c.anim?.cancel();
+  c.classList.toggle('closing', !open);
+  c.open = true;
+  const to = open ? body.scrollHeight : 0;
+  const done = () => { c.anim = null; c.classList.remove('closing'); c.open = open; };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return done();
+  c.anim = body.animate({ height: [from + 'px', to + 'px'], opacity: [from ? 1 : 0, open ? 1 : 0] },
+    { duration: open ? 320 : 240, easing: 'cubic-bezier(.23, 1, .32, 1)' });
+  c.anim.onfinish = done;
+}
+
+let hoverCard = null, hoverTimer;
+const hoverClose = () => {
+  clearTimeout(hoverTimer);
+  if (hoverCard?.dataset.hover) { setOpen(hoverCard, false); delete hoverCard.dataset.hover; }
+};
+$('#list').addEventListener('pointermove', e => {
+  if (e.pointerType !== 'mouse') return;
+  const c = e.target.closest('.rel');
+  if (c === hoverCard) return;
+  hoverClose();
+  hoverCard = c;
+  if (c && !isOpen(c)) hoverTimer = setTimeout(() => { setOpen(c, true); c.dataset.hover = 1; }, 400);
+});
+$('#list').addEventListener('pointerleave', () => { hoverClose(); hoverCard = null; });
+$('#list').addEventListener('click', e => {
+  const c = e.target.closest('.rel > summary')?.parentNode;
+  if (!c) return;
+  clearTimeout(hoverTimer);
+  if (e.detail === 0) return; // keyboard toggles natively, no animation
+  e.preventDefault();
+  if (c.dataset.hover) delete c.dataset.hover; // click pins a hover-opened card
+  else setOpen(c, !isOpen(c));
+});
+addEventListener('scroll', () => clearTimeout(hoverTimer), { passive: true });
 $('#seg').addEventListener('click', e => {
   const b = e.target.closest('button');
   if (!b || b.getAttribute('aria-pressed') === 'true') return;
@@ -456,6 +512,72 @@ requestAnimationFrame(() => $('#seg .thumb').classList.add('animated')); // don'
 // The bar only frosts once it is pinned: the sentinel sits directly above it.
 new IntersectionObserver(([e]) => $('.controls').classList.toggle('stuck', !e.isIntersecting))
   .observe($('#sentinel'));
+
+const rail = $('#rail'), railDot = rail.querySelector('.rail-dot'), tip = $('#tip'), scroller = () => document.scrollingElement;
+let railTargets = [], railGap = 0, railIdle, railHide, railFrame;
+function railPos() {
+  const t = railTargets, s = scroller(), y = Math.min(Math.max(s.scrollTop, 0), s.scrollHeight - s.clientHeight);
+  if (y <= t[0]) return 0;
+  for (let i = 0; i < t.length - 1; i++) if (y < t[i + 1]) return i + (y - t[i]) / (t[i + 1] - t[i]);
+  return t.length - 1;
+}
+function railUpdate(moving) {
+  if (rail.hidden) return;
+  const p = railPos(), at = moving ? p : Math.round(p);
+  railDot.classList.toggle('line', moving);
+  railDot.style.transform = `translateY(${at * railGap}px)`;
+}
+function railTicks() {
+  const s = scroller(), base = -s.scrollTop, offset = $('.controls').offsetHeight + 12, max = s.scrollHeight - s.clientHeight;
+  const heads = [...document.querySelectorAll('details.group > summary')];
+  rail.hidden = heads.length < 2 || max < 1;
+  if (rail.hidden) return;
+  const t = heads.map(n => Math.max(0, n.getBoundingClientRect().top - base - offset));
+  const k = t.findIndex(v => v >= max);
+  if (k === 0) t.forEach((v, j) => t[j] = max * j / (t.length - 1));
+  else if (k > 0) for (let j = k; j < t.length; j++) t[j] = t[k - 1] + (max - t[k - 1]) * (j - k + 1) / (t.length - k);
+  for (let j = 1; j < t.length; j++) t[j] = Math.max(t[j], t[j - 1] + .5);
+  railTargets = t;
+  railGap = Math.min(28, (innerHeight - 240) / (heads.length - 1));
+  rail.style.height = railGap * (heads.length - 1) + 'px';
+  rail.querySelector('.rail-ticks').replaceChildren(...heads.map((n, i) => {
+    const tick = document.createElement('i');
+    tick.className = 'rail-tick';
+    tick.style.top = i * railGap + 'px';
+    tick.onclick = () => railGo(i, true);
+    tick.onmouseenter = () => {
+      const r = tick.getBoundingClientRect();
+      tip.textContent = n.querySelector('h2').textContent;
+      tip.style.left = r.left + 'px';
+      tip.style.top = r.top + r.height / 2 + 'px';
+      tip.classList.add('show');
+    };
+    tick.onmouseleave = () => tip.classList.remove('show');
+    return tick;
+  }));
+  railUpdate(false);
+}
+function railGo(p, smooth) {
+  const t = railTargets, i = Math.min(Math.floor(p), t.length - 1), y = i + 1 < t.length ? t[i] + (p - i) * (t[i + 1] - t[i]) : t[i];
+  scroller().scrollTo({ top: y, behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' });
+  if (smooth) { rail.classList.add('show'); railDot.style.transform = `translateY(${Math.round(p) * railGap}px)`; }
+}
+addEventListener('scroll', () => {
+  railFrame ||= requestAnimationFrame(() => { railFrame = 0; if (rail.classList.contains('scrolling')) railUpdate(true); });
+  rail.classList.add('scrolling'); clearTimeout(railIdle); railIdle = setTimeout(() => { rail.classList.remove('scrolling'); railUpdate(false); }, 260);
+  rail.classList.add('show'); clearTimeout(railHide); railHide = setTimeout(() => rail.classList.remove('show'), 1200);
+  tip.classList.remove('show');
+}, { passive: true });
+addEventListener('resize', railTicks);
+new ResizeObserver(railTicks).observe($('#list'));
+railDot.onpointerdown = e => {
+  e.preventDefault();
+  railDot.setPointerCapture(e.pointerId);
+  rail.classList.add('drag');
+  const top = rail.getBoundingClientRect().top, n = railTargets.length;
+  railDot.onpointermove = m => railGo(Math.min(n - 1, Math.max(0, (m.clientY - top) / railGap)), false);
+  railDot.onpointerup = railDot.onpointercancel = () => { railDot.onpointermove = null; rail.classList.remove('drag'); railUpdate(false); };
+};
 
 function show(data) {
   DATA = data;
